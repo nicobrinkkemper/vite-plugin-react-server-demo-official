@@ -21,6 +21,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "acorn-loose": "^8.4.0",
     "patch-package": "^8.0.0",
     "react-server-dom-esm": "^0.0.1",
     "typescript-plugin-css-modules": "^5.1.0",
