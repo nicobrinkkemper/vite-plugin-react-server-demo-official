@@ -1,0 +1,38 @@
+{
+  "name": "vite-plugin-react-server-demo-official",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:client && npm run build:server",
+    "dev": "NODE_OPTIONS='--conditions=react-server' vite --config vite.server.config.ts",
+    "preview": "npm run build && npm run preview:client",
+    "start": "NODE_OPTIONS='--trace-warnings' vite",
+    "build:client": "vite build",
+    "preview:client": "vite preview",
+    "build:server": "NODE_OPTIONS='--conditions=react-server' vite build --ssr --config vite.server.config.ts",
+    "preview:server": "NODE_OPTIONS='--conditions=react-server' vite preview --config vite.server.config.ts",
+    "postinstall": "patch-package",
+    "clean-install": "npm install react@experimental react-dom@experimental react-server-dom-esm",
+    "patch-oss": "npm run clean-install && check-react-version && patch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "patch-package": "^8.0.0",
+    "react": "^0.0.0-experimental-e670e72f-20250214",
+    "react-dom": "^0.0.0-experimental-e670e72f-20250214",
+    "react-server-dom-esm": "^0.0.1",
+    "typescript-plugin-css-modules": "^5.1.0",
+    "vite-plugin-react-server": "^0.3.11"
+  },
+  "dependencies": {
+    "@types/react": "^19.0.9",
+    "@types/react-dom": "^19.0.3",
+    "magic-string": "^0.30.17",
+    "tsx": "^4.19.2",
+    "vite": "^6.1.0"
+  }
+}
