@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { StreamPluginOptions } from "vite-plugin-react-server/server";
 import { Html } from "./src/html";
 
@@ -16,10 +17,17 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
       throw new Error(`Unknown route: ${url}`);
   }
 };
+
+const files = {};
 const tap = (fn: (...args: any[]) => any) => {
-  return (...args: any[]) => {
-    const result = fn(...args);
-    console.log(args, "->", result);
+  return (...args2: any[]) => {
+    const result = fn(...args2);
+    if (!files[args2[0]]) {
+      files[args2[0]] = [result];
+    } else {
+      files[args2[0]].push(result);
+      console.log(args2[0], "\n", files[args2[0]].join("\n "), "\n");
+    }
     return result;
   };
 };
@@ -30,7 +38,7 @@ export const config = {
   props: tap(createRouter("props.ts")),
   Html: Html,
   build: {
-    pages: ["/", "/404", "/bidoof"],
+    pages: ["/", "/bidoof", "/404"	],
     client: "client",
     server: "server",
     static: "static",

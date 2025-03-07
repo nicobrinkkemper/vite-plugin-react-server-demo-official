@@ -14,7 +14,7 @@ export function createReactFetcher({
 } = {}): Promise<ReactNode> {
   return ReactDOMESM.createFromFetch(
     fetch(url, {
-      headers: headers,
+      headers: { Accept: "text/x-component" },
     }),
     {
       callServer: callServer,

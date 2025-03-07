@@ -7,15 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:client && npm run build:server",
     "dev": "NODE_OPTIONS='--conditions=react-server' vite --config vite.server.config.ts",
-    "preview": "npm run build && npm run preview:client",
+    "preview": "npm run build && vite preview",
     "start": "NODE_OPTIONS='--trace-warnings' vite",
     "build:client": "vite build",
-    "preview:client": "vite preview",
-    "build:server": "NODE_OPTIONS='--conditions=react-server' vite build --ssr --config vite.server.config.ts",
-    "preview:server": "NODE_OPTIONS='--conditions=react-server' vite preview --config vite.server.config.ts",
+    "build:server": "NODE_OPTIONS='--conditions=react-server' vite build --config vite.server.config.ts",
+    "debug-build": "NODE_ENV=development npm run build:client -- --mode development && NODE_ENV=development npm run build:server -- --mode development",
+    "preview:static": "NODE_OPTIONS='--conditions=react-server' vite preview --config vite.server.config.ts",
     "postinstall": "patch-package",
-    "clean-install": "npm install react@experimental react-dom@experimental react-server-dom-esm",
-    "patch-oss": "npm run clean-install && check-react-version && patch"
+    "clean-install": "npm install react@0.0.0-experimental-f9d78089-20250306 react-dom@0.0.0-experimental-f9d78089-20250306 react-server-dom-esm",
+    "patch-oss": "check-react-version && patch"
   },
   "author": "",
   "license": "ISC",
@@ -25,15 +25,14 @@
     "patch-package": "^8.0.0",
     "react-server-dom-esm": "^0.0.1",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite-plugin-react-server": "^0.3.18"
+    "vite-plugin-react-server": "^0.3.19"
   },
   "dependencies": {
     "@types/react": "^19.0.9",
     "@types/react-dom": "^19.0.3",
     "happy-dom": "^17.1.8",
-    "magic-string": "^0.30.17",
-    "react": "^0.0.0-experimental-d55cc79b-20250228",
-    "react-dom": "^0.0.0-experimental-d55cc79b-20250228",
+    "react": "^0.0.0-experimental-f9d78089-20250306",
+    "react-dom": "^0.0.0-experimental-f9d78089-20250306",
     "tsx": "^4.19.2",
     "vite": "^6.1.0"
   }

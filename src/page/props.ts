@@ -1,6 +1,8 @@
 
 export const props = (url: string) => {
     return {
-        url
+        url,
+        title: "Home",
+        description: "Home page",
     }
 }

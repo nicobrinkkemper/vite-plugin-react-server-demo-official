@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "../components/Link.client.js";
-import styles from "./home.module.css";
+import styles from "../css/home.module.css";
 
 export const Page = ({ url }: { url: string }) => {
   return (

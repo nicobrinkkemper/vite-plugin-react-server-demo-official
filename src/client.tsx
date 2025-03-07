@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
-import "./globalStyles.css";
+import "./css/globalStyles.css";
 import { createReactFetcher } from "./utils/createReactFetcher.js";
 /**
  * Client-side React Server Components implementation

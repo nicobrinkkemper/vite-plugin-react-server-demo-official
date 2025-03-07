@@ -8,10 +8,13 @@ export const Html = ({
   pageProps: Record<string, any>;
   manifest: Manifest;
 }) => {
+  if (!pageProps) {
+    throw new Error("pageProps is required");
+  }
   return (
     <html>
       <head>
-        <title>{pageProps["title"]}</title>
+        <title>{pageProps?.["title"]}</title>
         <meta name="description" content={pageProps["description"]} />
       </head>
       <body>
