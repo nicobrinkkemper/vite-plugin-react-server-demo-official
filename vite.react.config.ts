@@ -1,5 +1,5 @@
-// @ts-ignore
 import type { StreamPluginOptions } from "vite-plugin-react-server/server";
+import { InlineCssCollector } from "vite-plugin-react-server/components";
 import { Html } from "./src/html";
 
 const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
@@ -37,6 +37,7 @@ export const config = {
   Page: tap(createRouter("page.tsx")),
   props: tap(createRouter("props.ts")),
   Html: Html,
+  inlineCss: true,
   build: {
     pages: ["/", "/bidoof", "/404"	],
     client: "client",
