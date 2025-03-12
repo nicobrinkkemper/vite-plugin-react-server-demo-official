@@ -37,7 +37,7 @@ export const config = {
   Page: tap(createRouter("page.tsx")),
   props: tap(createRouter("props.ts")),
   Html: Html,
-  moduleBaseURL: "",
+  moduleBaseURL: "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/",
   moduleBasePath: "",
   inlineCss: true,
   build: {

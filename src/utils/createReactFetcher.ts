@@ -12,6 +12,9 @@ export function createReactFetcher({
   moduleBaseURL?: string;
   headers?: HeadersInit;
 } = {}): Promise<ReactNode> {
+  if (url.includes("vite-plugin-react-server-demo-official")) {
+    moduleBaseURL = "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/";
+  }
   return ReactDOMESM.createFromFetch(
     fetch(url, {
       headers: { Accept: "text/x-component" },
