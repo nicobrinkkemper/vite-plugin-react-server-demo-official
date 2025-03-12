@@ -26,6 +26,10 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: mv dist/static _site
+      - name: List contents
+        run: |
+          ls -la _site/
+          find _site -type l -ls  # Check for symlinks
       - name: Fix permissions
         run: |
           chmod -c -R +rX "_site/" | while read line; do
