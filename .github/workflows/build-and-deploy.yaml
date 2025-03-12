@@ -27,8 +27,8 @@ jobs:
       - run: npm run build --if-present
       - name: List contents
         run: |
-          ls -la _site/
-          find _site -type l -ls  # Check for symlinks
+          ls -la dist/static/
+          find dist/static -type l -ls  # Check for symlinks
       - name: Fix permissions
         run: |
           chmod -c -R +rX "dist/static/" | while read line; do
