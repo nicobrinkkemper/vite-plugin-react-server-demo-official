@@ -1,5 +1,4 @@
 import type { StreamPluginOptions } from "vite-plugin-react-server/server";
-import { InlineCssCollector } from "vite-plugin-react-server/components";
 import { Html } from "./src/html";
 
 const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
@@ -38,14 +37,16 @@ export const config = {
   props: tap(createRouter("props.ts")),
   Html: Html,
   moduleBaseURL: "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/",
-  moduleBasePath: "",
-  inlineCss: true,
   build: {
     pages: ["/", "/bidoof", "/404"	],
+    // below are redundant, already the default
+    preserveModulesRoot: true, 
+    hash: "hash",
+    outDir: "dist",
     client: "client",
     server: "server",
     static: "static",
-    outDir: "dist",
-    assetsDir: "assets",
   },
+  moduleBasePath: "",
+  inlineCss: true,
 } satisfies StreamPluginOptions;
