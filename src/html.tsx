@@ -8,9 +8,6 @@ export const Html = ({
   pageProps: Record<string, any>;
   manifest: Manifest;
 }) => {
-  if (!pageProps) {
-    throw new Error("pageProps is required");
-  }
   return (
     <html>
       <head>

@@ -1,0 +1,1 @@
+export const props = ()=>({ throwError: process.env['NODE_ENV'] === 'development' })

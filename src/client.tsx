@@ -1,4 +1,3 @@
-"use client";
 import React, {
   use,
   useCallback,
@@ -59,8 +58,18 @@ const Shell: React.FC<{
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 
+const serverRequestFromWindow = (defaultFileName: string) => {
+  const currentUrl = new URL(window.location.href);
+  const href = currentUrl.href;
+  const fileName = currentUrl.pathname;
+  if(fileName.includes('.')) return href;
+  // check for backslash
+  if(fileName.endsWith("/")) return href + defaultFileName;
+  return href + "/" + defaultFileName;
+};
+const initialUrl = serverRequestFromWindow('index.rsc');
 const intitalData = createReactFetcher({
-  url: new URL("index.rsc", window.location.href).href,
+  url: initialUrl,
 });
 
 createRoot(rootElement).render(<Shell data={intitalData} />);
@@ -113,6 +122,6 @@ class ErrorBoundary extends React.Component<
     if (!this.state.hasError) {
       return this.props.children;
     }
-    return <Redirect search={`?error=${this.state.error?.message}`} />;
+    return <Redirect search={`?error=${encodeURIComponent(this.state.error?.message ?? "Unknown error")}`} />;
   }
 }

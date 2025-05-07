@@ -1,6 +1,5 @@
 .Home {
     font-size: 50px;
-    background-color: #0FF;
     color: white;
     display: flex;
     flex-direction: column;
@@ -10,4 +9,23 @@
     width: 100vw;
     padding: 0;
     margin: 0;
+}
+.Url {
+    font-size: 20px;
+    display: inline;
+    color: #0004ff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.Panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-size: 12px;
+    background-color: #000;
+    color: white;
+    padding: 1rem;
 }

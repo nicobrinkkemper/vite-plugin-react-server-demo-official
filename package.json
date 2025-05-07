@@ -1,18 +1,20 @@
 {
   "name": "vite-plugin-react-server-demo-official",
+  "repository": "https://github.com/nicobrinkkemper/vite-plugin-react-server-demo-official",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build:client && npm run build:server",
-    "dev": "NODE_OPTIONS='--conditions=react-server' vite --config vite.server.config.ts",
+    "build": "npm run build:static && npm run build:client && npm run build:server",
+    "dev": "NODE_OPTIONS='--conditions=react-server' vite",
     "preview": "npm run build && vite preview",
-    "start": "NODE_OPTIONS='--trace-warnings' vite",
-    "build:client": "vite build",
-    "build:server": "NODE_OPTIONS='--conditions=react-server' vite build --config vite.server.config.ts",
+    "start": "vite",
+    "build:static": "vite build",
+    "build:client": "vite build --ssr",
+    "build:server": "NODE_OPTIONS='--conditions=react-server' vite build --ssr",
     "debug-build": "NODE_ENV=development npm run build:client -- --mode development && NODE_ENV=development npm run build:server -- --mode development",
-    "preview:static": "NODE_OPTIONS='--conditions=react-server' vite preview --config vite.server.config.ts",
+    "preview:static": "NODE_OPTIONS='--conditions=react-server' vite preview",
     "postinstall": "patch-package",
     "clean-install": "npm install react@experimental react-dom@experimental react-server-dom-esm",
     "patch-oss": "patch"
@@ -21,19 +23,14 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/node": "^22.15.3",
     "@types/react": "^19.0.9",
     "@types/react-dom": "^19.0.3",
     "acorn-loose": "^8.4.0",
     "happy-dom": "^17.1.8",
     "patch-package": "^8.0.0",
-    "react": "^0.0.0-experimental-6aa8254b-20250312",
-    "react-dom": "^0.0.0-experimental-6aa8254b-20250312",
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
-    "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^6.1.0",
-    "vite-plugin-react-server": "^1.0.3"
-  },
-  "dependencies": {
+    "vite": "^6.3.2"
   }
 }

@@ -1,13 +1,14 @@
 "use client";
 import * as React from "react";
-
 export const Link: React.FC<{
   children: React.ReactNode;
   to?: string;
   href?: string;
-}> = ({ children, to, href, ...props }) => (
+  className?: string;
+}> = ({ children, to, href, className, ...props }) => (
   <a
     {...props}
+    className={className ?? ""}
     href={typeof href === 'string' ? href : to}
     onClick={(e) => {
       e.preventDefault();
