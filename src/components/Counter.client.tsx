@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import React from "react";
 
 export function Counter() {
   const [count, setCount] = React.useState<number>();

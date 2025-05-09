@@ -55,11 +55,11 @@
     },
     "include": [
       // support just normal ts
-      "src/**/*.ts",
+      "src/**/*.client.ts",
       // support tsx
-      "src/**/*.tsx",
+      "src/**/*.client.tsx",
       // support mts
-      "src/**/*.mts",
+      "src/**/*.client.mts",
       // support json
       "src/**/*.json",
       // support css

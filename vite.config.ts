@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+// @ts-ignore
 import { vitePluginReactServer } from "vite-plugin-react-server";
 import { Html } from "./src/html";
 
@@ -29,9 +30,9 @@ export default defineConfig({
     moduleBase: "src",
     Page: createRouter("page.tsx"),
     props: createRouter("props.ts"),
+    Html: Html,
     serverEntry: "src/server.tsx",
     clientEntry: "src/client.tsx",
-    Html: Html,
     moduleBaseURL: "",
     build: {
       pages: ["/", "/bidoof", "/404", "/error-example"],
