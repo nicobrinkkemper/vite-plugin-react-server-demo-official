@@ -1,9 +1,9 @@
 "use server"
 
-export function getServerSideProps() {
-  return {
+export async function getServerSideProps() {
+  return await Promise.resolve({
     props: {
       message: "Hello from server",
     },
-  };
+  });
 }
