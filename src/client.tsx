@@ -81,7 +81,7 @@ const Redirect = ({ search }: { search?: string }) => {
     }
     if (!window.location.href.includes("/404")) {
       const timeout = setTimeout(() => {
-        window.location.href = "/404" + search;
+        window.location.href = "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/404" + search;
       }, 1000);
       return () => clearTimeout(timeout);
     }
