@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 // @ts-ignore
 import { vitePluginReactServer } from "vite-plugin-react-server";
-import { Html } from "./src/html";
 
 
 const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
@@ -30,7 +29,6 @@ export default defineConfig({
     moduleBase: "src",
     Page: createRouter("page.tsx"),
     props: createRouter("props.ts"),
-    Html: Html,
     serverEntry: "src/server.tsx",
     clientEntry: "src/client.tsx",
     moduleBaseURL: "",

@@ -7,7 +7,7 @@ import { Counter } from "../components/Counter.client.js";
 export const Page = ({ url, title }: { url: string, title: string }) => {
   return (
     <>
-      <title>{title}</title>
+      <title>{title ?? "No title"}</title>
       <div className={styles["Home"]}>
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <div className={styles["Panel"]}>

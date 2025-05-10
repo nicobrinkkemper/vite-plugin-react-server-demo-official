@@ -8,10 +8,10 @@ function TestError({ throwError }: { throwError: boolean }) {
   return null;
 }
 
-export const Page = (props: { throwError: boolean, nodeEnv: string }) => {
+export const Page = (props: { throwError: boolean, title: string }) => {
   return (
     <>
-      <title>Error Example for node env: {props.nodeEnv}</title>
+      <title>{props.title}</title>
       <div>
         <Link to="/">Go back</Link>
         <ErrorBoundary>
