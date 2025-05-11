@@ -3,8 +3,6 @@ import * as ReactDOMESM from "react-server-dom-esm/client.browser";
   
   type ServerResponse = { returnValue: unknown };
   
-  const host = "";
-  const moduleBaseURL = host;
 
   export const callServer = async (
     id: string,
@@ -12,7 +10,7 @@ import * as ReactDOMESM from "react-server-dom-esm/client.browser";
   ): Promise<unknown> => {
     console.log("Fetching", id);
     const response = await ReactDOMESM.createFromFetch(
-      fetch(host, {
+      fetch(import.meta.env.BASE_URL, {
         method: "POST",
         body: await ReactDOMESM.encodeReply(args),
         headers: {
@@ -20,7 +18,7 @@ import * as ReactDOMESM from "react-server-dom-esm/client.browser";
           "Content-Type": "application/json",
         },
       }),
-      { callServer, moduleBaseURL: moduleBaseURL }
+      { callServer, moduleBaseURL: import.meta.env.BASE_URL }
     );
     const returnValue = (response as ServerResponse).returnValue;
     return returnValue;

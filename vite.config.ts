@@ -25,7 +25,7 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
     }
   }
 };
-
+process.env.GITHUB_ACTIONS = "true"
 export default defineConfig({
   plugins: vitePluginReactServer({
     moduleBase: "src",

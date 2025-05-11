@@ -5,7 +5,7 @@ export const props = (url: string)=>{
         url,    
         navigation: {
             back: {
-                href: `${process.env.VITE_BASE}`,
+                href: `${process.env.VITE_BASE_URL}`,
                 text: "Back"
             }
         }
