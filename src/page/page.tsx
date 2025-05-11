@@ -4,7 +4,9 @@ import { Link } from "../components/Link.client.js";
 import styles from "../css/home.module.css";
 import packageJson from "../../package.json" assert { type: "json" };
 import { Counter } from "../components/Counter.client.js";
-export const Page = ({ url, title }: { url: string, title: string }) => {
+import type { Props } from "./props.js";
+
+export const Page = ({ url, title, navigation }: Props) => {
   return (
     <>
       <title>{title ?? "No title"}</title>
@@ -29,13 +31,13 @@ export const Page = ({ url, title }: { url: string, title: string }) => {
           </p>
           <ul>
             <li>
-              <Link to="bidoof" className={styles["Url"]}>
-                bidoof
+              <Link to={navigation.toBidoof.href} className={styles["Url"]}>
+                {navigation.toBidoof.text}
               </Link>
             </li>
             <li>
-              <Link to="error-example" className={styles["Url"]}>
-                error-example
+              <Link to={navigation.toErrorExample.href} className={styles["Url"]}>
+                {navigation.toErrorExample.text}
               </Link>
             </li>
           </ul>

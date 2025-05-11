@@ -1,6 +1,4 @@
 export const fallbackData = {
-  title: "Bidoof",
-  description: "It's bidoof.",
   form_name: "",
   form_names: [],
   form_order: 1,

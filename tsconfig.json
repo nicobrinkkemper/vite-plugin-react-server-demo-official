@@ -35,7 +35,6 @@
       // We collect all of our compiled files into the dist folder so that we do not clutter our source directories with distilled files.
       "outDir": "dist",
       // We tell the transpiler that we are using vite and that we want to use the client types. This makes sure that our import.meta.env types are available, as well as the experimental react types.
-      "plugins": [{ "name": "typescript-plugin-css-modules" }],
       "types": [
         "vite/client",
         "react/experimental"
@@ -43,6 +42,7 @@
       "resolvePackageJsonImports": true,
       "resolvePackageJsonExports": true,
       "verbatimModuleSyntax": true,
+      "allowArbitraryExtensions": true,
       // The very latest ES features
       "target": "es2022",
       "module": "nodenext",

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { ErrorBoundary } from "../../components/ErrorBoundary.client.js";
 import { Link } from "../../components/Link.client.js";
+import type { Props } from "./props.js";
+
 function TestError({ throwError }: { throwError: boolean }) {
   if (throwError) {
     throw new Error("test");
@@ -8,12 +10,12 @@ function TestError({ throwError }: { throwError: boolean }) {
   return null;
 }
 
-export const Page = (props: { throwError: boolean, title: string }) => {
+export const Page = (props: Props) => {
   return (
     <>
       <title>{props.title}</title>
       <div>
-        <Link to="/">Go back</Link>
+        <Link to={props.navigation.back.href}>{props.navigation.back.text}</Link>
         <ErrorBoundary>
          This page rendered without errors.
           <TestError throwError={props.throwError} />

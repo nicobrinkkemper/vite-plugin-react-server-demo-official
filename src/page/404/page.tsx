@@ -1,13 +1,16 @@
 import React from "react";
-// @ts-ignore
 import styles from "../../css/404.module.css";
+import type { Props } from "./props.js";
+import { Link } from "../../components/Link.client.js";
 
-export const Page = () => {
+export const Page = ({ title, navigation }: Props) => {
   return (
     <>
-      <title>404</title>
+      <title>{title}</title>
       <div className={styles["NotFound"]}>
-        <h1>404</h1>
+        <h1>{title}</h1>
+        <p>The page you are looking for does not exist.</p>
+        <Link to={navigation.back.href}>{navigation.back.text}</Link>
       </div>
     </>
   );
