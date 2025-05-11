@@ -5,7 +5,7 @@ import { callServer } from "./callServer.js";
 
 export function createReactFetcher({
   url = window.location.pathname,
-  moduleBaseURL = new URL(import.meta.env.BASE_URL, window.location.origin).toString().slice(0, -1),
+  moduleBaseURL = new URL(import.meta.env.BASE_URL, window.location.host).toString().slice(0, -1),
   headers = { Accept: "text/x-component" },
 }: {
   url?: string;
