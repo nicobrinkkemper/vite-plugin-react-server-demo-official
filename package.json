@@ -33,7 +33,9 @@
     "react-dom": "^0.0.0-experimental-38ef6550-20250508",
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
-    "vite": "^6.3.2",
-    "vite-plugin-react-server": "^1.1.7"
+    "vite": "^6.3.2"
+  },
+  "dependencies": {
+    "vite-plugin-react-server": "^1.1.8"
   }
 }
