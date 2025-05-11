@@ -2,7 +2,7 @@ import React, { use, useCallback, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
-import { createReactFetcher } from "./utils/createReactFetcher.js";
+import { createReactFetcher } from "vite-plugin-react-server/utils";
 import { ErrorMessage } from "./components/ErrorMessage.js";
 /**
  * Client-side React Server Components implementation
@@ -57,19 +57,7 @@ const Shell: React.FC<{
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 
-const serverRequestFromWindow = (defaultFileName: string) => {
-  const currentUrl = new URL(window.location.href);
-  const href = currentUrl.href;
-  const fileName = currentUrl.pathname;
-  if (fileName.includes(".")) return href;
-  // check for backslash
-  if (fileName.endsWith("/")) return href + defaultFileName;
-  return href + "/" + defaultFileName;
-};
-const initialUrl = serverRequestFromWindow("index.rsc");
-const intitalData = createReactFetcher({
-  url: initialUrl,
-});
+const intitalData = createReactFetcher();
 
 createRoot(rootElement).render(<Shell data={intitalData} />);
 

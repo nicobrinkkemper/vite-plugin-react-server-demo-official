@@ -25,6 +25,7 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
     }
   }
 };
+process.env.GITHUB_ACTIONS = "true";
 export default defineConfig({
   plugins: vitePluginReactServer({
     moduleBase: "src",
@@ -32,8 +33,8 @@ export default defineConfig({
     props: createRouter("props.ts"),
     serverEntry: "src/server.tsx",
     clientEntry: "src/client.tsx",
-    moduleBaseURL: "",
-    moduleBasePath: process.env.GITHUB_ACTIONS ? "/vite-plugin-react-server-demo-official" : undefined,
+    moduleBaseURL: "https://nicobrinkkemper.github.io",
+    moduleBasePath: "/vite-plugin-react-server-demo-official",
     build: {
       pages: ["/", "/bidoof", "/404", "/error-example"],
       // below are redundant, already the default
