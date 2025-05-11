@@ -9,7 +9,7 @@ import * as ReactDOMESM from "react-server-dom-esm/client.browser";
     args: unknown[]
   ): Promise<unknown> => {
     console.log("Fetching", id);
-    const baseURL = new URL(import.meta.env.BASE_URL, window.location.origin).toString()
+    let baseURL = new URL(import.meta.env.BASE_URL, window.location.origin).toString()
     if(baseURL.endsWith("/")) {
       baseURL = baseURL.slice(0, -1)
     }
