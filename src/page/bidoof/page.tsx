@@ -1,17 +1,16 @@
 import { Link } from "../../components/Link.client.js";
 // @ts-ignore
 import styles from "../../css/bidoof.module.css";
-import type { FallbackData } from "./fallbackData.js";
 import * as React from "react";
-
-export const Page = (props: FallbackData) => {
+import type { Props } from "./props.js";
+export const Page = (props: Props) => {
  
   return (
     <>
       <link rel="icon" href="/bidoof.png" type="image/png" />
       <title>{props?.title ?? "No title"}</title>
       <div className={styles["Bidoof"]}>
-        <Link to="/" className={styles["Link"]}>Go back</Link>
+        <Link to={props.navigation.back.href} className={styles["Link"]}>{props.navigation.back.text}</Link>
         <h1>{props.name}</h1>
         <div className={styles["Images"]}>
           <img

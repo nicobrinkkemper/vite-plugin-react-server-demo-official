@@ -18,7 +18,9 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
     case "/index.rsc":
       return `src/page/${file}`;
     default: {
-      console.trace({url,file});
+      if(process.env.NODE_ENV === 'development'){
+        return `src/page/404/${file}`;
+      }
       throw new Error(`Unknown route: ${typeof url === "string" ? url : JSON.stringify(url)}`);
     }
   }
@@ -31,8 +33,8 @@ export default defineConfig({
     props: createRouter("props.ts"),
     serverEntry: "src/server.tsx",
     clientEntry: "src/client.tsx",
-    moduleBaseURL: "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/",
-    moduleBasePath: "/vite-plugin-react-server-demo-official",
+    moduleBaseURL: process.env.GITHUB_ACTIONS ? "https://nicobrinkkemper.github.io" : '',
+    moduleBasePath: process.env.GITHUB_ACTIONS ? "/vite-plugin-react-server-demo-official" : '',
     build: {
       pages: ["/", "/bidoof", "/404", "/error-example"],
       // below are redundant, already the default

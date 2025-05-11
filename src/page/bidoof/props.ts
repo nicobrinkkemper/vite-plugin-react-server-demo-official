@@ -1,7 +1,16 @@
 import { fallbackData, type FallbackData } from "./fallbackData.js";
 
-
 export const props = async () => {
+  const baseProps = {
+    title: "Bidoof",
+    description: "It's bidoof.",
+    navigation: {
+      back: {
+        href: `${process.env.VITE_BASE}`,
+        text: "Back",
+      },
+    },
+  } as const
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
@@ -16,12 +25,15 @@ export const props = async () => {
     }
     const body = await res.json();
     return {
-        title: 'Bidoof',
-        description: 'It\'s bidoof.',
-        ...body,
-    } as FallbackData;
+      ...baseProps,
+      ...(body as FallbackData),
+    };
   } catch (error) {
     // Fallback data
-    return fallbackData
+    return {
+      ...baseProps,
+      ...fallbackData,
+    };
   }
 };
+export type Props = Awaited<ReturnType<typeof props>>;
