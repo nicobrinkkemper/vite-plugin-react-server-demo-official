@@ -32,7 +32,7 @@ export default defineConfig({
     props: createRouter("props.ts"),
     serverEntry: "src/server.tsx",
     clientEntry: "src/client.tsx",
-    moduleBaseURL: "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official",
+    moduleBaseURL: process.env.GITHUB_ACTIONS ? "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official" : "",
     build: {
       pages: ["/", "/bidoof", "/404", "/error-example"],
       // below are redundant, already the default
