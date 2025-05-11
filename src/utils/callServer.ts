@@ -9,8 +9,8 @@ import * as ReactDOMESM from "react-server-dom-esm/client.browser";
     args: unknown[]
   ): Promise<unknown> => {
     console.log("Fetching", id);
-    let baseURL = new URL(import.meta.env.BASE_URL, window.location.origin).toString()
-    if(baseURL.endsWith("/")) {
+    let baseURL = import.meta.env.BASE_URL
+    if(baseURL !== '/' && baseURL.endsWith("/")) {
       baseURL = baseURL.slice(0, -1)
     }
     const response = await ReactDOMESM.createFromFetch(
