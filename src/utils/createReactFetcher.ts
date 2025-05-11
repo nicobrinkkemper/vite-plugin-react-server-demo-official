@@ -14,6 +14,9 @@ export function createReactFetcher({
   moduleBaseURL?: string;
   headers?: HeadersInit;
 } = {}): Promise<ReactNode> {
+  if(moduleBaseURL.endsWith("/")) {
+    moduleBaseURL = moduleBaseURL.slice(0, -1)
+  }
   return ReactDOMESM.createFromFetch(
     fetch(url, {
       headers: headers,
