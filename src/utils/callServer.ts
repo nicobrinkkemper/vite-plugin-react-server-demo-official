@@ -9,8 +9,9 @@ import * as ReactDOMESM from "react-server-dom-esm/client.browser";
     args: unknown[]
   ): Promise<unknown> => {
     console.log("Fetching", id);
+    const baseURL = new URL(import.meta.env.BASE_URL, window.location.origin).toString().slice(0, -1)
     const response = await ReactDOMESM.createFromFetch(
-      fetch(import.meta.env.BASE_URL, {
+      fetch(baseURL, {
         method: "POST",
         body: await ReactDOMESM.encodeReply(args),
         headers: {
@@ -18,7 +19,7 @@ import * as ReactDOMESM from "react-server-dom-esm/client.browser";
           "Content-Type": "application/json",
         },
       }),
-      { callServer, moduleBaseURL: import.meta.env.BASE_URL }
+      { callServer, moduleBaseURL: baseURL }
     );
     const returnValue = (response as ServerResponse).returnValue;
     return returnValue;
