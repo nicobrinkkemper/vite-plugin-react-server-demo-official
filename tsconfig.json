@@ -54,6 +54,7 @@
       ]
     },
     "include": [
+      "src/utils/**/*.ts",
       // support just normal ts
       "src/**/*.client.ts",
       // support tsx

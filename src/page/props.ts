@@ -5,11 +5,11 @@ export const props = (url: string) => {
         description: "Home page",
         navigation: {
             toBidoof: {
-                href: `${process.env.VITE_BASE}bidoof`,
+                href: `${process.env.VITE_BASE_URL}bidoof`,
                 text: "Bidoof"
             },
             toErrorExample: {
-                href: `${process.env.VITE_BASE}error-example`,
+                href: `${process.env.VITE_BASE_URL}error-example`,
                 text: "Error Example"
             }
         }

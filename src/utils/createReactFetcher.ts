@@ -5,7 +5,7 @@ import { callServer } from "./callServer.js";
 
 export function createReactFetcher({
   url = window.location.pathname,
-  moduleBaseURL = "",
+  moduleBaseURL = new URL(import.meta.env.BASE_URL, window.location.origin).toString().slice(0, -1),
   headers = { Accept: "text/x-component" },
 }: {
   url?: string;
@@ -14,7 +14,7 @@ export function createReactFetcher({
 } = {}): Promise<ReactNode> {
   return ReactDOMESM.createFromFetch(
     fetch(url, {
-      headers: { Accept: "text/x-component" },
+      headers: headers,
     }),
     {
       callServer: callServer,
