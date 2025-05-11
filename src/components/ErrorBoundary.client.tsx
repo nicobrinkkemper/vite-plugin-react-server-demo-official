@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { ErrorMessage } from "./ErrorMessage.js";
 
 export class ErrorBoundary extends React.Component {
   public state: {
@@ -28,11 +29,7 @@ export class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       if (this.state.error) {
         return (
-          <div>
-            <h1>Error</h1>
-            <p>{this.state.error.message}</p>
-            <p style={{ whiteSpace: "pre-wrap" }}>{this.state.error.stack}</p>
-          </div>
+          <ErrorMessage error={{ message: this.state.error.message, stack: this.state.error.stack }} />
         );
       }
       return <div>Error</div>;

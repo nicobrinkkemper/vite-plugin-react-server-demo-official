@@ -1,13 +1,9 @@
-import React, {
-  use,
-  useCallback,
-  useState,
-  useTransition,
-} from "react";
+import React, { use, useCallback, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
 import { createReactFetcher } from "./utils/createReactFetcher.js";
+import { ErrorMessage } from "./components/ErrorMessage.js";
 /**
  * Client-side React Server Components implementation
  *
@@ -31,11 +27,14 @@ const Shell: React.FC<{
 
   const navigate = useCallback((to: string) => {
     if ("scrollTo" in window) window.scrollTo(0, 0);
+    const [withOutQuery, query] = to.split("?");
     startTransition(() => {
       // Create new RSC data stream
       setStoreData(
         createReactFetcher({
-          url: to.endsWith("/") ? to + "index.rsc" : to + "/index.rsc",
+          url: to.endsWith("/")
+            ? withOutQuery + "index.rsc"
+            : withOutQuery + "/index.rsc",
         })
       );
     });
@@ -62,32 +61,17 @@ const serverRequestFromWindow = (defaultFileName: string) => {
   const currentUrl = new URL(window.location.href);
   const href = currentUrl.href;
   const fileName = currentUrl.pathname;
-  if(fileName.includes('.')) return href;
+  if (fileName.includes(".")) return href;
   // check for backslash
-  if(fileName.endsWith("/")) return href + defaultFileName;
+  if (fileName.endsWith("/")) return href + defaultFileName;
   return href + "/" + defaultFileName;
 };
-const initialUrl = serverRequestFromWindow('index.rsc');
+const initialUrl = serverRequestFromWindow("index.rsc");
 const intitalData = createReactFetcher({
   url: initialUrl,
 });
 
 createRoot(rootElement).render(<Shell data={intitalData} />);
-
-const Redirect = ({ search }: { search?: string }) => {
-  React.useEffect(() => {
-    if(import.meta?.['env']?.['DEV'] || window.location.origin.includes('localhost')|| window.location.origin.includes('127.0.0.1')) {
-      return;
-    }
-    if (!window.location.href.includes("/404")) {
-      const timeout = setTimeout(() => {
-        window.location.href = "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/404" + search;
-      }, 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, []);
-  return null;
-};
 
 /**
  * Error boundary
@@ -122,6 +106,13 @@ class ErrorBoundary extends React.Component<
     if (!this.state.hasError) {
       return this.props.children;
     }
-    return <Redirect search={`?error=${encodeURIComponent(this.state.error?.message ?? "Unknown error")}`} />;
+    return (
+      <ErrorMessage
+        error={{
+          message: this.state.error?.message ?? "Unknown error",
+          stack: this.state.error?.stack,
+        }}
+      />
+    );
   }
 }

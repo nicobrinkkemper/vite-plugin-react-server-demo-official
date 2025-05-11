@@ -73,9 +73,9 @@
       "types/**/*.d.ts",
       // entry
       "index.ts",
-      "server.ts",
-      "client.ts",
-      "types.ts",
+      "src/server.tsx",
+      "src/client.tsx",
+      "src/types.ts",
     ],
     "exclude": [
       "dist",
