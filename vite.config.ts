@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 // @ts-ignore
 import { vitePluginReactServer } from "vite-plugin-react-server";
+import { Html } from "vite-plugin-react-server/components";
 
 
 const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
@@ -35,6 +36,7 @@ export default defineConfig({
     clientEntry: "src/client.tsx",
     moduleBaseURL: process.env.GITHUB_ACTIONS ? "/vite-plugin-react-server-demo-official/" : "/",
     moduleBasePath: "",
+    Html: Html,
     build: {
       pages: ["/", "/bidoof", "/404", "/error-example"],
       // below are redundant, already the default
