@@ -34,6 +34,6 @@
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
     "vite": "^6.3.2",
-    "vite-plugin-react-server": "^1.1.5"
+    "vite-plugin-react-server": "^1.1.6"
   }
 }
