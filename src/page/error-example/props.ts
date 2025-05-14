@@ -5,7 +5,7 @@ export const props = ()=>{
     title: "Error Example for node env: " + process.env['NODE_ENV'],
     navigation: {
       back: {
-        href: `${process.env.VITE_BASE_URL}`,
+        href: `${process.env.VITE_BASE_URL === "" ? "/" : process.env.VITE_BASE_URL}`,
         text: "Back"
       }
     }

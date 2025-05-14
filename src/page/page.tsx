@@ -11,7 +11,13 @@ export const Page = ({ url, title, navigation }: Props) => {
     <>
       <title>{title ?? "No title"}</title>
       <div className={styles["Home"]}>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link
+          rel="icon"
+          href={`${process.env.VITE_PUBLIC_ORIGIN ?? ""}${
+            process.env.VITE_BASE_URL ?? "/"
+          }favicon.ico`}
+          type="image/x-icon"
+        />
         <div className={styles["Panel"]}>
           <h1>vite-plugin-react-server demo</h1>
           <p>
@@ -36,7 +42,10 @@ export const Page = ({ url, title, navigation }: Props) => {
               </Link>
             </li>
             <li>
-              <Link to={navigation.toErrorExample.href} className={styles["Url"]}>
+              <Link
+                to={navigation.toErrorExample.href}
+                className={styles["Url"]}
+              >
                 {navigation.toErrorExample.text}
               </Link>
             </li>

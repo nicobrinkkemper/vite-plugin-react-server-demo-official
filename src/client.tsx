@@ -2,8 +2,9 @@ import React, { use, useCallback, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
-import { createReactFetcher } from "vite-plugin-react-server/utils";
+import { createReactFetcher, pageURL} from "vite-plugin-react-server/utils";
 import { ErrorMessage } from "./components/ErrorMessage.js";
+import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
 /**
  * Client-side React Server Components implementation
  *
@@ -28,14 +29,11 @@ const Shell: React.FC<{
   const navigate = useCallback((to: string) => {
     if ("scrollTo" in window) window.scrollTo(0, 0);
     const [withOutQuery, query] = to.split("?");
+    
     startTransition(() => {
       // Create new RSC data stream
       setStoreData(
-        createReactFetcher({
-          url: to.endsWith("/")
-            ? withOutQuery + "index.rsc"
-            : withOutQuery + "/index.rsc",
-        })
+        createReactFetcher()
       );
     });
   }, []);
@@ -59,48 +57,5 @@ if (!rootElement) throw new Error("Root element not found");
 
 const intitalData = createReactFetcher();
 
+
 createRoot(rootElement).render(<Shell data={intitalData} />);
-
-/**
- * Error boundary
- */
-class ErrorBoundary extends React.Component<
-  React.PropsWithChildren,
-  { hasError: boolean; error: Error | null }
-> {
-  state: { hasError: boolean; error: Error | null } = {
-    hasError: false,
-    error: null,
-  };
-  constructor(props: React.PropsWithChildren) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
-
-  componentDidCatch(error: unknown) {
-    console.error(error);
-    this.setState({
-      hasError: true,
-      error:
-        error instanceof Error
-          ? error
-          : new Error("Error", {
-              cause: error,
-            }),
-    });
-  }
-
-  render() {
-    if (!this.state.hasError) {
-      return this.props.children;
-    }
-    return (
-      <ErrorMessage
-        error={{
-          message: this.state.error?.message ?? "Unknown error",
-          stack: this.state.error?.stack,
-        }}
-      />
-    );
-  }
-}

@@ -26,7 +26,6 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
     }
   }
 };
-process.env.GITHUB_ACTIONS = "true";
 export default defineConfig({
   plugins: vitePluginReactServer({
     moduleBase: "src",
@@ -34,8 +33,9 @@ export default defineConfig({
     props: createRouter("props.ts"),
     serverEntry: "src/server.tsx",
     clientEntry: "src/client.tsx",
-    moduleBaseURL: process.env.GITHUB_ACTIONS ? "https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official" : "/",
-    moduleBasePath: process.env.GITHUB_ACTIONS ? "/vite-plugin-react-server-demo-official" : "/",
+    moduleBaseURL: process.env.GITHUB_ACTIONS ? "/vite-plugin-react-server-demo-official" : '/',
+    moduleBasePath: process.env.GITHUB_ACTIONS ? "/vite-plugin-react-server-demo-official" : '/',
+    publicOrigin: process.env.GITHUB_ACTIONS ? "https://nicobrinkkemper.github.io" : '',
     Html: Html,
     build: {
       pages: ["/", "/bidoof", "/404", "/error-example"],
