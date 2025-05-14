@@ -29,8 +29,12 @@ export const Link: React.FC<{
         }
       const newState = { to: newTo };
       if(window.location.pathname !== newTo) {
-        window.history.pushState(newState, "", e.currentTarget.href);
-        window.dispatchEvent(new PopStateEvent("popstate", { state: newState }));
+        try {
+          window.history.pushState(newState, "", e.currentTarget.href);
+          window.dispatchEvent(new PopStateEvent("popstate", { state: newState }));
+        } catch (error) {
+          console.error(`You can not go to ${newTo}`, error);
+        }
       }
     }}
   >

@@ -36,6 +36,6 @@
     "vite": "^6.3.2"
   },
   "dependencies": {
-    "vite-plugin-react-server": "^1.1.9"
+    "vite-plugin-react-server": "^1.1.10"
   }
 }
