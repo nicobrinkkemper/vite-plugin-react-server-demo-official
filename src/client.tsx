@@ -2,9 +2,9 @@ import React, { use, useCallback, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
-import { createReactFetcher, pageURL} from "vite-plugin-react-server/utils";
-import { ErrorMessage } from "./components/ErrorMessage.js";
+import { createReactFetcher, env } from "vite-plugin-react-server/utils";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
+console.log(env)
 /**
  * Client-side React Server Components implementation
  *
@@ -20,32 +20,32 @@ import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
  * Handles navigation and RSC data updates
  */
 const Shell: React.FC<{
-  data: React.Usable<unknown>;
-}> = ({ data: initialServerData }) => {
+  data: React.Usable<React.ReactNode>;
+}> = ({ data }) => {
   const [, startTransition] = useTransition();
   const [storeData, setStoreData] =
-    useState<React.Usable<unknown>>(initialServerData);
+    useState<React.Usable<React.ReactNode>>(data);
 
   const navigate = useCallback((to: string) => {
     if ("scrollTo" in window) window.scrollTo(0, 0);
-    const [withOutQuery, query] = to.split("?");
-    
     startTransition(() => {
       // Create new RSC data stream
       setStoreData(
-        createReactFetcher()
+        createReactFetcher({
+          url: to,
+        })
       );
     });
   }, []);
 
   // Handle browser navigation
-  useEventListener("popstate", (e) => {
-    if (e instanceof PopStateEvent && e.state?.to) {
-      return navigate(e.state.to);
-    } else {
-      return navigate(window.location.pathname);
-    }
-  });
+  useEventListener("popstate", (e) =>
+    navigate(
+      e instanceof PopStateEvent && e.state?.to
+        ? e.state.to
+        : window.location.pathname
+    )
+  );
 
   const content = use(storeData);
 
@@ -55,7 +55,4 @@ const Shell: React.FC<{
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 
-const intitalData = createReactFetcher();
-
-
-createRoot(rootElement).render(<Shell data={intitalData} />);
+createRoot(rootElement).render(<Shell data={createReactFetcher()} />);

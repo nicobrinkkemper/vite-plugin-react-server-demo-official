@@ -17,7 +17,7 @@ export const Page = (props: Props) => {
       <div>
         <Link to={props.navigation.back.href}>{props.navigation.back.text}</Link>
         <ErrorBoundary>
-         This page rendered without errors.
+          <p>This page rendered without errors.</p>
           <TestError throwError={props.throwError} />
         </ErrorBoundary>
       </div>

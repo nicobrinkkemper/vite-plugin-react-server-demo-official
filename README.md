@@ -2,6 +2,25 @@
 
 A modern React application template using [vite-plugin-react-server](https://github.com/nicobrinkkemper/vite-plugin-react-server) for React Server Components (RSC) support.
 
+[See the example hosted on Github pages](https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/)
+
+Showcasing:
+
+- Client / Server boundary
+  - Client side Error Boundary
+  - Client side navigation
+  - Server side page & props
+  - Counter with useState
+  - Dynamic head updates
+  - Async props using the pokeapi
+- Static site generation capabilities with "headless" index.rsc files and fully static index.html files
+
+Clone the repository to see the development process in action.
+
+- Showing server side stack trace in ErrorBoundary
+- Open Developer console for additional stack-trace information on the error-example page
+- Hot reloading of pages
+
 ## Features
 
 - ⚡️ [Vite](https://vitejs.dev/) - Lightning fast build tool
@@ -31,17 +50,33 @@ cd vite-plugin-react-server-demo-official
 2. Install dependencies and apply patches:
 ```bash
 npm install
-npm run patch  # Applies necessary React experimental patches
+```
+After installing new dependencies
+```bash
+npm run postinstall
 ```
 
 3. Start the development server:
 ```bash
 # For server-side development
-NODE_OPTIONS="--conditions=react-server" npm run dev
+npm run dev
+NODE_OPTIONS='--conditions=react-server' npx vite
 
-# For client-side development
-npm run dev:client
+# Using the plugin's built-in rsc-worker
+npm run start
+npx vite
 ```
+
+4. Build and preview
+```bash
+# To build the static site
+npm run build
+NODE_OPTIONS='--conditions=react-server' npx vite build
+
+# 
+npx vite preview
+```
+
 
 ## Project Structure
 
@@ -54,7 +89,6 @@ project/
 │   └── workflows/    # CI/CD configurations
 ├── vite.config.ts           # Client-side Vite configuration
 ├── vite.react.config.ts     # Shared React configuration
-├── vite.server.config.ts    # Server-side configuration
 └── tsconfig.json            # TypeScript configuration
 ```
 
@@ -73,41 +107,14 @@ npm run build:server
 
 ## Configuration
 
-The project uses three Vite configuration files:
+The project uses Vite configuration file:
 
 ### `vite.config.ts` (Client)
 Handles client-side bundling and ESM modules using `vite-plugin-react-server/client`.
 
-### `vite.server.config.ts` (Server)
-Manages server-side rendering and RSC processing using `vite-plugin-react-server`.
+### `vite.react.config.ts`
+Contains configuration for the plugin this demo is for
 
-### `vite.react.config.ts` (Shared)
-Contains shared configuration for both client and server builds.
-
-## React Server Components
-
-The template includes utilities for working with React Server Components. Here's an example of how to use the `createReactFetcher`:
-
-```typescript
-import { createReactFetcher } from './utils/createReactFetcher';
-
-// Create a fetcher with default options
-const component = await createReactFetcher();
-
-// Or with custom options
-const component = await createReactFetcher({
-  url: '/api/component',
-  moduleBaseURL: 'https://your-base-url.com',
-  headers: { Accept: 'text/x-component' }
-});
-```
-
-## Worker Support
-
-The template leverages two types of workers from vite-plugin-react-server:
-
-- **RSC Worker**: Handles server-side component streaming
-- **HTML Worker**: Manages client-side HTML generation
 
 ## Contributing
 
