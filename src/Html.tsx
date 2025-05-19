@@ -11,7 +11,6 @@ export const Html = ({
 }: React.PropsWithChildren<HtmlProps>) => (
   <html>
     <head>
-      {moduleBaseURL !== "/" && <base href={moduleBaseURL} />}
       <CssCollectorElements cssFiles={globalCss} />
     </head>
     <body>

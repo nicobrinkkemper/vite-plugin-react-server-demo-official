@@ -6,15 +6,29 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build:static && npm run build:client && npm run build:server",
-    "dev": "NODE_OPTIONS='--conditions=react-server' vite",
-    "preview": "npm run build && vite preview",
+    "dev": "npm run env:dev -- vite",
     "start": "vite",
-    "build:static": "vite build",
-    "build:client": "vite build --ssr",
-    "build:server": "NODE_OPTIONS='--conditions=react-server' vite build --ssr",
-    "debug-build": "NODE_ENV=development npm run build:static -- --mode development && NODE_ENV=development npm run build:client -- --mode development && NODE_ENV=development npm run build:server -- --mode development",
-    "preview:static": "NODE_OPTIONS='--conditions=react-server' vite preview",
+    "preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview && npm run preview:start",
+    "env:gh": "PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:dev": "NODE_ENV=development BASE_URL='/vite-plugin-react-server-demo-official/' NODE_OPTIONS='--conditions=react-server'",
+    "build": "npm run build:static && npm run build:client && npm run build:server",
+    "build:static": "npm run env:gh -- vite build",
+    "build:client": "npm run env:gh -- vite build --ssr",
+    "build:server": "npm run env:gh -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
+    "build:gh": "npm run build:static:gh && npm run build:client:gh && npm run build:server:gh",
+    "build:static:gh": "npm run env:gh -- vite build",
+    "build:client:gh": "npm run env:gh -- vite build --ssr",
+    "build:server:gh": "npm run env:gh -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
+    "build:preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview",
+    "build:static:preview": "npm run env:preview -- vite build",
+    "build:client:preview": "npm run env:preview -- vite build --ssr",
+    "build:server:preview": "npm run env:preview -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
+    "preview:start": "npm run env:preview -- vite preview",
+    "build:static:dev": "npm run env:dev -- vite build --mode development",
+    "build:client:dev": "npm run env:dev -- vite build --ssr --mode development",
+    "build:server:dev": "npm run env:dev -- NODE_OPTIONS='--conditions=react-server' vite build --ssr --mode development",
+    "debug-build": "npm run build:static:dev && npm run build:client:dev && npm run build:server:dev",
     "postinstall": "patch-package",
     "clean-install": "npm install react@experimental react-dom@experimental react-server-dom-esm",
     "patch-oss": "patch"
@@ -36,6 +50,6 @@
     "vite": "^6.3.2"
   },
   "dependencies": {
-    "vite-plugin-react-server": "^1.1.10"
+    "vite-plugin-react-server": "^1.1.12"
   }
 }

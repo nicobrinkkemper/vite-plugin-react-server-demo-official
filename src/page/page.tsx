@@ -1,11 +1,10 @@
+/// <reference types="vite/client" />
 import * as React from "react";
 import { Link } from "../components/Link.client.js";
-// @ts-ignore
 import styles from "../css/home.module.css";
 import packageJson from "../../package.json" assert { type: "json" };
 import { Counter } from "../components/Counter.client.js";
 import type { Props } from "./props.js";
-
 export const Page = ({ url, title, navigation }: Props) => {
   return (
     <>
@@ -13,8 +12,8 @@ export const Page = ({ url, title, navigation }: Props) => {
       <div className={styles["Home"]}>
         <link
           rel="icon"
-          href={`${process.env.VITE_PUBLIC_ORIGIN ?? ""}${
-            process.env.VITE_BASE_URL ?? "/"
+          href={`${import.meta.env.PUBLIC_ORIGIN ?? ""}${
+            import.meta.env.BASE_URL ?? "/"
           }favicon.ico`}
           type="image/x-icon"
         />
@@ -50,11 +49,28 @@ export const Page = ({ url, title, navigation }: Props) => {
               </Link>
             </li>
           </ul>
-          <p>
-            Build using node version <code>{process.versions.node}</code>. React
-            version <code>{React.version}</code>.
-          </p>
-          <Counter />
+          <dl>
+            <dt>Build using node version</dt>
+            <dd>
+              <code>{process.versions.node}</code>
+            </dd>
+            <dt>React version</dt>
+            <dd>
+              <code>{React.version}</code>
+            </dd>
+            <dt>BASE_URL</dt>
+            <dd>
+              <code>{import.meta.env.BASE_URL}</code>
+            </dd>
+            <dt>PUBLIC_ORIGIN</dt>
+            <dd>
+              <code>{import.meta.env.PUBLIC_ORIGIN}</code>
+            </dd>
+            <dt>Mandatory counter example</dt>
+            <dd>
+              <Counter />
+            </dd> 
+          </dl>
         </div>
       </div>
     </>
