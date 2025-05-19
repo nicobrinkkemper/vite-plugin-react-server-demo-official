@@ -5,7 +5,6 @@ import styles from "../css/home.module.css";
 import packageJson from "../../package.json" assert { type: "json" };
 import { Counter } from "../components/Counter.client.js";
 import type { Props } from "./props.js";
-import { env } from "vite-plugin-react-server/utils";
 export const Page = ({ url, title, navigation }: Props) => {
   return (
     <>
@@ -13,8 +12,8 @@ export const Page = ({ url, title, navigation }: Props) => {
       <div className={styles["Home"]}>
         <link
           rel="icon"
-          href={`${env.PUBLIC_ORIGIN ?? ""}${
-            env.BASE_URL ?? "/"
+          href={`${import.meta.env.PUBLIC_ORIGIN ?? ""}${
+            import.meta.env.BASE_URL ?? "/"
           }favicon.ico`}
           type="image/x-icon"
         />

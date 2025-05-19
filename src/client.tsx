@@ -2,9 +2,18 @@ import React, { use, useCallback, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
-import { createReactFetcher, env } from "vite-plugin-react-server/utils";
+import { createReactFetcher } from "vite-plugin-react-server/utils";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
-console.log(env)
+declare global {
+  interface ImportMetaEnv {
+    BASE_URL: string
+    MODE: string
+    DEV: boolean
+    PROD: boolean
+    SSR: boolean
+    PUBLIC_ORIGIN: string
+  }
+}
 /**
  * Client-side React Server Components implementation
  *
@@ -33,6 +42,8 @@ const Shell: React.FC<{
       setStoreData(
         createReactFetcher({
           url: to,
+          moduleBaseURL: import.meta.env.BASE_URL,
+          publicOrigin: import.meta.env.PUBLIC_ORIGIN,
         })
       );
     });
