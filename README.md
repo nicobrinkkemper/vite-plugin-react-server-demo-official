@@ -42,21 +42,26 @@ Clone the repository to see the development process in action.
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/nicobrinkkemper/vite-plugin-react-server-demo-official.git
 cd vite-plugin-react-server-demo-official
 ```
 
 2. Install dependencies and apply patches:
+
 ```bash
 npm install
 ```
+
 After installing new dependencies
+
 ```bash
 npm run postinstall
 ```
 
 3. Start the development server:
+
 ```bash
 # For server-side development
 npm run dev
@@ -68,15 +73,15 @@ npx vite
 ```
 
 4. Build and preview
+
 ```bash
 # To build the static site
 npm run build
 NODE_OPTIONS='--conditions=react-server' npx vite build
 
-# 
+#
 npx vite preview
 ```
-
 
 ## Project Structure
 
@@ -109,12 +114,13 @@ npm run build:server
 
 The project uses Vite configuration file:
 
-### `vite.config.ts` (Client)
-Handles client-side bundling and ESM modules using `vite-plugin-react-server/client`.
+### `vite.config.ts`
+
+Adding `vite-plugin-react-server` to vite
 
 ### `vite.react.config.ts`
-Contains configuration for the plugin this demo is for
 
+Configuration for the plugin this demo is for
 
 ## Contributing
 
