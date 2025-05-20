@@ -92,8 +92,8 @@ project/
 ├── patches/          # Custom patches for React experimental features
 ├── .github/          # GitHub workflows
 │   └── workflows/    # CI/CD configurations
-├── vite.config.ts           # Client-side Vite configuration
-├── vite.react.config.ts     # Shared React configuration
+├── vite.config.ts           # Vite configuration
+├── vite.react.config.ts     # Plugin configuration
 └── tsconfig.json            # TypeScript configuration
 ```
 
