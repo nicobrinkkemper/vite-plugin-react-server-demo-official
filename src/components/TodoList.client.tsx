@@ -150,7 +150,7 @@ export function TodoList({
           disabled={loading}
         />
         <button type="submit" disabled={loading}>
-          {loading ? 'Adding...' : 'Add'}
+          {loading ? '...' : 'Add'}
         </button>
       </form>
 
