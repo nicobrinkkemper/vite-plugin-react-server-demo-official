@@ -1,7 +1,9 @@
-import sqlite3 from "sqlite3";
+import sqlite from "node:sqlite";
 
 // Initialize database
-export const db = new sqlite3.Database("todos.db");
+const db = new sqlite.DatabaseSync("todos.db", {
+  open: true,
+});
 
 // Create table if it doesn't exist
 db.exec(`
@@ -12,3 +14,5 @@ db.exec(`
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
   ) STRICT
 `); 
+
+export { db };

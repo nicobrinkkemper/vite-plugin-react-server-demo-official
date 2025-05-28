@@ -1,9 +1,16 @@
-import { addTodo,  } from '../../server/actions/todoActions.server.js';
-
+import { addTodo, toggleTodo, deleteTodo, editTodo, clearCompletedTodos, getTodos } from '../../server/actions/todoActions.server.js';
 
 export const props = async () => {
+  const initialTodos = await getTodos();
+  
   return {
-    addTodo: addTodo,
+    addTodo,
+    toggleTodo,
+    deleteTodo,
+    editTodo,
+    clearCompletedTodos,
+    getTodos,
+    initialTodos
   };
 };
 

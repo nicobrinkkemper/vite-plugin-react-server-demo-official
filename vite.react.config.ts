@@ -29,8 +29,11 @@ export default {
   Page: createRouter("page.tsx"),
   props: createRouter("props.ts"),
   Html: Html,
+  verbose: true,
+  moduleBasePath: "/",
+  moduleBaseURL: "/",
   serverEntry: "src/server/index.ts",
   build: {
-    pages: ["/", "/bidoof", "/404", "/error-example"],
+    pages: ["/", "/bidoof", "/404", "/error-example", "/todos"],
   },
 } satisfies StreamPluginOptions;

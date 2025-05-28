@@ -73,9 +73,6 @@
       "types/**/*.d.ts",
       // entry
       "index.ts",
-      "src/server/**/*.ts",
-      "src/server/**/*.tsx",
-      "src/server/**/*.mts",
       "src/client.tsx",
       "src/types.ts",
     ],
