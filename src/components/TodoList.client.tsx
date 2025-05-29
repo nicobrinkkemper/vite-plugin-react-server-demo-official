@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-import '../css/todoStyles.css';
 
 type Todo = {
   id: number;
@@ -11,6 +10,7 @@ type Todo = {
 
 type Props = {
   initialTodos: Todo[];
+  styles: CSSModuleClasses;
   addTodo: (title: string) => Promise<{ success: boolean; id?: number }>;
   toggleTodo: (id: number) => Promise<{ success: boolean }>;
   deleteTodo: (id: number) => Promise<{ success: boolean }>;
@@ -22,11 +22,12 @@ type Props = {
 export function TodoList({ 
   initialTodos, 
   addTodo, 
-  toggleTodo, 
-  deleteTodo, 
+  toggleTodo,
+  deleteTodo,
   editTodo,
   getTodos,
-  clearCompletedTodos 
+  clearCompletedTodos,
+  styles
 }: Props) {
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
   const [newTodo, setNewTodo] = useState('');
@@ -136,10 +137,10 @@ export function TodoList({
   }
 
   return (
-    <div className="todo-list">
+    <div className={styles["todo-list"]}>
       <h1>Todo List</h1>
       
-      {error && <div className="error-message">{error}</div>}
+      {error && <div className={styles["error-message"]}>{error}</div>}
       
       <form onSubmit={handleAddTodo}>
         <input
@@ -154,13 +155,13 @@ export function TodoList({
         </button>
       </form>
 
-      <div className="todo-stats">
+      <div className={styles["todo-stats"]}>
         <span>{remainingCount} items left</span>
         {todos.some(todo => todo.completed) && (
           <button 
             onClick={handleClearCompleted}
             disabled={loading}
-            className="clear-completed"
+            className={styles["clear-completed"]}
           >
             Clear completed
           </button>
@@ -182,7 +183,7 @@ export function TodoList({
                   e.preventDefault();
                   handleEditTodo(todo.id);
                 }}
-                className="edit-form"
+                className={styles["edit-form"]}
               >
                 <input
                   type="text"
@@ -217,7 +218,7 @@ export function TodoList({
                 <button 
                   onClick={() => handleDeleteTodo(todo.id)}
                   disabled={loading}
-                  className="delete-button"
+                  className={styles["delete-button"]} 
                 >
                   ×
                 </button>

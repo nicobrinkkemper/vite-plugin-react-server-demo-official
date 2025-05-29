@@ -24,7 +24,6 @@ export async function getTodos(): Promise<Todo[]> {
   }));
 }
 
-console.log('test')
 // Server action to add a todo
 export async function addTodo(title: string): Promise<{ success: boolean; id?: number }> {
   try {
