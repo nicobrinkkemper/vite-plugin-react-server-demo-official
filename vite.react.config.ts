@@ -34,6 +34,6 @@ export default {
   moduleBaseURL: "/",
   serverEntry: "src/server/index.ts",
   build: {
-    pages: ["/", "/bidoof", "/404", "/error-example", "/todos"],
+    pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
   },
 } satisfies StreamPluginOptions;

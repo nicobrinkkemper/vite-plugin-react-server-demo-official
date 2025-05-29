@@ -14,7 +14,6 @@ type SQLiteTodo = {
   completed: number;
   created_at: string;
 };
-
 // Server action to fetch todos
 export async function getTodos(): Promise<Todo[]> {
   const stmt = db.prepare("SELECT * FROM todos ORDER BY created_at DESC");
@@ -25,6 +24,7 @@ export async function getTodos(): Promise<Todo[]> {
   }));
 }
 
+console.log('test')
 // Server action to add a todo
 export async function addTodo(title: string): Promise<{ success: boolean; id?: number }> {
   try {

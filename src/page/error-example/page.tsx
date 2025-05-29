@@ -5,7 +5,7 @@ import type { Props } from "./props.js";
 
 function TestError({ throwError }: { throwError: boolean }) {
   if (throwError) {
-    throw new Error("test");
+    throw new Error("test error example");
   }
   return null;
 }
