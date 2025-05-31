@@ -30,8 +30,8 @@ export default {
   props: createRouter("props.ts"),
   Html: Html,
   verbose: true,
-  moduleBasePath: "/",
-  moduleBaseURL: "/",
+  moduleBasePath: process.env.VITE_BASE_URL || "/",
+  moduleBaseURL: process.env.VITE_BASE_URL || "/",
   serverEntry: "src/server/index.ts",
   build: {
     pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],

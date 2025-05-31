@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_OPTIONS='--conditions react-server' vite",
+    "dev": "npm run env:dev-server -- vite",
     "start": "npm run env:start -- vite",
     "preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview && npm run preview:start",
     "env:gh": "PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/'",
-    "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
-    "env:dev": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
+    "env:preview": "VITE_PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:dev": "NODE_ENV=development BASE_URL='/bidoof-template/' PUBLIC_ORIGIN='http://localhost:5173'",
+    "env:dev-server": "NODE_OPTIONS='--conditions react-server' && npm run env:dev",
     "env:start": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "build": "npm run build:static && npm run build:client && npm run build:server",
     "build:static": "vite build",
@@ -48,9 +49,10 @@
     "react-dom": "^0.0.0-experimental-c0464aed-20250523",
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
-    "vite": "^6.3.2"
+    "vite": "^6.3.2",
+    "webpack-sources": "^3.3.0"
   },
   "dependencies": {
-    "vite-plugin-react-server": "^1.1.14"
+    "vite-plugin-react-server": "^1.1.15"
   }
 }
