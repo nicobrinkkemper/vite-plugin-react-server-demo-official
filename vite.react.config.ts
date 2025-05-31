@@ -29,10 +29,13 @@ export default {
   Page: createRouter("page.tsx"),
   props: createRouter("props.ts"),
   Html: Html,
-  verbose: true,
+  verbose: false,
   moduleBasePath: process.env.VITE_BASE_URL || "/",
   moduleBaseURL: process.env.VITE_BASE_URL || "/",
   serverEntry: "src/server/index.ts",
+  css: {
+    inlineThreshold: 10000,
+  },
   build: {
     pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
   },
