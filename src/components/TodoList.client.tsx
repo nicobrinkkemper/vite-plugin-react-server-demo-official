@@ -156,7 +156,7 @@ export function TodoList({
       </form>
 
       <div className={styles["todo-stats"]}>
-        <span>{remainingCount} items left</span>
+        <span>{remainingCount === 0 ? '' : `${remainingCount} items left`}</span>
         {todos.some(todo => todo.completed) && (
           <button 
             onClick={handleClearCompleted}

@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "demo": "rm todos.db && NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run env:dev-server -- vite",
     "start": "npm run env:start -- vite",
@@ -39,6 +40,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/express": "^5.0.2",
     "@types/node": "^22.15.17",
     "@types/react": "^19.0.9",
     "@types/react-dom": "^19.0.3",
@@ -53,6 +55,7 @@
     "webpack-sources": "^3.3.0"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "vite-plugin-react-server": "^1.1.16"
   }
 }
