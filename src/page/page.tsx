@@ -48,6 +48,11 @@ export const Page = ({ url, title, navigation }: Props) => {
                 {navigation.toErrorExample.text}
               </Link>
             </li>
+            <li>
+              <Link to={navigation.toTodos.href} className={styles["Url"]}>
+                {navigation.toTodos.text}
+              </Link>
+            </li>
           </ul>
           <dl>
             <dt>Build using node version</dt>

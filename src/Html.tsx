@@ -7,6 +7,8 @@ export const Html = ({
   CssCollector,
   cssFiles,
   globalCss,
+  pageProps,
+  Page,
   moduleBaseURL,
 }: React.PropsWithChildren<HtmlProps>) => (
   <html>
@@ -14,9 +16,13 @@ export const Html = ({
       <CssCollectorElements cssFiles={globalCss} />
     </head>
     <body>
-      <CssCollector as={"div"} id="root" cssFiles={cssFiles}>
-        {children}
-      </CssCollector>
+      <CssCollector
+        as={"div"}
+        id="root"
+        cssFiles={cssFiles}
+        Page={Page}
+        pageProps={pageProps}
+      />
     </body>
   </html>
 );

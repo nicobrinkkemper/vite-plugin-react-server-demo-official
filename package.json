@@ -6,16 +6,18 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run env:dev -- vite",
-    "start": "vite",
+    "dev": "npm run env:dev-server -- vite",
+    "start": "npm run env:start -- vite",
     "preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview && npm run preview:start",
     "env:gh": "PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/'",
-    "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
-    "env:dev": "NODE_ENV=development BASE_URL='/vite-plugin-react-server-demo-official/' NODE_OPTIONS='--conditions=react-server'",
+    "env:preview": "VITE_PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:dev": "NODE_ENV=development BASE_URL='/bidoof-template/' PUBLIC_ORIGIN='http://localhost:5173'",
+    "env:dev-server": "NODE_OPTIONS='--conditions react-server' && npm run env:dev",
+    "env:start": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "build": "npm run build:static && npm run build:client && npm run build:server",
-    "build:static": "npm run env:gh -- vite build",
-    "build:client": "npm run env:gh -- vite build --ssr",
-    "build:server": "npm run env:gh -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
+    "build:static": "vite build",
+    "build:client": "vite build --ssr",
+    "build:server": "NODE_OPTIONS='--conditions react-server' vite build",
     "build:gh": "npm run build:static:gh && npm run build:client:gh && npm run build:server:gh",
     "build:static:gh": "npm run env:gh -- vite build",
     "build:client:gh": "npm run env:gh -- vite build --ssr",
@@ -43,13 +45,14 @@
     "acorn-loose": "^8.4.0",
     "happy-dom": "^17.1.8",
     "patch-package": "^8.0.0",
-    "react": "^0.0.0-experimental-38ef6550-20250508",
-    "react-dom": "^0.0.0-experimental-38ef6550-20250508",
+    "react": "^0.0.0-experimental-c0464aed-20250523",
+    "react-dom": "^0.0.0-experimental-c0464aed-20250523",
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
-    "vite": "^6.3.2"
+    "vite": "^6.3.2",
+    "webpack-sources": "^3.3.0"
   },
   "dependencies": {
-    "vite-plugin-react-server": "^1.1.12"
+    "vite-plugin-react-server": "^1.1.15"
   }
 }
