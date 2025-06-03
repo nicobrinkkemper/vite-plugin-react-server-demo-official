@@ -1,5 +1,6 @@
-"use client";
-import * as React from "react";
+"use client"
+
+import React from "react";
 export const Link: React.FC<{
   children: React.ReactNode;
   to?: string;

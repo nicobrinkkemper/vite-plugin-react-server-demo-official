@@ -13,7 +13,9 @@ Showcasing:
   - Counter with useState
   - Dynamic head updates
   - Async props using the pokeapi
+  - Todo page using server actions and sqlite database
 - Static site generation capabilities with "headless" index.rsc files and fully static index.html files
+  - Static result includes server actions results
 
 Clone the repository to see the development process in action.
 

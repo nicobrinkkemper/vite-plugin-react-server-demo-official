@@ -12,7 +12,6 @@ export async function Page({
   getTodos,
   initialTodos,
 }: Props) {
-  console.log("initialTodos", initialTodos);
   return (
     <div>
       <TodoList
