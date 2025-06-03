@@ -2,7 +2,7 @@ import { addTodo, toggleTodo, deleteTodo, editTodo, clearCompletedTodos, getTodo
 
 export const props = async () => {
   let initialTodos = await getTodos();
-  const isGithubPages = process.env.GITHUB_PAGES === 'true';
+  const isGithubPages = process.env.VITE_GITHUB_PAGES === 'true';
   // set some todo if there are no todos
   if (initialTodos.length === 0) {
     await addTodo('Clone the repo');
