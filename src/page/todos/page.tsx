@@ -11,6 +11,7 @@ export async function Page({
   clearCompletedTodos,
   getTodos,
   initialTodos,
+  isGithubPages
 }: Props) {
   return (
     <div>
@@ -23,6 +24,7 @@ export async function Page({
         clearCompletedTodos={clearCompletedTodos}
         getTodos={getTodos}
         styles={styles}
+        isGithubPages={isGithubPages}
       />
     </div>
   );
