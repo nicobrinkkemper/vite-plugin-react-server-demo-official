@@ -17,6 +17,7 @@ type Props = {
   editTodo: (id: number, title: string) => Promise<{ success: boolean }>;
   clearCompletedTodos: () => Promise<{ success: boolean }>;
   getTodos: () => Promise<Todo[]>;
+  isGithubPages: boolean;
 };
 
 export function TodoList({ 
@@ -27,7 +28,8 @@ export function TodoList({
   editTodo,
   getTodos,
   clearCompletedTodos,
-  styles
+  styles,
+  isGithubPages
 }: Props) {
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
   const [newTodo, setNewTodo] = useState('');
@@ -75,7 +77,11 @@ export function TodoList({
         ));
       }
     } catch (err) {
-      setError('Failed to toggle todo');
+      if (!isGithubPages) {
+        setError('Failed to toggle todo');
+      } else {
+        setError('Failed to toggle todo. Todo page is not supported on Github Pages, it uses a database.');
+      }
       console.error(err);
     } finally {
       setLoading(false);
@@ -91,7 +97,11 @@ export function TodoList({
         setTodos(todos.filter(todo => todo.id !== id));
       }
     } catch (err) {
-      setError('Failed to delete todo');
+      if (!isGithubPages) {
+        setError('Failed to delete todo');
+      } else {
+        setError('Failed to delete todo. Todo page is not supported on Github Pages, it uses a database.');
+      }
       console.error(err);
     } finally {
       setLoading(false);
@@ -113,7 +123,11 @@ export function TodoList({
         setEditText('');
       }
     } catch (err) {
-      setError('Failed to edit todo');
+      if (!isGithubPages) {
+        setError('Failed to edit todo');
+      } else {
+        setError('Failed to edit todo. Todo page is not supported on Github Pages, it uses a database.');
+      }
       console.error(err);
     } finally {
       setLoading(false);
@@ -129,7 +143,11 @@ export function TodoList({
         setTodos(todos.filter(todo => !todo.completed));
       }
     } catch (err) {
-      setError('Failed to clear completed todos');
+      if (!isGithubPages) {
+        setError('Failed to clear completed todos');
+      } else {
+        setError('Failed to clear completed todos. Todo page is not supported on Github Pages, it uses a database.');
+      }
       console.error(err);
     } finally {
       setLoading(false);
