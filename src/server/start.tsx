@@ -6,7 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import { props as todosProps } from "../page/todos/props.js";
-import { CssCollectorElements } from "vite-plugin-react-server/components";
+import { Css } from "vite-plugin-react-server/components";
 import type { CssContent } from "vite-plugin-react-server/types";
 
 declare global {
@@ -260,7 +260,7 @@ const renderRSC = async (
   const { pipe } = renderToPipeableStream(
     <>
       <Component {...props} />
-      <CssCollectorElements cssFiles={cssFiles} />
+      <Css cssFiles={cssFiles} />
     </>,
     base,
     {
