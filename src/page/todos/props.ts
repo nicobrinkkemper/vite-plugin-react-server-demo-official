@@ -11,6 +11,7 @@ export const props = async () => {
     initialTodos = await getTodos();
   }
   return {
+    title: "Todos",
     addTodo,
     toggleTodo,
     deleteTodo,
