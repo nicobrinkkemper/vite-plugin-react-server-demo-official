@@ -1,4 +1,3 @@
-import { Html } from "./src/Html.tsx";
 import type { StreamPluginOptions } from "vite-plugin-react-server/types";
 
 const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
@@ -23,7 +22,7 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
     }
   }
 };
-
+console.log('process.env.VITE_GITHUB_PAGES', process.env.VITE_GITHUB_PAGES);
 export default {
   moduleBase: "src",
   Page: createRouter("page.tsx"),
