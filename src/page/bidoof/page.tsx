@@ -1,13 +1,12 @@
 import { Link } from "../../components/Link.client.js";
-// @ts-ignore
 import styles from "../../css/bidoof.module.css";
 import * as React from "react";
 import type { Props } from "./props.js";
+
 export const Page = (props: Props) => {
- 
   return (
     <>
-      <link rel="icon" href="/bidoof.png" type="image/png" />
+      <link rel="icon" href={props.favicon} type="image/png" />
       <title>{props?.title ?? "No title"}</title>
       <div className={styles["Bidoof"]}>
         <Link to={props.navigation.back.href} className={styles["Link"]}>{props.navigation.back.text}</Link>
