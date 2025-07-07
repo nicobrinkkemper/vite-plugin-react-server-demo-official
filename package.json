@@ -12,8 +12,8 @@
     "preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview && npm run preview:start",
     "env:gh": "PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/'",
     "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
-    "env:dev": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
-    "env:dev-server": "NODE_OPTIONS='--conditions react-server' && npm run env:dev",
+    "env:dev-client": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
+    "env:dev-server": "NODE_OPTIONS='--conditions react-server' NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "env:start": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "build": "npm run build:static && npm run build:client && npm run build:server",
     "build:static": "vite build",
@@ -28,9 +28,9 @@
     "build:client:preview": "npm run env:preview -- vite build --ssr",
     "build:server:preview": "npm run env:preview -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
     "preview:start": "npm run env:preview -- vite preview",
-    "build:static:dev": "npm run env:dev -- vite build --mode development",
-    "build:client:dev": "npm run env:dev -- vite build --ssr --mode development",
-    "build:server:dev": "npm run env:dev -- NODE_OPTIONS='--conditions=react-server' vite build --ssr --mode development",
+    "build:static:dev": "npm run env:dev-client -- vite build --mode development",
+    "build:client:dev": "npm run env:dev-client -- vite build --mode development --ssr",
+    "build:server:dev": "npm run env:dev-server -- vite build --mode development --ssr",
     "debug-build": "npm run build:static:dev && npm run build:client:dev && npm run build:server:dev",
     "postinstall": "patch-package",
     "clean-install": "npm install react@experimental react-dom@experimental react-server-dom-esm",
@@ -47,8 +47,8 @@
     "acorn-loose": "^8.4.0",
     "happy-dom": "^17.1.8",
     "patch-package": "^8.0.0",
-    "react": "^0.0.0-experimental-c0464aed-20250523",
-    "react-dom": "^0.0.0-experimental-c0464aed-20250523",
+    "react": "^0.0.0-experimental-12bc60f5-20250613",
+    "react-dom": "^0.0.0-experimental-12bc60f5-20250613",
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
     "vite": "^6.3.2",
@@ -56,6 +56,6 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "vite-plugin-react-server": "^1.1.20"
+    "vite-plugin-react-server": "^1.2.0-alpha.0"
   }
 }

@@ -1,22 +1,20 @@
 import React from "react";
 import type { HtmlProps } from "vite-plugin-react-server/types";
-import { CssCollectorElements } from "vite-plugin-react-server/components";
+import { Css } from "vite-plugin-react-server/components";
 
 export const Html = ({
-  children,
-  CssCollector,
+  Root,
   cssFiles,
   globalCss,
   pageProps,
   Page,
-  moduleBaseURL,
-}: React.PropsWithChildren<HtmlProps>) => (
+}: HtmlProps) => (
   <html>
     <head>
-      <CssCollectorElements cssFiles={globalCss} />
+      <Css cssFiles={globalCss} />
     </head>
     <body>
-      <CssCollector
+      <Root
         as={"div"}
         id="root"
         cssFiles={cssFiles}

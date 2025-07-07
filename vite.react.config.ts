@@ -28,9 +28,9 @@ export default {
   moduleBase: "src",
   Page: createRouter("page.tsx"),
   props: createRouter("props.ts"),
-  Html: Html,
+  Html: `src/Html.tsx`,
   verbose: false,
-  moduleBasePath: process.env.VITE_BASE_URL || "/",
+  moduleBasePath: "/",
   moduleBaseURL: process.env.VITE_BASE_URL || "/",
   serverEntry: "src/server/index.ts",
   css: {
