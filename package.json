@@ -55,6 +55,7 @@
     "webpack-sources": "^3.3.0"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "vite-plugin-react-server": "^1.2.0-alpha.0"
   }
 }
