@@ -30,7 +30,7 @@ export default {
   props: createRouter("props.ts"),
   Html: `src/Html.tsx`,
   verbose: false,
-  moduleBasePath: process.env.VITE_BASE_URL || "/",
+  moduleBasePath: "/",
   moduleBaseURL: process.env.VITE_BASE_URL || "/",
   serverEntry: "src/server/index.ts",
   css: {
@@ -39,4 +39,7 @@ export default {
   build: {
     pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
   },
+  components: {
+    Html
+  }
 } satisfies StreamPluginOptions;

@@ -12,8 +12,8 @@ export const Page = ({ url, title, navigation }: Props) => {
       <div className={styles["Home"]}>
         <link
           rel="icon"
-          href={`${import.meta.env.PUBLIC_ORIGIN ?? ""}${
-            import.meta.env.BASE_URL ?? "/"
+          href={`${import.meta.env.PUBLIC_ORIGIN}${
+            import.meta.env.BASE_URL
           }favicon.ico`}
           type="image/x-icon"
         />
@@ -74,7 +74,7 @@ export const Page = ({ url, title, navigation }: Props) => {
             <dt>Mandatory counter example</dt>
             <dd>
               <Counter />
-            </dd> 
+            </dd>
           </dl>
         </div>
       </div>

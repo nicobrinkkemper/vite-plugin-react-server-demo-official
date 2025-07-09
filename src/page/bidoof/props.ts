@@ -6,7 +6,7 @@ export const props = async () => {
     description: "It's bidoof.",
     navigation: {
       back: {
-        href: `${process.env.VITE_BASE_URL === "" ? "/" : process.env.VITE_BASE_URL}`,
+        href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
         text: "Back",
       },
     },
