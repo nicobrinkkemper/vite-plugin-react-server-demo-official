@@ -37,5 +37,5 @@ export default {
   },
   build: {
     pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
-  },
+  }
 } satisfies StreamPluginOptions;

@@ -9,7 +9,9 @@ export const Page = (props: Props) => {
       <link rel="icon" href={props.favicon} type="image/png" />
       <title>{props?.title ?? "No title"}</title>
       <div className={styles["Bidoof"]}>
-        <Link to={props.navigation.back.href} className={styles["Link"]}>{props.navigation.back.text}</Link>
+        <Link to={props.navigation.back.href} className={styles["Link"]}>
+          {props.navigation.back.text}
+        </Link>
         <h1>{props.name}</h1>
         <div className={styles["Images"]}>
           <img
