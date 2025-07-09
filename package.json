@@ -10,8 +10,8 @@
     "dev": "npm run env:dev-server -- vite",
     "start": "npm run env:start -- vite",
     "preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview && npm run preview:start",
-    "env:gh": "PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/' GITHUB_PAGES=true",
-    "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:gh": "PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/' NODE_ENV=development",
     "env:dev-client": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "env:dev-server": "NODE_OPTIONS='--conditions react-server' NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "env:start": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
@@ -27,7 +27,7 @@
     "build:static:preview": "npm run env:preview -- vite build",
     "build:client:preview": "npm run env:preview -- vite build --ssr",
     "build:server:preview": "npm run env:preview -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
-    "preview:start": "npm run env:preview -- vite preview",
+    "preview:start": "npm run env:preview -- vite preview --mode development",
     "build:static:dev": "npm run env:dev-client -- vite build --mode development",
     "build:client:dev": "npm run env:dev-client -- vite build --mode development --ssr",
     "build:server:dev": "npm run env:dev-server -- vite build --mode development --ssr",
@@ -52,8 +52,9 @@
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
     "vite": "^6.3.2",
-    "webpack-sources": "^3.3.0",
-    "vite-plugin-react-server": "^1.2.0-alpha.1"
+    "vite-plugin-react-server": "^1.2.0-alpha.1",
+    "express": "^5.1.0",
+    "webpack-sources": "^3.3.0"
   },
   "dependencies": {
   }

@@ -1,0 +1,874 @@
+
+> vite-plugin-react-server-demo-official@1.0.0 start
+> npm run env:start -- vite
+
+
+> vite-plugin-react-server-demo-official@1.0.0 env:start
+> NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173' vite
+
+[plugin/index.js] Being imported from:     at ModuleJob.run (node:internal/modules/esm/module_job:272:25)
+react-client
+[resolveBuildPages] resolveBuildPages called with pages: [ '/', '/bidoof', '/404', '/todos', '/error-example' ] Root: undefined Html: src/Html.tsx
+[resolveBuildPages] resolveBuildPages - No Root option defined
+[resolveBuildPages] resolveBuildPages - resolving Html for page: /, Html option: src/Html.tsx
+[resolveBuildPages] resolveBuildPages - Html resolved: src/Html.tsx -> src/Html.tsx
+[resolveBuildPages] resolveBuildPages - No Root option defined
+[resolveBuildPages] resolveBuildPages - resolving Html for page: /bidoof, Html option: src/Html.tsx
+[resolveBuildPages] resolveBuildPages - Html resolved: src/Html.tsx -> src/Html.tsx
+[resolveBuildPages] resolveBuildPages - No Root option defined
+[resolveBuildPages] resolveBuildPages - resolving Html for page: /404, Html option: src/Html.tsx
+[resolveBuildPages] resolveBuildPages - Html resolved: src/Html.tsx -> src/Html.tsx
+[resolveBuildPages] resolveBuildPages - No Root option defined
+[resolveBuildPages] resolveBuildPages - resolving Html for page: /todos, Html option: src/Html.tsx
+[resolveBuildPages] resolveBuildPages - Html resolved: src/Html.tsx -> src/Html.tsx
+[resolveBuildPages] resolveBuildPages - No Root option defined
+[resolveBuildPages] resolveBuildPages - resolving Html for page: /error-example, Html option: src/Html.tsx
+[resolveBuildPages] resolveBuildPages - Html resolved: src/Html.tsx -> src/Html.tsx
+
+  VITE v6.3.2  ready in 199 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  press h + enter to show help
+requestInfo: { value: '', hostDir: '', reqUrl: '/', route: '/' }
+[react-dev-server] (html) /
+requestInfo: {
+  value: '@vite/client',
+  hostDir: '',
+  reqUrl: '/@vite/client',
+  route: '/@vite/client'
+}
+[react-dev-server] (js) /@vite/client
+requestInfo: {
+  value: 'src/client.tsx',
+  hostDir: '',
+  reqUrl: '/src/client.tsx',
+  route: '/src/client.tsx'
+}
+[react-dev-server] (js) /src/client.tsx
+requestInfo: {
+  value: 'src/hooks/useEventListener.ts',
+  hostDir: '',
+  reqUrl: '/src/hooks/useEventListener.ts',
+  route: '/src/hooks/useEventListener.ts'
+}
+[react-dev-server] (js) /src/hooks/useEventListener.ts
+requestInfo: {
+  value: 'node_modules/vite/dist/client/env.mjs',
+  hostDir: '',
+  reqUrl: '/node_modules/vite/dist/client/env.mjs',
+  route: '/node_modules/vite/dist/client/env.mjs'
+}
+[react-dev-server] (js) /node_modules/vite/dist/client/env.mjs
+requestInfo: {
+  value: 'src/css/globalStyles.css',
+  hostDir: '',
+  reqUrl: '/src/css/globalStyles.css',
+  route: '/src/css/globalStyles.css'
+}
+[react-dev-server] (css) /src/css/globalStyles.css
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js
+requestInfo: {
+  value: 'src/components/ErrorBoundary.client.tsx',
+  hostDir: '',
+  reqUrl: '/src/components/ErrorBoundary.client.tsx',
+  route: '/src/components/ErrorBoundary.client.tsx'
+}
+[react-dev-server] (js) /src/components/ErrorBoundary.client.tsx
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js
+requestInfo: {
+  value: 'src/components/ErrorMessage.tsx',
+  hostDir: '',
+  reqUrl: '/src/components/ErrorMessage.tsx',
+  route: '/src/components/ErrorMessage.tsx'
+}
+[react-dev-server] (js) /src/components/ErrorMessage.tsx
+requestInfo: { value: '', hostDir: '', reqUrl: '/index.rsc', route: '/' }
+[react-dev-server] (rsc) /
+[getRouteFiles] Looking up route: /
+[getRouteFiles] urlMap has route? true
+[getRouteFiles] urlMap keys: [ '/', '/bidoof', '/404', '/todos', '/error-example' ]
+[getRouteFiles] Found in urlMap: {
+  page: 'src/page/page.tsx',
+  props: 'src/page/props.ts',
+  root: undefined,
+  html: 'src/Html.tsx'
+}
+requestInfo: { value: '', hostDir: '', reqUrl: '/', route: '/' }
+[react-dev-server] (html) /
+requestInfo: {
+  value: '@vite/client',
+  hostDir: '',
+  reqUrl: '/@vite/client',
+  route: '/@vite/client'
+}
+[react-dev-server] (js) /@vite/client
+requestInfo: {
+  value: 'src/client.tsx',
+  hostDir: '',
+  reqUrl: '/src/client.tsx',
+  route: '/src/client.tsx'
+}
+[react-dev-server] (js) /src/client.tsx
+requestInfo: {
+  value: 'src/hooks/useEventListener.ts',
+  hostDir: '',
+  reqUrl: '/src/hooks/useEventListener.ts',
+  route: '/src/hooks/useEventListener.ts'
+}
+[react-dev-server] (js) /src/hooks/useEventListener.ts
+requestInfo: {
+  value: 'src/css/globalStyles.css',
+  hostDir: '',
+  reqUrl: '/src/css/globalStyles.css',
+  route: '/src/css/globalStyles.css'
+}
+[react-dev-server] (css) /src/css/globalStyles.css
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js
+requestInfo: {
+  value: 'src/components/ErrorBoundary.client.tsx',
+  hostDir: '',
+  reqUrl: '/src/components/ErrorBoundary.client.tsx',
+  route: '/src/components/ErrorBoundary.client.tsx'
+}
+[react-dev-server] (js) /src/components/ErrorBoundary.client.tsx
+requestInfo: {
+  value: 'node_modules/vite/dist/client/env.mjs',
+  hostDir: '',
+  reqUrl: '/node_modules/vite/dist/client/env.mjs',
+  route: '/node_modules/vite/dist/client/env.mjs'
+}
+[react-dev-server] (js) /node_modules/vite/dist/client/env.mjs
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js
+requestInfo: {
+  value: 'src/components/ErrorMessage.tsx',
+  hostDir: '',
+  reqUrl: '/src/components/ErrorMessage.tsx',
+  route: '/src/components/ErrorMessage.tsx'
+}
+[react-dev-server] (js) /src/components/ErrorMessage.tsx
+requestInfo: {
+  value: '@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js',
+  hostDir: '',
+  reqUrl: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js',
+  route: '/@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js'
+}
+[react-dev-server] (js) /@fs/home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js
+[react-client] Set max listeners to 25 for 5 routes
+[react-client] Starting stream
+[react-client] sending message RSC_RENDER
+[react-client] waiting for message handler
+[react-loader] Resolving: file:///home/nico/code/vite-plugin-react-server/dist/plugin/loader/env-loader.js
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: '/home/nico/code/vite-plugin-react-server/dist/plugin'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/vite-plugin-react-server/dist/plugin/loader/env-loader.js',
+  format: 'module'
+}
+[react-loader] Attempting to load: file:///home/nico/code/vite-plugin-react-server/dist/plugin/loader/env-loader.js
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/vite-plugin-react-server/dist/plugin/loader/env-loader.js
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'object' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/vite-plugin-react-server/dist/plugin/loader/env-loader.js',
+  isServer: false,
+  isClient: false,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: false,
+  sourceLength: 7969,
+  sourcePreview: '\n' +
+    ' */\n' +
+    'let loaderPort;\n' +
+    'let resolvedConfig;\n' +
+    'async function initialize(data) {\n' +
+    '  loaderPort = data.port;...'
+}
+[react-loader] Skipping non-server/non-client module: file:///home/nico/code/vite-plugin-react-server/dist/plugin/loader/env-loader.js
+[react-loader] Attempting to load: file:///home/nico/code/vite-plugin-react-server/node_modules/tsx/dist/lexer-DQCqS3nf.mjs
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/vite-plugin-react-server/node_modules/tsx/dist/lexer-DQCqS3nf.mjs
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'object' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/tsx/dist/lexer-DQCqS3nf.mjs',
+  isServer: false,
+  isClient: false,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: false,
+  sourceLength: 13456,
+  sourcePreview: 'var Y=Object.defineProperty;var k=(A,E)=>Y(A,"name",{value:E,configurable:!0});var L;(function(A){A[...'
+}
+[react-loader] Skipping non-server/non-client module: file:///home/nico/code/vite-plugin-react-server/node_modules/tsx/dist/lexer-DQCqS3nf.mjs
+[react-loader] Resolving: /home/nico/code/bidoof-template/src/page/page.tsx
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/dist/plugin/worker/rsc/handleRender.js'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/src/page/page.tsx',
+  format: 'module'
+}
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/src/page/page.tsx
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/bidoof-template/src/page/page.tsx
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'string' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/bidoof-template/src/page/page.tsx',
+  isServer: false,
+  isClient: false,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: false,
+  sourceLength: 4046,
+  sourcePreview: 'var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,"name",{value,config...'
+}
+[react-loader] Skipping non-server/non-client module: file:///home/nico/code/bidoof-template/src/page/page.tsx
+[react-loader] Resolving: react
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/bidoof-template/src/page/page.tsx'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/node_modules/react/react.react-server.js',
+  format: undefined
+}
+[react-loader] Resolving: ../components/Link.client.js
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/bidoof-template/src/page/page.tsx'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/src/components/Link.client.tsx',
+  format: 'module'
+}
+[react-loader] Resolving: ../css/home.module.css
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/bidoof-template/src/page/page.tsx'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/src/css/home.module.css',
+  format: undefined
+}
+[react-loader] Resolving: ../../package.json
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/bidoof-template/src/page/page.tsx'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/package.json',
+  format: 'json'
+}
+[react-loader] Resolving: ../components/Counter.client.js
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/bidoof-template/src/page/page.tsx'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/src/components/Counter.client.tsx',
+  format: 'module'
+}
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/node_modules/react/react.react-server.js
+[react-loader] Context: { format: undefined, conditions: undefined }
+[react-loader] Skipping non-module format: undefined
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/src/components/Link.client.tsx
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/bidoof-template/src/components/Link.client.tsx
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/src/css/home.module.css
+[react-loader] Context: { format: undefined, conditions: undefined }
+[react-loader] Skipping non-module format: undefined
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/package.json
+[react-loader] Context: { format: 'json', conditions: undefined }
+[react-loader] Skipping non-module format: json
+requestInfo: { value: '', hostDir: '', reqUrl: '/index.rsc', route: '/' }
+[react-dev-server] (rsc) /
+[getRouteFiles] Looking up route: /
+[getRouteFiles] urlMap has route? true
+[getRouteFiles] urlMap keys: [ '/', '/bidoof', '/404', '/todos', '/error-example' ]
+[getRouteFiles] Found in urlMap: {
+  page: 'src/page/page.tsx',
+  props: 'src/page/props.ts',
+  root: undefined,
+  html: 'src/Html.tsx'
+}
+[react-client] Starting stream
+[react-client] sending message RSC_RENDER
+[react-client] waiting for message handler
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/src/components/Counter.client.tsx
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/bidoof-template/src/components/Counter.client.tsx
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'string' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/bidoof-template/src/components/Link.client.tsx',
+  isServer: false,
+  isClient: true,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: true,
+  sourceLength: 2043,
+  sourcePreview: '"use client";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,"name",...'
+}
+[react-loader] File path: /home/nico/code/bidoof-template/src/components/Link.client.tsx
+[react-loader] Normalized IDs: {
+  moduleID: '/src/components/Link.client.tsx',
+  finalID: '/src/components/Link.client.tsx'
+}
+[createTransformer] Loading: /src/components/Link.client.tsx
+[analyzeModule] exports [
+  {
+    localName: 'Link',
+    exportName: 'Link',
+    type: 'function',
+    range: [ 910, 923 ],
+    loc: undefined
+  }
+]
+[analyzeDirectives] Processing node: {
+  type: 'ExpressionStatement',
+  start: 0,
+  end: 13,
+  directive: 'use client',
+  beforeNode: 'none',
+  foundNonDirective: false
+}
+[analyzeDirectives] Found first directive: use client at range: [ 0, 13 ]
+[analyzeDirectives] Processing node: {
+  type: 'VariableDeclaration',
+  start: 13,
+  end: 49,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'VariableDeclaration',
+  start: 49,
+  end: 127,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'ImportDeclaration',
+  start: 127,
+  end: 152,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,\\"name\\",{value,configurable:true});"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'VariableDeclaration',
+  start: 152,
+  end: 910,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,\\"name\\",{value,configurable:true});import React from\\"react\\";"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'ExportNamedDeclaration',
+  start: 910,
+  end: 923,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,\\"name\\",{value,configurable:true});import React from\\"react\\";const Link=__name(({children,to,href,className,...props})=>React.createElement(\\"a\\",{...props,className:className??\\"\\",href:typeof href===\\"string\\"?href:to,onClick:e=>{e.preventDefault();let localHref=href||to;const isBlank=localHref?.startsWith(\\"http\\")||e.currentTarget&&\\"target\\"in e.currentTarget&&e.currentTarget.target.toLowerCase()===\\"_blank\\";const newTo=e.currentTarget&&\\"href\\"in e.currentTarget?e.currentTarget.href:localHref;if(isBlank){if(newTo)window.location.href=newTo}const newState={to:newTo};if(window.location.pathname!==newTo){try{window.history.pushState(newState,\\"\\",e.currentTarget.href);window.dispatchEvent(new PopStateEvent(\\"popstate\\",{state:newState}))}catch(error){console.error(`You can not go to ${newTo}`,error)}}}},children),\\"Link\\");"',
+  foundNonDirective: false
+}
+[transformModule] Module: /src/components/Link.client.tsx
+[transformModule] Directives: {
+  fileLevel: { type: 'client', range: [ 0, 13 ] },
+  functionLevel: [],
+  warnings: []
+}
+[transformModule] isServerFunction: false isClientComponent: true
+[transformClientModule] Transforming client module: /src/components/Link.client.tsx
+Found exports: {
+  exportNames: [ 'Link' ],
+  exports: Map(1) {
+    'Link' => {
+      localName: 'Link',
+      exportName: 'Link',
+      type: 'function',
+      range: [Array],
+      loc: undefined
+    }
+  }
+}
+Found export info: {
+  localName: 'Link',
+  exportName: 'Link',
+  type: 'function',
+  range: [ 910, 923 ],
+  loc: undefined
+} for localName: Link
+[react-loader] Transformation result: {
+  originalLength: 2043,
+  transformedLength: 250,
+  wasTransformed: true,
+  hasSourceMap: true
+}
+[react-loader] Sending SERVER_MODULE message
+[react-loader] Resolving: /home/nico/code/bidoof-template/src/page/page.tsx
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/dist/plugin/worker/rsc/handleRender.js'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/src/page/page.tsx',
+  format: 'module'
+}
+[react-loader] Resolving: react-server-dom-esm/server.node
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/bidoof-template/src/components/Link.client.tsx'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/node_modules/react-server-dom-esm/server.node.js',
+  format: undefined
+}
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/node_modules/react-server-dom-esm/server.node.js
+[react-loader] Context: { format: undefined, conditions: undefined }
+[react-loader] Skipping non-module format: undefined
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'string' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/bidoof-template/src/components/Counter.client.tsx',
+  isServer: false,
+  isClient: true,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: true,
+  sourceLength: 827,
+  sourcePreview: '"use client";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,"name",...'
+}
+[react-loader] File path: /home/nico/code/bidoof-template/src/components/Counter.client.tsx
+[react-loader] Normalized IDs: {
+  moduleID: '/src/components/Counter.client.tsx',
+  finalID: '/src/components/Counter.client.tsx'
+}
+[createTransformer] Loading: /src/components/Counter.client.tsx
+[analyzeModule] exports [
+  {
+    localName: 'Counter',
+    exportName: 'Counter',
+    type: 'function',
+    range: [ 335, 351 ],
+    loc: undefined
+  }
+]
+[analyzeDirectives] Processing node: {
+  type: 'ExpressionStatement',
+  start: 0,
+  end: 13,
+  directive: 'use client',
+  beforeNode: 'none',
+  foundNonDirective: false
+}
+[analyzeDirectives] Found first directive: use client at range: [ 0, 13 ]
+[analyzeDirectives] Processing node: {
+  type: 'VariableDeclaration',
+  start: 13,
+  end: 49,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'VariableDeclaration',
+  start: 49,
+  end: 127,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'ImportDeclaration',
+  start: 127,
+  end: 152,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,\\"name\\",{value,configurable:true});"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'FunctionDeclaration',
+  start: 152,
+  end: 309,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,\\"name\\",{value,configurable:true});import React from\\"react\\";"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'ExpressionStatement',
+  start: 309,
+  end: 335,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,\\"name\\",{value,configurable:true});import React from\\"react\\";function Counter(){const[count,setCount]=React.useState();return React.createElement(\\"button\\",{onClick:()=>setCount((count??0)+1)},\\"Click count: \\",count??0)}"',
+  foundNonDirective: false
+}
+[analyzeDirectives] Processing node: {
+  type: 'ExportNamedDeclaration',
+  start: 335,
+  end: 351,
+  directive: undefined,
+  beforeNode: '"\\"use client\\";var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,\\"name\\",{value,configurable:true});import React from\\"react\\";function Counter(){const[count,setCount]=React.useState();return React.createElement(\\"button\\",{onClick:()=>setCount((count??0)+1)},\\"Click count: \\",count??0)}__name(Counter,\\"Counter\\");"',
+  foundNonDirective: false
+}
+[transformModule] Module: /src/components/Counter.client.tsx
+[transformModule] Directives: {
+  fileLevel: { type: 'client', range: [ 0, 13 ] },
+  functionLevel: [],
+  warnings: []
+}
+[transformModule] isServerFunction: false isClientComponent: true
+[transformClientModule] Transforming client module: /src/components/Counter.client.tsx
+Found exports: {
+  exportNames: [ 'Counter' ],
+  exports: Map(1) {
+    'Counter' => {
+      localName: 'Counter',
+      exportName: 'Counter',
+      type: 'function',
+      range: [Array],
+      loc: undefined
+    }
+  }
+}
+Found export info: {
+  localName: 'Counter',
+  exportName: 'Counter',
+  type: 'function',
+  range: [ 335, 351 ],
+  loc: undefined
+} for localName: Counter
+[react-loader] Transformation result: {
+  originalLength: 827,
+  transformedLength: 262,
+  wasTransformed: true,
+  hasSourceMap: true
+}
+[react-loader] Sending SERVER_MODULE message
+[react-loader] Resolving: react-server-dom-esm/server.node
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/bidoof-template/src/components/Counter.client.tsx'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/node_modules/react-server-dom-esm/server.node.js',
+  format: undefined
+}
+[react-loader] Resolving: ./dep-SgSik2vo.js
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js',
+  format: 'module'
+}
+[react-loader] Attempting to load: file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'object' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js',
+  isServer: false,
+  isClient: false,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: false,
+  sourceLength: 235591,
+  sourcePreview: "import { Q as commonjsGlobal, P as getDefaultExportFromCjs } from './dep-DBxKXgDP.js';\n" +
+    'import requir...'
+}
+[react-loader] Skipping non-server/non-client module: file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js
+[react-loader] Resolving: ./dep-DBxKXgDP.js
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js'
+}
+[react-loader] Resolving: fs
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js'
+}
+[react-loader] Resolving: postcss
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js'
+}
+[react-loader] Resolving: path
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js'
+}
+[react-loader] Resolving: crypto
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js'
+}
+[react-loader] Resolving: util
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js'
+}
+[react-loader] Resolving: ./dep-3RmXg9uo.js
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-SgSik2vo.js'
+}
+[react-loader] Resolve result: [Object: null prototype] { url: 'node:fs', format: 'builtin' }
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.mjs',
+  format: 'module'
+}
+[react-loader] Resolve result: [Object: null prototype] { url: 'node:path', format: 'builtin' }
+[react-loader] Resolve result: [Object: null prototype] { url: 'node:crypto', format: 'builtin' }
+[react-loader] Resolve result: [Object: null prototype] { url: 'node:util', format: 'builtin' }
+[react-loader] Attempting to load: file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.mjs
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.mjs
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js',
+  format: 'module'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-3RmXg9uo.js',
+  format: 'module'
+}
+[react-loader] Attempting to load: file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-3RmXg9uo.js
+[react-loader] Context: { format: 'module', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-3RmXg9uo.js
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'object' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.mjs',
+  isServer: false,
+  isClient: false,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: false,
+  sourceLength: 980,
+  sourcePreview: "import postcss from './postcss.js'\n" +
+    '\n' +
+    'export default postcss\n' +
+    '\n' +
+    'export const stringify = postcss.stringi...'
+}
+[react-loader] Skipping non-server/non-client module: file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.mjs
+[react-loader] Resolving: ./postcss.js
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.mjs'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.js',
+  format: undefined
+}
+[react-loader] Attempting to load: file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.js
+[react-loader] Context: { format: undefined, conditions: undefined }
+[react-loader] Skipping non-module format: undefined
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'object' }
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-3RmXg9uo.js',
+  isServer: false,
+  isClient: false,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: false,
+  sourceLength: 13038,
+  sourcePreview: 'var openParentheses = "(".charCodeAt(0);\n' +
+    'var closeParentheses = ")".charCodeAt(0);\n' +
+    'var singleQuote =...'
+}
+[react-loader] Skipping non-server/non-client module: file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-3RmXg9uo.js
+[react-loader] Resolving: postcss
+[react-client] received css file /home/nico/code/bidoof-template/src/css/home.module.css
+[react-client] received css file /home/nico/code/bidoof-template/src/css/home.module.css
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: [Object: null prototype] {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/vite-plugin-react-server/node_modules/postcss/lib/postcss.mjs',
+  format: 'module'
+}
+[react-loader] Resolving: /home/nico/code/bidoof-template/src/page/props.ts
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/dist/plugin/worker/rsc/handleRender.js'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/src/page/props.ts',
+  format: 'module-typescript'
+}
+[react-loader] Resolving: /home/nico/code/bidoof-template/src/page/props.ts
+[react-loader] Resolve context: {
+  conditions: [ 'node', 'import', 'module-sync', 'node-addons', 'react-server' ],
+  importAttributes: {},
+  parentURL: 'file:///home/nico/code/vite-plugin-react-server/dist/plugin/worker/rsc/handleRender.js'
+}
+[react-loader] Resolve result: [Object: null prototype] {
+  url: 'file:///home/nico/code/bidoof-template/src/page/props.ts',
+  format: 'module-typescript'
+}
+[react-loader] Attempting to load: file:///home/nico/code/bidoof-template/src/page/props.ts
+[react-loader] Context: { format: 'module-typescript', conditions: undefined }
+[react-loader] Loading module: file:///home/nico/code/bidoof-template/src/page/props.ts
+[react-loader] Next load result: { format: 'module', shortCircuit: undefined, source: 'string' }
+[react-client] received chunk / 21 bytes
+[react-client] received chunk / 21 bytes
+[react-client] received message handler
+[react-client] received message handler
+[react-client] Stream is flowing
+[react-client] Stream is flowing
+[react-client] received chunk / 341 bytes
+[react-client] received chunk / 341 bytes
+[react-client] received chunk / 2695 bytes
+[react-client] received chunk / 2695 bytes
+[react-client] received chunk / 573 bytes
+[react-client] received chunk / 573 bytes
+[react-client] received chunk / 4404 bytes
+[react-client] received chunk / 4404 bytes
+[react-client] received chunk / 850 bytes
+[react-client] received chunk / 850 bytes
+[react-client] received chunk / 21 bytes
+[react-client] received chunk / 21 bytes
+[react-client] received chunk / 341 bytes
+[react-client] received chunk / 341 bytes
+[react-client] received chunk / 2695 bytes
+[react-client] received chunk / 2695 bytes
+[react-client] received chunk / 573 bytes
+[react-client] received chunk / 573 bytes
+[react-client] received chunk / 4404 bytes
+[react-client] received chunk / 4404 bytes
+[react-client] received chunk / 848 bytes
+[react-client] received chunk / 848 bytes
+[react-client] received end
+[react-client] received end
+[react-client] Stream closing
+[react-client] Stream closing
+[resolveComponents] Using default Root component (override: false, rootPath: undefined)
+[resolveComponents] Using default Html component (override: true, htmlPath: src/Html.tsx)
+[resolveComponents] Using default Root component (override: false, rootPath: undefined)
+[resolveComponents] Using default Html component (override: true, htmlPath: src/Html.tsx)
+[react-loader] Module analysis: {
+  url: 'file:///home/nico/code/bidoof-template/src/page/props.ts',
+  isServer: false,
+  isClient: false,
+  hasFileLevelServerDirective: false,
+  hasFileLevelClientDirective: false,
+  sourceLength: 1621,
+  sourcePreview: 'var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,"name",{value,config...'
+}
+[react-loader] Skipping non-server/non-client module: file:///home/nico/code/bidoof-template/src/page/props.ts
+requestInfo: {
+  value: 'src/components/Link.client.tsx',
+  hostDir: '',
+  reqUrl: '/src/components/Link.client.tsx',
+  route: '/src/components/Link.client.tsx'
+}
+[react-dev-server] (js) /src/components/Link.client.tsx
+requestInfo: {
+  value: 'src/components/Counter.client.tsx',
+  hostDir: '',
+  reqUrl: '/src/components/Counter.client.tsx',
+  route: '/src/components/Counter.client.tsx'
+}
+[react-dev-server] (js) /src/components/Counter.client.tsx
+requestInfo: {
+  value: 'src/css/home.module.css',
+  hostDir: '',
+  reqUrl: '/src/css/home.module.css',
+  route: '/src/css/home.module.css'
+}
+[react-dev-server] (css) /src/css/home.module.css
+4:43:16 PM [vite] (client) page reload /home/nico/code/vite-plugin-react-server/dist/plugin/utils/urls.js
+4:43:16 PM [vite] (client) page reload /home/nico/code/vite-plugin-react-server/dist/plugin/utils/createReactFetcher.js
+4:43:16 PM [vite] (client) page reload /home/nico/code/vite-plugin-react-server/dist/plugin/utils/env.js
+4:43:16 PM [vite] (client) page reload /home/nico/code/vite-plugin-react-server/dist/plugin/utils/callServer.js
+4:43:16 PM [vite] (client) page reload /home/nico/code/vite-plugin-react-server/dist/plugin/utils/createCallServer.js
+4:43:16 PM [vite] (client) page reload /home/nico/code/vite-plugin-react-server/dist/plugin/utils/index.js

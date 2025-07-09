@@ -1,14 +1,5 @@
 import { fallbackData, type FallbackData } from "./fallbackData.js";
 
-declare global {
-  interface ImportMeta {
-    env: {
-      PUBLIC_ORIGIN: string;
-      BASE_URL: string;
-    };
-  }
-}
-
 export const props = async () => {
   const baseProps = {
     title: "Bidoof",
