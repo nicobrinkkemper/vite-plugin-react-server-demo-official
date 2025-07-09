@@ -52,10 +52,9 @@
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
     "vite": "^6.3.2",
-    "webpack-sources": "^3.3.0"
+    "webpack-sources": "^3.3.0",
+    "vite-plugin-react-server": "^1.2.0-alpha.1"
   },
   "dependencies": {
-    "express": "^5.1.0",
-    "vite-plugin-react-server": "^1.2.0-alpha.0"
   }
 }
