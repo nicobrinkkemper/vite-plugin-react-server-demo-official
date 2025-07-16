@@ -24,9 +24,9 @@
     "build:client:gh": "npm run env:gh -- vite build --ssr",
     "build:server:gh": "npm run env:gh -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
     "build:preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview",
-    "build:static:preview": "npm run env:preview -- vite build",
-    "build:client:preview": "npm run env:preview -- vite build --ssr",
-    "build:server:preview": "npm run env:preview -- NODE_OPTIONS='--conditions=react-server' vite build --ssr",
+    "build:static:preview": "npm run env:preview -- vite build --mode development",
+    "build:client:preview": "npm run env:preview -- vite build --ssr --mode development",
+    "build:server:preview": "npm run env:preview -- NODE_OPTIONS='--conditions=react-server' vite build --ssr --mode development",
     "preview:start": "npm run env:preview -- vite preview --mode development",
     "build:static:dev": "npm run env:dev-client -- vite build --mode development",
     "build:client:dev": "npm run env:dev-client -- vite build --mode development --ssr",
@@ -50,12 +50,16 @@
     "react": "^0.0.0-experimental-12bc60f5-20250613",
     "react-dom": "^0.0.0-experimental-12bc60f5-20250613",
     "react-server-dom-esm": "^0.0.1",
-    "tsx": "^4.19.2",
     "vite": "^6.3.2",
     "vite-plugin-react-server": "^1.2.0-alpha.1",
     "express": "^5.1.0",
     "webpack-sources": "^3.3.0"
   },
   "dependencies": {
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom",
+    "vite": "$vite"
   }
 }

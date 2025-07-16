@@ -1,4 +1,5 @@
 export const props = (url: string)=>{
+    console.log(url)
     return {
         title: `404 - ${url}`,
         description: `Page not found - ${url}`,

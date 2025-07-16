@@ -1,5 +1,15 @@
-import type { StreamPluginOptions } from "vite-plugin-react-server/types";
+import type { CustomInterface, StreamPluginOptions } from "vite-plugin-react-server/types";
 
+type MyInterface = CustomInterface<React.ReactNode>;
+
+declare global {    
+  interface ImportMetaEnv {
+    readonly BASE_URL: string;
+    readonly PUBLIC_ORIGIN: string;
+  }
+  interface ViteReactServerComponentsPlugin extends MyInterface{
+  }
+}  
 const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
   switch (url) { 
     case "/bidoof":
@@ -22,13 +32,12 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
     }
   }
 };
-console.log('process.env.VITE_GITHUB_PAGES', process.env.VITE_GITHUB_PAGES);
 export default {
   moduleBase: "src",
   Page: createRouter("page.tsx"),
   props: createRouter("props.ts"),
   Html: `src/Html.tsx`,
-  verbose: false,
+  verbose: true,
   moduleBasePath: "/",
   moduleBaseURL: process.env.VITE_BASE_URL || "/",
   serverEntry: "src/server/index.ts",

@@ -4,7 +4,7 @@ import { getCondition } from "vite-plugin-react-server/config";
 import config from "./vite.react.config.ts";
 
 export default defineConfig({
-  plugins: vitePluginReactServer(config),
+  plugins: vitePluginReactServer(config) as never,
 });
 
 console.log("Building", getCondition(), process.env.VITE_MODE, process.env.VITE_SSR === 'true' ? "SSR" : "STATIC");
