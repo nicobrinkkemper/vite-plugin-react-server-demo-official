@@ -1,4 +1,3 @@
-import { Html } from "./src/Html.tsx";
 import type { StreamPluginOptions } from "vite-plugin-react-server/types";
 
 const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
@@ -28,7 +27,7 @@ export default {
   moduleBase: "src",
   Page: createRouter("page.tsx"),
   props: createRouter("props.ts"),
-  Html: Html,
+  Html: "src/Html.tsx",
   verbose: false,
   moduleBasePath: process.env.VITE_BASE_URL || "/",
   moduleBaseURL: process.env.VITE_BASE_URL || "/",

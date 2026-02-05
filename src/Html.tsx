@@ -1,28 +1,30 @@
 import React from "react";
 import type { HtmlProps } from "vite-plugin-react-server/types";
-import { CssCollectorElements } from "vite-plugin-react-server/components";
+import { Css, Root as DefaultRoot } from "vite-plugin-react-server/components";
 
-export const Html = ({
-  children,
-  CssCollector,
+export const Html: React.FC<HtmlProps> = ({
+  Root = DefaultRoot,
   cssFiles,
   globalCss,
   pageProps,
   Page,
-  moduleBaseURL,
-}: React.PropsWithChildren<HtmlProps>) => (
-  <html>
-    <head>
-      <CssCollectorElements cssFiles={globalCss} />
-    </head>
-    <body>
-      <CssCollector
-        as={"div"}
-        id="root"
-        cssFiles={cssFiles}
-        Page={Page}
-        pageProps={pageProps}
-      />
-    </body>
-  </html>
-);
+  as = "div",
+}) => {
+  const rootProps = {
+    as,
+    id: "root",
+    cssFiles,
+    Page,
+    pageProps,
+  } as Record<string, unknown>;
+  return (
+    <html>
+      <head>
+        <Css cssFiles={globalCss} />
+      </head>
+      <body>
+        {React.createElement(Root as React.ElementType, rootProps)}
+      </body>
+    </html>
+  );
+};

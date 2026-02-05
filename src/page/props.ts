@@ -1,7 +1,9 @@
 export const props = (url: string) => {
-  let pathname = process.env.VITE_PUBLIC_ORIGIN?.includes("//")
-    ? new URL(import.meta.env.BASE_URL, import.meta.env.PUBLIC_ORIGIN).pathname
-    : import.meta.env.VITE_PUBLIC_ORIGIN + import.meta.env.BASE_URL;
+  const origin = import.meta.env.VITE_PUBLIC_ORIGIN ?? "";
+  const base = import.meta.env.BASE_URL ?? "/";
+  let pathname = origin.includes("//")
+    ? new URL(base, origin).pathname
+    : origin + base;
   if (!pathname.endsWith("/")) pathname += "/";
   const bidoofURL = pathname + "bidoof/";
   const errorExampleURL = pathname + "error-example/";

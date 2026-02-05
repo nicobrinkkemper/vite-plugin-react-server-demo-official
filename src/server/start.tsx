@@ -6,8 +6,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import { props as todosProps } from "../page/todos/props.js";
-import { CssCollectorElements } from "vite-plugin-react-server/components";
-import { CssContent } from "vite-plugin-react-server/types";
+import { Css } from "vite-plugin-react-server/components";
+import type { CssContent } from "vite-plugin-react-server/types";
 
 /**
  * Purpose of this demo is to to show how to use the bundled modules from vite-plugin-react-server
@@ -274,7 +274,7 @@ const renderRSC = async (
   const { pipe } = renderToPipeableStream(
     <>
       <Component {...props} />
-      <CssCollectorElements cssFiles={cssFiles} />
+      <Css cssFiles={cssFiles} />
     </>,
     base,
     {
