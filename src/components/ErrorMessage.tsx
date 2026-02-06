@@ -34,7 +34,7 @@ function linkifyStack(stack: string) {
 export function ErrorMessage({ error }: { error: { message: string, stack?: string } }) {
   return (
     <div className={styles["ErrorMessage"]}>
-      <h1>An Error Occurred</h1>
+      <h1>An Error Occurred!</h1>
       <p>If you're at the /error-example page, this is expected.</p>
       <p>Message: "{error.message}"</p>
       {error.stack && <pre className={styles["ErrorStack"]}>{linkifyStack(error.stack)}</pre>}

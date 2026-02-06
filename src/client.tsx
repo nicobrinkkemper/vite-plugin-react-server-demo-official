@@ -1,12 +1,9 @@
-import React, { use, useCallback, useState, useTransition } from "react";
+import React, { use, useCallback, useEffect, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
-import { createReactFetcher, setupRscHmr } from "vite-plugin-react-server/utils";
+import { createReactFetcher } from "vite-plugin-react-server/utils";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
-
-// Enable HMR for server components - will reload page when .server.ts files change
-setupRscHmr();
 declare global {
   interface ImportMetaEnv {
     BASE_URL: string
@@ -38,13 +35,13 @@ const Shell: React.FC<{
   const [storeData, setStoreData] =
     useState<React.Usable<React.ReactNode>>(data);
 
-  const navigate = useCallback((to: string) => {
-    if ("scrollTo" in window) window.scrollTo(0, 0);
+  // Refetch RSC stream - used for both navigation and HMR
+  const refetch = useCallback((url: string = window.location.pathname, scrollToTop = true) => {
+    if (scrollToTop && "scrollTo" in window) window.scrollTo(0, 0);
     startTransition(() => {
-      // Create new RSC data stream
       setStoreData(
         createReactFetcher({
-          url: to,
+          url,
           moduleBaseURL: import.meta.env.BASE_URL,
           publicOrigin: import.meta.env.PUBLIC_ORIGIN,
         })
@@ -54,12 +51,26 @@ const Shell: React.FC<{
 
   // Handle browser navigation
   useEventListener("popstate", (e) =>
-    navigate(
+    refetch(
       e instanceof PopStateEvent && e.state?.to
         ? e.state.to
         : window.location.pathname
     )
   );
+
+  // HMR: refetch when server components change (no scroll, preserves position)
+  useEffect(() => {
+    if (import.meta.hot) {
+      const handler = (data: { file: string }) => {
+        console.log('[RSC HMR] Server component updated:', data.file);
+        refetch(window.location.pathname, false); // Don't scroll on HMR
+      };
+      import.meta.hot.on('vite-plugin-react-server:server-component-update', handler);
+      return () => {
+        import.meta.hot!.off('vite-plugin-react-server:server-component-update', handler);
+      };
+    }
+  }, [refetch]);
 
   const content = use(storeData);
 
