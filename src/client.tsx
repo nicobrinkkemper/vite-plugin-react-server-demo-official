@@ -2,8 +2,11 @@ import React, { use, useCallback, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
-import { createReactFetcher } from "vite-plugin-react-server/utils";
+import { createReactFetcher, setupRscHmr } from "vite-plugin-react-server/utils";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
+
+// Enable HMR for server components - will reload page when .server.ts files change
+setupRscHmr();
 declare global {
   interface ImportMetaEnv {
     BASE_URL: string

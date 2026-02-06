@@ -7,7 +7,8 @@ export const props = async () => {
   if (initialTodos.length === 0) {
     await addTodo('Clone the repo');
     await addTodo('npm install');
-    await addTodo('npm run dev');
+    await addTodo('run `npm run dev:rsc` for server-first workflow');
+    await addTodo('or `npm run dev:ssr` for client-first workflow');
     initialTodos = await getTodos();
   }
   return {

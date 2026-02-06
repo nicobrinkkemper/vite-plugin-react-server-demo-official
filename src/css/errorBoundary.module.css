@@ -1,0 +1,21 @@
+.ErrorBoundary {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+}
+.ErrorBoundary h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+.ErrorBoundary p {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+.ErrorBoundary pre {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
