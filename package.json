@@ -13,7 +13,7 @@
     "env:gh": "PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/'",
     "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
     "env:dev": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
-    "env:dev-server": "NODE_OPTIONS='--conditions react-server' && npm run env:dev",
+    "env:dev-server": "NODE_OPTIONS='--conditions react-server' npm run env:dev",
     "env:start": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "build": "NODE_OPTIONS='--conditions react-server' vite build --app",
     "build:static": "vite build",

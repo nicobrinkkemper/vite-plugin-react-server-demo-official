@@ -29,7 +29,12 @@ export class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       if (this.state.error) {
         return (
-          <ErrorMessage error={this.state.error} />
+          <ErrorMessage
+            error={{
+              message: this.state.error.message,
+              stack: this.state.error.stack,
+            }}
+          />
         );
       }
       return <div>Error</div>;
