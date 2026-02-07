@@ -79,10 +79,16 @@ Object.values(manifest).forEach((entry) => {
   entry.css?.forEach((css) => validFiles.add(css));
 });
 
-// Build a map of all valid server files
+// Build a map of all valid server files, and a src→file lookup for action resolution
 const validServerFiles = new Set<string>();
-Object.entries(serverManifest).forEach(([, entry]) => {
+const serverSrcToFile = new Map<string, string>();
+Object.entries(serverManifest).forEach(([key, entry]) => {
   validServerFiles.add(entry.file);
+  validServerFiles.add(key); // also allow lookup by src key
+  if (entry.src) {
+    serverSrcToFile.set(entry.src, entry.file);
+  }
+  serverSrcToFile.set(key, entry.file);
   // allow css files to be requested.
   entry.css?.forEach((css) => validServerFiles.add(css));
 });
@@ -119,30 +125,46 @@ app.use(async (req, res, next) => {
   // Handle server actions
   if (req.method === "POST") {
     console.log("Handling server action:", url);
-    // Parse the action ID from the request body
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
+    // Parse the action ID from x-rsc-action header (RSC protocol)
+    const chunks: Buffer[] = [];
+    req.on("data", (chunk: Buffer) => {
+      chunks.push(chunk);
     });
     req.on("end", async () => {
       try {
-        const { id, args } = JSON.parse(body);
+        const body = Buffer.concat(chunks).toString();
+        // Action ID comes from x-rsc-action header, body is encodeReply-encoded args
+        let id = req.headers["x-rsc-action"] as string;
+        let args: unknown[];
+        if (id) {
+          // RSC protocol: decode args with decodeReply
+          const { decodeReply } = await import("react-server-dom-esm/server");
+          args = await decodeReply(body, base) as unknown[];
+        } else {
+          // Legacy JSON format fallback
+          const parsed = JSON.parse(body);
+          id = parsed.id;
+          args = parsed.args ?? [];
+        }
         const actionName = id.split("#")[1];
         const actionKey = id.split("#")[0];
 
-        // it should be the actual file name.
-        const hasAction = validServerFiles.has(actionKey.slice(base.length));
-        if (!hasAction) {
+        // Resolve action key: could be src path (e.g. src/server/actions/todoActions.server.ts)
+        // or built path — strip base prefix and look up in manifest
+        const strippedKey = actionKey.startsWith(base) ? actionKey.slice(base.length) : actionKey;
+        const resolvedFile = serverSrcToFile.get(strippedKey) ?? strippedKey;
+        
+        if (!validServerFiles.has(strippedKey) && !validServerFiles.has(resolvedFile)) {
           throw new Error(`Action not found in manifest: ${actionKey}`);
         }
 
         console.log(
           "Loading action:",
-          actionKey.slice(base.length),
+          resolvedFile,
           actionName
         );
         const actionModule = await import(
-          path.join(serverRoot, actionKey.slice(base.length))
+          path.join(serverRoot, resolvedFile)
         );
         const result = await actionModule[actionName](...args);
 
