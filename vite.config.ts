@@ -4,6 +4,7 @@ import { getCondition } from "vite-plugin-react-server/config";
 import config from "./vite.react.config.ts";
 
 export default defineConfig({
+  base: process.env.BASE_URL || "/",
   plugins: vitePluginReactServer(config),
   optimizeDeps: {
     // Pre-bundle these for faster dev startup and to resolve linked package issues
