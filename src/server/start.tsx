@@ -119,14 +119,27 @@ app.use(async (req, res, next) => {
   // Handle server actions
   if (req.method === "POST") {
     console.log("Handling server action:", url);
-    // Parse the action ID from the request body
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
+    // Parse the action ID from x-rsc-action header (RSC protocol)
+    const chunks: Buffer[] = [];
+    req.on("data", (chunk: Buffer) => {
+      chunks.push(chunk);
     });
     req.on("end", async () => {
       try {
-        const { id, args } = JSON.parse(body);
+        const body = Buffer.concat(chunks).toString();
+        // Action ID comes from x-rsc-action header, body is encodeReply-encoded args
+        let id = req.headers["x-rsc-action"] as string;
+        let args: unknown[];
+        if (id) {
+          // RSC protocol: decode args with decodeReply
+          const { decodeReply } = await import("react-server-dom-esm/server");
+          args = await decodeReply(body, base) as unknown[];
+        } else {
+          // Legacy JSON format fallback
+          const parsed = JSON.parse(body);
+          id = parsed.id;
+          args = parsed.args ?? [];
+        }
         const actionName = id.split("#")[1];
         const actionKey = id.split("#")[0];
 
