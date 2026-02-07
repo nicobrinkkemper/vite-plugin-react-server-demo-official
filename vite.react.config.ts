@@ -30,7 +30,7 @@ export default {
   Html: `src/Html.tsx`,
   verbose: false,
   moduleBasePath: "/",
-  moduleBaseURL: process.env.VITE_BASE_URL || "/",
+  moduleBaseURL: process.env.BASE_URL || process.env.VITE_BASE_URL || "/",
   serverEntry: "src/server/index.ts",
   css: {
     inlineThreshold: 10000,
