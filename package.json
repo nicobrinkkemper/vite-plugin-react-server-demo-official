@@ -47,8 +47,8 @@
     "acorn-loose": "^8.4.0",
     "happy-dom": "^17.1.8",
     "patch-package": "^8.0.0",
-    "react": "^0.0.0-experimental-c0464aed-20250523",
-    "react-dom": "^0.0.0-experimental-c0464aed-20250523",
+    "react": "^0.0.0-experimental-19baee81-20250725",
+    "react-dom": "^0.0.0-experimental-19baee81-20250725",
     "react-server-dom-esm": "^0.0.1",
     "tsx": "^4.19.2",
     "vite": "^6.3.2",
@@ -56,6 +56,6 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "vite-plugin-react-server": "^1.1.20"
+    "vite-plugin-react-server": "^1.2.0"
   }
 }
