@@ -1,29 +1,32 @@
 import React from "react";
-import { Css, type HtmlProps } from "vite-plugin-react-server/components";
+import type { HtmlProps } from "vite-plugin-react-server/types";
+import { Css, Root as DefaultRoot } from "vite-plugin-react-server/components";
 
-export const Html = ({
-  Root,
+export const Html: React.FC<HtmlProps> = ({
+  Root = DefaultRoot,
   cssFiles,
   globalCss,
   pageProps = {},
   Page,
-}: HtmlProps) => {
+  as = "div",
+}) => {
   if (!pageProps.title) {
     pageProps.title = "No title";
   }
+  const rootProps = {
+    as,
+    id: "root",
+    cssFiles,
+    Page,
+    pageProps,
+  } as Record<string, unknown>;
   return (
     <html>
       <head>
         <Css cssFiles={globalCss} />
       </head>
       <body>
-        <Root
-          as={"div"}
-          id="root"
-          cssFiles={cssFiles}
-          Page={Page}
-          pageProps={pageProps}
-        />
+        {React.createElement(Root as React.ElementType, rootProps)}
       </body>
     </html>
   );

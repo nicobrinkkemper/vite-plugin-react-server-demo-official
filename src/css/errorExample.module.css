@@ -1,0 +1,20 @@
+.ErrorExample {
+    background-color: #F00;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+.Link {
+    color: blue;
+    text-decoration: underline;
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem;
+}

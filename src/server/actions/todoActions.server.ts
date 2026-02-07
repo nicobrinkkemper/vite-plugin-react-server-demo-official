@@ -16,7 +16,8 @@ type SQLiteTodo = {
 };
 // Server action to fetch todos
 export async function getTodos(): Promise<Todo[]> {
-  const stmt = db.prepare("SELECT * FROM todos ORDER BY created_at DESC");
+  console.log("getTodos called at", Date.now());  // Add this
+  const stmt = db.prepare("SELECT * FROM todos ORDER BY created_at ASC");
   const results = stmt.all() as unknown as SQLiteTodo[];
   return results.map(todo => ({
     ...todo,
