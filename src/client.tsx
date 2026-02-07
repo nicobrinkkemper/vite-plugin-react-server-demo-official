@@ -1,8 +1,9 @@
-import React, { use, useCallback, useEffect, useState, useTransition } from "react";
+import React, { use, useCallback, useState, useTransition } from "react";
 import { createRoot } from "react-dom/client";
 import { useEventListener } from "./hooks/useEventListener.js";
 import "./css/globalStyles.css";
 import { createReactFetcher } from "vite-plugin-react-server/utils";
+import { useRscHmr } from "virtual:react-server/hmr";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
 declare global {
   interface ImportMetaEnv {
@@ -59,18 +60,7 @@ const Shell: React.FC<{
   );
 
   // HMR: refetch when server components change (no scroll, preserves position)
-  useEffect(() => {
-    if (import.meta.hot) {
-      const handler = (data: { file: string }) => {
-        console.log('[RSC HMR] Server component updated:', data.file);
-        refetch(window.location.pathname, false); // Don't scroll on HMR
-      };
-      import.meta.hot.on('vite-plugin-react-server:server-component-update', handler);
-      return () => {
-        import.meta.hot!.off('vite-plugin-react-server:server-component-update', handler);
-      };
-    }
-  }, [refetch]);
+  useRscHmr((url) => refetch(url, false));
 
   const content = use(storeData);
 
