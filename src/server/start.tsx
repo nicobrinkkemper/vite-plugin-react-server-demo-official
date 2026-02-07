@@ -79,10 +79,16 @@ Object.values(manifest).forEach((entry) => {
   entry.css?.forEach((css) => validFiles.add(css));
 });
 
-// Build a map of all valid server files
+// Build a map of all valid server files, and a src→file lookup for action resolution
 const validServerFiles = new Set<string>();
-Object.entries(serverManifest).forEach(([, entry]) => {
+const serverSrcToFile = new Map<string, string>();
+Object.entries(serverManifest).forEach(([key, entry]) => {
   validServerFiles.add(entry.file);
+  validServerFiles.add(key); // also allow lookup by src key
+  if (entry.src) {
+    serverSrcToFile.set(entry.src, entry.file);
+  }
+  serverSrcToFile.set(key, entry.file);
   // allow css files to be requested.
   entry.css?.forEach((css) => validServerFiles.add(css));
 });
@@ -143,19 +149,22 @@ app.use(async (req, res, next) => {
         const actionName = id.split("#")[1];
         const actionKey = id.split("#")[0];
 
-        // it should be the actual file name.
-        const hasAction = validServerFiles.has(actionKey.slice(base.length));
-        if (!hasAction) {
+        // Resolve action key: could be src path (e.g. src/server/actions/todoActions.server.ts)
+        // or built path — strip base prefix and look up in manifest
+        const strippedKey = actionKey.startsWith(base) ? actionKey.slice(base.length) : actionKey;
+        const resolvedFile = serverSrcToFile.get(strippedKey) ?? strippedKey;
+        
+        if (!validServerFiles.has(strippedKey) && !validServerFiles.has(resolvedFile)) {
           throw new Error(`Action not found in manifest: ${actionKey}`);
         }
 
         console.log(
           "Loading action:",
-          actionKey.slice(base.length),
+          resolvedFile,
           actionName
         );
         const actionModule = await import(
-          path.join(serverRoot, actionKey.slice(base.length))
+          path.join(serverRoot, resolvedFile)
         );
         const result = await actionModule[actionName](...args);
 
