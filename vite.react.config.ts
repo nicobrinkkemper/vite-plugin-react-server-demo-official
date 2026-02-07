@@ -22,14 +22,14 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
     }
   }
 };
-
+console.log('process.env.VITE_GITHUB_PAGES', process.env.VITE_GITHUB_PAGES);
 export default {
   moduleBase: "src",
   Page: createRouter("page.tsx"),
   props: createRouter("props.ts"),
   Html: "src/Html.tsx",
   verbose: false,
-  moduleBasePath: process.env.VITE_BASE_URL || "/",
+  moduleBasePath: "/",
   moduleBaseURL: process.env.VITE_BASE_URL || "/",
   serverEntry: "src/server/index.ts",
   css: {
@@ -37,5 +37,5 @@ export default {
   },
   build: {
     pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
-  },
+  }
 } satisfies StreamPluginOptions;

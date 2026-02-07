@@ -6,10 +6,13 @@ export const Html: React.FC<HtmlProps> = ({
   Root = DefaultRoot,
   cssFiles,
   globalCss,
-  pageProps,
+  pageProps = {},
   Page,
   as = "div",
 }) => {
+  if (!pageProps.title) {
+    pageProps.title = "No title";
+  }
   const rootProps = {
     as,
     id: "root",

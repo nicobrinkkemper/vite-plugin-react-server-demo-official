@@ -15,7 +15,7 @@ export const props = () => {
     title: "Error Example for node env: " + import.meta.env["NODE_ENV"],
     navigation: {
       back: {
-        href: `${import.meta.env.VITE_BASE_URL === "" ? "/" : import.meta.env.VITE_BASE_URL}`,
+        href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
         text: "Back",
       },
     },

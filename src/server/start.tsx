@@ -9,31 +9,15 @@ import { props as todosProps } from "../page/todos/props.js";
 import { Css } from "vite-plugin-react-server/components";
 import type { CssContent } from "vite-plugin-react-server/types";
 
-/**
- * Purpose of this demo is to to show how to use the bundled modules from vite-plugin-react-server
- * to serve a specific use case: the dynamic todo page functionality of the demo app.
- *
- * We can run this script using the following commands:
- * ```bash
- * # clean up database and build the project
- * rm todos.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
- * # run the server
- * NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server/start.js
- * ```
- * Because the vite-plugin-react-server has no opinion on how to serve your application,
- * you need to write all this code yourself. It can be express, which seems to be popular these days
- * but of course there are many other options.
- *
- * The plugin only cares about transforming the modules for each boundary, and this module is one of those
- * that can also be used as the entry point for a server.
- *
- * For html pages it streams files directly from the static directory, which is like us saying that these
- * pages are static and never change.
- *
- * The todo page is made to show-off the server-action functionality - which of course won't work on
- * Github pages - but it will work just fine if you know how to setup a server and setup streams based on header/url information
- * depending on your use cases.
- */
+declare global {
+  interface ImportMetaEnv {
+    GITHUB_PAGES: string;
+    BASE_URL: string;
+  }
+  interface ImportMeta {
+    env: ImportMetaEnv;
+  }
+}
 
 interface ManifestEntry {
   file: string;
@@ -43,7 +27,6 @@ interface ManifestEntry {
   imports?: string[];
   css?: string[];
 }
-
 
 const app = express();
 const base = import.meta.env.BASE_URL || "/";
@@ -60,7 +43,6 @@ const manifest = JSON.parse(
 const serverManifest = JSON.parse(
   fs.readFileSync(path.join(serverRoot, ".vite/manifest.json"), "utf-8")
 ) as Record<string, ManifestEntry>;
-
 
 // Configuration for page handling
 const pageConfig = {
@@ -154,7 +136,11 @@ app.use(async (req, res, next) => {
           throw new Error(`Action not found in manifest: ${actionKey}`);
         }
 
-        console.log("Loading action:", actionKey.slice(base.length), actionName);
+        console.log(
+          "Loading action:",
+          actionKey.slice(base.length),
+          actionName
+        );
         const actionModule = await import(
           path.join(serverRoot, actionKey.slice(base.length))
         );
@@ -353,3 +339,39 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
   console.log(`Static files served from: ${staticDir}`);
 });
+
+/**
+ * Purpose of this demo is to to show how to use the bundled modules from vite-plugin-react-server
+ * to serve a specific use case: the dynamic todo page functionality of the demo app.
+ *
+ * We can run this script using the following commands:
+ * ```bash
+ * # clean up database and build the project
+ * rm todos.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
+ * # run the server
+ * NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server/start.js
+ * ```
+ * Because the vite-plugin-react-server has no opinion on how to serve your application,
+ * you need to write all this code yourself. It can be express, which seems to be popular these days
+ * but of course there are many other options.
+ *
+ * The plugin only cares about transforming the modules for each boundary, and this module is one of those
+ * that can also be used as the entry point for a server.
+ *
+ * For html pages it streams files directly from the static directory, which is like us saying that these
+ * pages are static and never change.
+ *
+ * The todo page is made to show-off the server-action functionality - which of course won't work on
+ * Github pages - but it will work just fine if you know how to setup a server and setup streams based on header/url information
+ * depending on your use cases.
+ *
+ * Notice how our "production" server is completely dressed down
+ * doing only the bare minimum to serve the files we know are static. But even for this
+ * page we do not even take the effort to regenerate the index.html - it just has no todo's when
+ * it renders, and they load in after the page has been rendered.
+ *
+ * Of course we would have several ways to handle dynamic index.html too, again, depending on your use case.
+ * One solution is to make two servers, one for html and one for rsc. The other would be to somehow run
+ * another thread that would generate the index.html for us, like
+ * this plugin does during the static build process using the html-worker.
+ */

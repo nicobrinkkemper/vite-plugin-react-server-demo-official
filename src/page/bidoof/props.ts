@@ -4,9 +4,10 @@ export const props = async () => {
   const baseProps = {
     title: "Bidoof",
     description: "It's bidoof.",
+    favicon: `${import.meta.env.PUBLIC_ORIGIN}${import.meta.env.BASE_URL}bidoof.png`,
     navigation: {
       back: {
-        href: `${process.env.VITE_BASE_URL === "" ? "/" : process.env.VITE_BASE_URL}`,
+        href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
         text: "Back",
       },
     },

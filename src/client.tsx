@@ -70,4 +70,8 @@ const Shell: React.FC<{
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 
-createRoot(rootElement).render(<Shell data={createReactFetcher()} />);
+createRoot(rootElement).render(<Shell data={createReactFetcher({
+  url: window.location.pathname,
+  moduleBaseURL: import.meta.env.BASE_URL,
+  publicOrigin: import.meta.env.PUBLIC_ORIGIN,
+})} />);
