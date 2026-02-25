@@ -37,7 +37,8 @@
       // We tell the transpiler that we are using vite and that we want to use the client types. This makes sure that our import.meta.env types are available, as well as the experimental react types.
       "types": [
         "vite/client",
-        "react/experimental"
+        "react/experimental",
+        "vite-plugin-react-server/virtual"
       ],
       "resolvePackageJsonImports": true,
       "resolvePackageJsonExports": true,

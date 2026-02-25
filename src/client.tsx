@@ -5,14 +5,11 @@ import "./css/globalStyles.css";
 import { createReactFetcher } from "vite-plugin-react-server/utils";
 import { useRscHmr } from "virtual:react-server/hmr";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
+// PUBLIC_ORIGIN is provided by vite-plugin-react-server/virtual types,
+// but re-declared here for noPropertyAccessFromIndexSignature compatibility
 declare global {
   interface ImportMetaEnv {
-    BASE_URL: string
-    MODE: string
-    DEV: boolean
-    PROD: boolean
-    SSR: boolean
-    PUBLIC_ORIGIN: string
+    readonly PUBLIC_ORIGIN: string;
   }
 }
 /**
