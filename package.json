@@ -49,11 +49,10 @@
     "react-dom": "0.0.0-experimental-19baee81-20250725",
     "tsx": "^4.19.2",
     "vite": "^6.3.2",
-    "webpack-sources": "^3.3.0",
-    "vite-plugin-react-server": "^1.4.3"
+    "webpack-sources": "^3.3.0"
   },
   "dependencies": {
     "express": "^5.1.0",
-    "vite-plugin-react-server": "^1.4.3"
+    "vite-plugin-react-server": "^1.4.4"
   }
 }
