@@ -8,11 +8,13 @@ export const props = (url: string) => {
   const bidoofURL = pathname + "bidoof/";
   const errorExampleURL = pathname + "error-example/";
   const todosURL = pathname + "todos/";
+  const isGithubPages = process.env.GITHUB_PAGES === "true";
   return {
     url,
     title: "vite-plugin-react-server demo",
     description: "Home page",
     baseUrl: import.meta.env.BASE_URL,
+    isGithubPages,
     navigation: {
       toBidoof: {
         href: bidoofURL,

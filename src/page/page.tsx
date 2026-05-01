@@ -5,7 +5,7 @@ import styles from "../css/home.module.css";
 import packageJson from "../../package.json" assert { type: "json" };
 import { Counter } from "../components/Counter.client.js";
 import type { Props } from "./props.js";
-export const Page = ({ url, title, navigation }: Props) => {
+export const Page = ({ url, title, navigation, isGithubPages }: Props) => {
   return (
     <>
       <title>{title ?? "No title"}</title>
@@ -48,11 +48,13 @@ export const Page = ({ url, title, navigation }: Props) => {
                 {navigation.toErrorExample.text}
               </Link>
             </li>
-            <li>
-              <Link to={navigation.toTodos.href} className={styles["Url"]}>
-                {navigation.toTodos.text}
-              </Link>
-            </li>
+            {!isGithubPages && (
+              <li>
+                <Link to={navigation.toTodos.href} className={styles["Url"]}>
+                  {navigation.toTodos.text}
+                </Link>
+              </li>
+            )}
           </ul>
           <dl>
             <dt>Build using node version</dt>
