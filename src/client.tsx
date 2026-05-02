@@ -5,16 +5,6 @@ import "./css/globalStyles.css";
 import { createReactFetcher } from "vite-plugin-react-server/utils";
 import { useRscHmr } from "virtual:react-server/hmr";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
-declare global {
-  interface ImportMetaEnv {
-    BASE_URL: string
-    MODE: string
-    DEV: boolean
-    PROD: boolean
-    SSR: boolean
-    PUBLIC_ORIGIN: string
-  }
-}
 /**
  * Client-side React Server Components implementation
  *

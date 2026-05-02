@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 import * as React from "react";
 import { Link } from "../components/Link.client.js";
 import styles from "../css/home.module.css";
