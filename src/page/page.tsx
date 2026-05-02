@@ -2,7 +2,7 @@
 import * as React from "react";
 import { Link } from "../components/Link.client.js";
 import styles from "../css/home.module.css";
-import packageJson from "../../package.json" assert { type: "json" };
+import packageJson from "../../package.json" with { type: "json" };
 import { Counter } from "../components/Counter.client.js";
 import type { Props } from "./props.js";
 export const Page = ({ url, title, navigation }: Props) => {
