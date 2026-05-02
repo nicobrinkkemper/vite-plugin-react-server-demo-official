@@ -6,7 +6,7 @@
         "types": [
             "vite/client",
             "node",
-            "react/experimental"
+            "vite-plugin-react-server/virtual"
         ]
     }
 }

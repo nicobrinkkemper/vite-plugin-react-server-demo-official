@@ -34,10 +34,10 @@
       "rootDir": "./",
       // We collect all of our compiled files into the dist folder so that we do not clutter our source directories with distilled files.
       "outDir": "dist",
-      // We tell the transpiler that we are using vite and that we want to use the client types. This makes sure that our import.meta.env types are available, as well as the experimental react types.
+      // The plugin's recommended types config: vite/client gives us import.meta.env basics, vite-plugin-react-server/virtual adds typing for the virtual:react-server/hmr module, the custom HMR event, and PUBLIC_ORIGIN.
       "types": [
         "vite/client",
-        "react/experimental"
+        "vite-plugin-react-server/virtual"
       ],
       "resolvePackageJsonImports": true,
       "resolvePackageJsonExports": true,
