@@ -13,7 +13,7 @@ Showcasing:
   - Counter with useState
   - Dynamic head updates
   - Async props using the pokeapi
-  - Todo page using server actions and sqlite database
+  - Todo page using server actions and a SQLite database (local only — disabled on the GitHub Pages build, since it has no server)
 - Static site generation capabilities with "headless" index.rsc files and fully static index.html files
   - Static result includes server actions results
 
@@ -50,66 +50,67 @@ git clone https://github.com/nicobrinkkemper/vite-plugin-react-server-demo-offic
 cd vite-plugin-react-server-demo-official
 ```
 
-2. Install dependencies and apply patches:
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-After installing new dependencies
-
-```bash
-npm run postinstall
-```
-
 3. Start the development server:
 
 ```bash
-# For server-side development
-npm run dev
-NODE_OPTIONS='--conditions=react-server' npx vite
+# Server-first dev (RSC condition active in Node)
+npm run dev:rsc
 
-# Using the plugin's built-in rsc-worker
-npm run start
-npx vite
+# Client-first dev (no RSC condition; Vite handles the boundary)
+npm run dev:ssr
 ```
 
-4. Build and preview
+4. Build and preview the static site:
 
 ```bash
-# To build the static site
+# Build (default base / origin)
 npm run build
-NODE_OPTIONS='--conditions=react-server' npx vite build
 
-#
-npx vite preview
+# Build the GitHub Pages variant (the todo page is replaced with a stub here)
+npm run build:gh
+
+# Build + serve a local preview at http://localhost:4173
+npm run preview
 ```
 
 ## Project Structure
 
 ```
 project/
-├── src/              # Source files
-├── public/           # Static assets
-├── patches/          # Custom patches for React experimental features
-├── .github/          # GitHub workflows
-│   └── workflows/    # CI/CD configurations
+├── src/                     # Source files
+├── public/                  # Static assets
+├── .github/workflows/       # CI/CD (builds + deploys to GitHub Pages)
 ├── vite.config.ts           # Vite configuration
-├── vite.react.config.ts     # Plugin configuration
+├── vite.react.config.ts     # Plugin configuration (router, pages, entry)
 └── tsconfig.json            # TypeScript configuration
 ```
 
 ## Build Commands
 
+The build is split into three passes — static prerender, client bundle, server bundle — and each pass has variants per environment (`dev`, `gh`, `preview`). The aggregate scripts compose them:
+
 ```bash
-# Build everything
-npm run build
+# Default (uses BASE_URL=/, PUBLIC_ORIGIN unset)
+npm run build              # all three passes
+npm run build:static       # prerender RSC + HTML only
+npm run build:client       # client bundle (vite build --ssr)
+npm run build:server       # server bundle (NODE_OPTIONS='--conditions=react-server')
 
-# Build client-side only
-npm run build:client
+# GitHub Pages variant (BASE_URL=/vite-plugin-react-server-demo-official/)
+npm run build:gh
 
-# Build server-side and generate static files
-npm run build:server
+# Preview variant (BASE_URL set so vite preview serves correctly)
+npm run build:preview
+npm run preview            # build:preview + preview:start
+
+# Full SSR demo: build + run the production node server
+npm run demo               # http://localhost:3000
 ```
 
 ## Configuration
