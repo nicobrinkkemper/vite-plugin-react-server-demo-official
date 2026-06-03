@@ -1,6 +1,7 @@
 .Home {
     font-size: 50px;
     color: white;
+    background-color: #000008;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +14,8 @@
 .Url {
     font-size: 20px;
     display: inline;
-    color: #0004ff;
+    color: #ffff;
+    background-color: #000008;
     text-decoration: underline;
     font-weight: bold;
 }
