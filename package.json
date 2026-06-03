@@ -43,6 +43,7 @@
     "@types/node": "^22.15.17",
     "@types/react": "^19.0.9",
     "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.7.0",
     "acorn-loose": "^8.4.0",
     "happy-dom": "^17.1.8",
     "react": "^19.2.7",
