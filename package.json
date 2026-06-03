@@ -32,7 +32,7 @@
     "build:client:dev": "npm run env:dev -- vite build --ssr --mode development",
     "build:server:dev": "npm run env:dev -- NODE_OPTIONS='--conditions=react-server' vite build --ssr --mode development",
     "debug-build": "npm run build:static:dev && npm run build:client:dev && npm run build:server:dev",
-    "clean-install": "npm install react@experimental react-dom@experimental",
+    "clean-install": "npm install react@^19.2.7 react-dom@^19.2.7",
     "patch-oss": "patch"
   },
   "author": "",
@@ -45,14 +45,14 @@
     "@types/react-dom": "^19.0.3",
     "acorn-loose": "^8.4.0",
     "happy-dom": "^17.1.8",
-    "react": "0.0.0-experimental-19baee81-20250725",
-    "react-dom": "0.0.0-experimental-19baee81-20250725",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "tsx": "^4.19.2",
     "vite": "^6.3.2",
     "webpack-sources": "^3.3.0"
   },
   "dependencies": {
     "express": "^5.1.0",
-    "vite-plugin-react-server": "^1.11.4"
+    "vite-plugin-react-server": "^2.0.1"
   }
 }
