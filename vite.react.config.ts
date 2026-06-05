@@ -12,6 +12,8 @@ const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
       return `src/page/${file}`;
     case "/todos":
       return `src/page/todos/${file}`;
+    case "/static-no-backend":
+      return `src/page/static-no-backend/${file}`;
     default: {
       if (process.env.NODE_ENV === "development") {
         return `src/page/404/${file}`;
@@ -36,6 +38,6 @@ export default {
     inlineThreshold: 10000,
   },
   build: {
-    pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
+    pages: ["/", "/bidoof", "/404", "/todos", "/error-example", "/static-no-backend"],
   }
 } satisfies StreamPluginOptions;
