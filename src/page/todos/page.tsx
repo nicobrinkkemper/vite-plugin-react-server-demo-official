@@ -13,7 +13,8 @@ export async function Page({
   clearCompletedTodos,
   getTodos,
   initialTodos,
-  isGithubPages
+  isGithubPages,
+  navigation,
 }: Props) {
   // The Todo UI renders on every build, including the static GitHub Pages one
   // — the static-host freeze (vprs 2.0.6, the headless-.rsc fix) is gone.
@@ -22,7 +23,7 @@ export async function Page({
   // those (it receives `isGithubPages` for exactly that).
   return (
     <div className={styles["TodoList"]}>
-      <Link to={import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL} className={styles["Link"]}> back </Link>
+      <Link to={navigation.back.href} className={styles["Link"]}>{navigation.back.text}</Link>
       <TodoList
         initialTodos={initialTodos}
         addTodo={addTodo}

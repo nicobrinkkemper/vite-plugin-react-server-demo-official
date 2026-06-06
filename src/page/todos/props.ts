@@ -34,6 +34,12 @@ export const props = async () => {
     getTodos,
     initialTodos,
     isGithubPages,
+    navigation: {
+      back: {
+        href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
+        text: "Back",
+      },
+    },
   };
 };
 
