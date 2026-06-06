@@ -2,6 +2,12 @@ import { addTodo, toggleTodo, deleteTodo, editTodo, clearCompletedTodos, getTodo
 
 export const props = async () => {
   const isGithubPages = process.env.GITHUB_PAGES === 'true';
+  const navigation = {
+    back: {
+      href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
+      text: "Back",
+    },
+  };
   if (isGithubPages) {
     return {
       title: "Todos",
@@ -13,12 +19,7 @@ export const props = async () => {
       getTodos,
       initialTodos: [],
       isGithubPages,
-      navigation: {
-        back: {
-          href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
-          text: "Back",
-        },
-      },
+      navigation,
     };
   }
   let initialTodos = await getTodos();
@@ -40,12 +41,7 @@ export const props = async () => {
     getTodos,
     initialTodos,
     isGithubPages,
-    navigation: {
-      back: {
-        href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
-        text: "Back",
-      },
-    },
+    navigation,
   };
 };
 
