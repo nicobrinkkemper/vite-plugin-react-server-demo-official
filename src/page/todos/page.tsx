@@ -15,33 +15,11 @@ export async function Page({
   initialTodos,
   isGithubPages
 }: Props) {
-  if (isGithubPages) {
-    return (
-      <div className={styles["TodoList"]}>
-        <Link to="/" className={styles["Link"]}> back </Link>
-        <h1>Todo List</h1>
-        <p>
-          The todo demo is disabled on the GitHub Pages build because it relies
-          on server actions backed by a SQLite database, which a static host
-          can't run.
-        </p>
-        <p>To try it locally:</p>
-        <ol>
-          <li>
-            Clone{" "}
-            <a href="https://github.com/nicobrinkkemper/vite-plugin-react-server-demo-official">
-              the demo repo
-            </a>
-          </li>
-          <li><code>npm install</code></li>
-          <li>
-            <code>npm run dev:rsc</code> (server-first) or{" "}
-            <code>npm run dev:ssr</code> (client-first)
-          </li>
-        </ol>
-      </div>
-    );
-  }
+  // The Todo UI renders on every build, including the static GitHub Pages one
+  // — the static-host freeze (vprs 2.0.6, the headless-.rsc fix) is gone.
+  // Server actions (add/toggle/delete) are backed by SQLite and can't run on a
+  // static host, so TodoList shows a graceful "needs a database" message on
+  // those (it receives `isGithubPages` for exactly that).
   return (
     <div className={styles["TodoList"]}>
       <Link to="/" className={styles["Link"]}> back </Link>
