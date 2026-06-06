@@ -22,7 +22,7 @@ export async function Page({
   // those (it receives `isGithubPages` for exactly that).
   return (
     <div className={styles["TodoList"]}>
-      <Link to="/" className={styles["Link"]}> back </Link>
+      <Link to={import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL} className={styles["Link"]}> back </Link>
       <TodoList
         initialTodos={initialTodos}
         addTodo={addTodo}
