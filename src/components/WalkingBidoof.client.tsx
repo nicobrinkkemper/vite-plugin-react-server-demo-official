@@ -1,26 +1,25 @@
 "use client";
 
 import * as React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 interface WalkingBidoofProps {
-  src: string;
+  srcBack: string;
+  srcFront: string;
   alt: string;
   index: number;
 }
 
-export const WalkingBidoof = ({ src, alt, index }: WalkingBidoofProps) => {
+export const WalkingBidoof = ({ srcBack, srcFront, alt, index }: WalkingBidoofProps) => {
   const [position, setPosition] = useState({
     x: Math.random() * 70 + 10, // Start between 10% and 80% of screen width
     y: Math.random() * 70 + 10, // Start between 10% and 80% of screen height
   });
-  
+
   const [velocity, setVelocity] = useState({
     x: (Math.random() - 0.5) * 0.5, // Random velocity between -0.25 and 0.25
     y: (Math.random() - 0.5) * 0.5,
   });
-
-  const [direction, setDirection] = useState<"left" | "right">("right");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,7 +33,6 @@ export const WalkingBidoof = ({ src, alt, index }: WalkingBidoofProps) => {
         if (newX <= 0 || newX >= 90) {
           newVelocityX = -newVelocityX * (0.8 + Math.random() * 0.4);
           newX = Math.max(0, Math.min(90, newX));
-          setDirection(newVelocityX > 0 ? "right" : "left");
         }
         if (newY <= 0 || newY >= 90) {
           newVelocityY = -newVelocityY * (0.8 + Math.random() * 0.4);
@@ -45,7 +43,6 @@ export const WalkingBidoof = ({ src, alt, index }: WalkingBidoofProps) => {
         if (Math.random() < 0.02) {
           newVelocityX = (Math.random() - 0.5) * 0.8;
           newVelocityY = (Math.random() - 0.5) * 0.8;
-          setDirection(newVelocityX > 0 ? "right" : "left");
         }
 
         if (newVelocityX !== velocity.x || newVelocityY !== velocity.y) {
@@ -59,9 +56,14 @@ export const WalkingBidoof = ({ src, alt, index }: WalkingBidoofProps) => {
     return () => clearInterval(interval);
   }, [velocity]);
 
+  const absVx = Math.abs(velocity.x);
+  const absVy = Math.abs(velocity.y);
+  const facingBack = velocity.y < 0 && absVy >= absVx;
+  const flipMirror = facingBack ? velocity.x < 0 : velocity.x > 0;
+
   return (
     <img
-      src={src}
+      src={facingBack ? srcBack : srcFront}
       alt={alt}
       style={{
         position: "fixed",
@@ -70,7 +72,7 @@ export const WalkingBidoof = ({ src, alt, index }: WalkingBidoofProps) => {
         width: "120px",
         height: "120px",
         objectFit: "contain",
-        transform: direction === "left" ? "scaleX(-1)" : "scaleX(1)",
+        transform: flipMirror ? "scaleX(-1)" : "scaleX(1)",
         transition: "transform 0.3s ease",
         zIndex: 10 + index,
         pointerEvents: "none",
@@ -79,4 +81,3 @@ export const WalkingBidoof = ({ src, alt, index }: WalkingBidoofProps) => {
     />
   );
 };
-

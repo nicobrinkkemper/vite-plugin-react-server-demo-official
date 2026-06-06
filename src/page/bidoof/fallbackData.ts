@@ -41,6 +41,8 @@ export const fallbackData = {
       name: "diamond-pearl",
       url: "https://pokeapi.co/api/v2/version-group/8/",
     },
+    bdspSprite:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/brilliant-diamond-shining-pearl/399.png",
   };
 
   export type FallbackData = typeof fallbackData;
