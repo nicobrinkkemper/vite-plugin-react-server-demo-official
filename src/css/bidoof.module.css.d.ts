@@ -1,9 +1,11 @@
 declare const styles: {
     Bidoof: string;
-    Code: string;
     Image: string;
     Images: string;
+    JsonSection: string;
     Link: string;
+    TitleRow: string;
+    TitleSprite: string;
 };
 
-export default styles
+export default styles;
