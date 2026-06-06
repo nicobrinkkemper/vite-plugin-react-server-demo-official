@@ -20,9 +20,9 @@ type Props = {
   isGithubPages: boolean;
 };
 
-export function TodoList({ 
-  initialTodos, 
-  addTodo, 
+export function TodoList({
+  initialTodos,
+  addTodo,
   toggleTodo,
   deleteTodo,
   editTodo,
@@ -40,6 +40,22 @@ export function TodoList({
 
   const remainingCount = todos.filter(todo => !todo.completed).length;
 
+  // On a static host (e.g. GitHub Pages) the SQLite-backed server actions have
+  // no server to run on, so each operation runs CLIENT-SIDE only: the UI is
+  // fully interactive, the changes just aren't persisted (a refresh resets
+  // them). With a backend the real server actions run and persist. Either way
+  // the success path below does the same local state update.
+  const runAdd = (title: string) =>
+    isGithubPages ? Promise.resolve({ success: true, id: Date.now() }) : addTodo(title);
+  const runToggle = (id: number) =>
+    isGithubPages ? Promise.resolve({ success: true }) : toggleTodo(id);
+  const runDelete = (id: number) =>
+    isGithubPages ? Promise.resolve({ success: true }) : deleteTodo(id);
+  const runEdit = (id: number, title: string) =>
+    isGithubPages ? Promise.resolve({ success: true }) : editTodo(id, title);
+  const runClear = () =>
+    isGithubPages ? Promise.resolve({ success: true }) : clearCompletedTodos();
+
   async function handleAddTodo(e: React.FormEvent) {
     e.preventDefault();
     if (!newTodo.trim()) return;
@@ -47,7 +63,7 @@ export function TodoList({
     setLoading(true);
     setError(null);
     try {
-      const result = await addTodo(newTodo);
+      const result = await runAdd(newTodo);
       if (result.success && result.id) {
         const newTodoItem: Todo = {
           id: result.id,
@@ -70,18 +86,14 @@ export function TodoList({
     setLoading(true);
     setError(null);
     try {
-      const result = await toggleTodo(id);
+      const result = await runToggle(id);
       if (result.success) {
-        setTodos(todos.map(todo => 
+        setTodos(todos.map(todo =>
           todo.id === id ? { ...todo, completed: !todo.completed } : todo
         ));
       }
     } catch (err) {
-      if (!isGithubPages) {
-        setError('Failed to toggle todo');
-      } else {
-        setError('Failed to toggle todo. Todo page is not supported on Github Pages, it uses a database.');
-      }
+      setError('Failed to toggle todo');
       console.error(err);
     } finally {
       setLoading(false);
@@ -92,16 +104,12 @@ export function TodoList({
     setLoading(true);
     setError(null);
     try {
-      const result = await deleteTodo(id);
+      const result = await runDelete(id);
       if (result.success) {
         setTodos(todos.filter(todo => todo.id !== id));
       }
     } catch (err) {
-      if (!isGithubPages) {
-        setError('Failed to delete todo');
-      } else {
-        setError('Failed to delete todo. Todo page is not supported on Github Pages, it uses a database.');
-      }
+      setError('Failed to delete todo');
       console.error(err);
     } finally {
       setLoading(false);
@@ -110,24 +118,20 @@ export function TodoList({
 
   async function handleEditTodo(id: number) {
     if (!editText.trim()) return;
-    
+
     setLoading(true);
     setError(null);
     try {
-      const result = await editTodo(id, editText);
+      const result = await runEdit(id, editText);
       if (result.success) {
-        setTodos(todos.map(todo => 
+        setTodos(todos.map(todo =>
           todo.id === id ? { ...todo, title: editText } : todo
         ));
         setEditingId(null);
         setEditText('');
       }
     } catch (err) {
-      if (!isGithubPages) {
-        setError('Failed to edit todo');
-      } else {
-        setError('Failed to edit todo. Todo page is not supported on Github Pages, it uses a database.');
-      }
+      setError('Failed to edit todo');
       console.error(err);
     } finally {
       setLoading(false);
@@ -138,16 +142,12 @@ export function TodoList({
     setLoading(true);
     setError(null);
     try {
-      const result = await clearCompletedTodos();
+      const result = await runClear();
       if (result.success) {
         setTodos(todos.filter(todo => !todo.completed));
       }
     } catch (err) {
-      if (!isGithubPages) {
-        setError('Failed to clear completed todos');
-      } else {
-        setError('Failed to clear completed todos. Todo page is not supported on Github Pages, it uses a database.');
-      }
+      setError('Failed to clear completed todos');
       console.error(err);
     } finally {
       setLoading(false);
@@ -157,9 +157,15 @@ export function TodoList({
   return (
     <div className={styles["todo-list"]}>
       <h1>Todo List</h1>
-      
+
+      {isGithubPages && (
+        <p style={{ fontSize: '0.85em', opacity: 0.75, margin: '0.5em 0' }}>
+          ⚠️ No backend connected — changes work in the UI but aren’t saved (a refresh resets them).
+        </p>
+      )}
+
       {error && <div className={styles["error-message"]}>{error}</div>}
-      
+
       <form onSubmit={handleAddTodo}>
         <input
           type="text"
@@ -176,7 +182,7 @@ export function TodoList({
       <div className={styles["todo-stats"]}>
         <span>{remainingCount === 0 ? '' : `${remainingCount} items left`}</span>
         {todos.some(todo => todo.completed) && (
-          <button 
+          <button
             onClick={handleClearCompleted}
             disabled={loading}
             className={styles["clear-completed"]}
@@ -196,7 +202,7 @@ export function TodoList({
               disabled={loading}
             />
             {editingId === todo.id ? (
-              <form 
+              <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   handleEditTodo(todo.id);
@@ -211,8 +217,8 @@ export function TodoList({
                   autoFocus
                 />
                 <button type="submit" disabled={loading}>Save</button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => {
                     setEditingId(null);
                     setEditText('');
@@ -224,7 +230,7 @@ export function TodoList({
               </form>
             ) : (
               <>
-                <span 
+                <span
                   style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
                   onDoubleClick={() => {
                     setEditingId(todo.id);
@@ -233,10 +239,10 @@ export function TodoList({
                 >
                   {todo.title}
                 </span>
-                <button 
+                <button
                   onClick={() => handleDeleteTodo(todo.id)}
                   disabled={loading}
-                  className={styles["delete-button"]} 
+                  className={styles["delete-button"]}
                 >
                   ×
                 </button>
@@ -247,4 +253,4 @@ export function TodoList({
       </ul>
     </div>
   );
-} 
+}
