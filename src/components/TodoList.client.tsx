@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { usePersistentState } from '../hooks/usePersistentState.js';
 
 type Todo = {
   id: number;
@@ -31,7 +32,12 @@ export function TodoList({
   styles,
   isGithubPages
 }: Props) {
-  const [todos, setTodos] = useState<Todo[]>(initialTodos);
+  // On a static host (no backend) the changes only live in React state, so they
+  // would vanish on refresh. usePersistentState mirrors them to localStorage so
+  // add/toggle/delete/edit survive a reload. With a backend (NOT isGithubPages)
+  // it's disabled and behaves exactly like plain useState — the server actions
+  // are the source of truth and localStorage is left untouched.
+  const [todos, setTodos] = usePersistentState<Todo[]>('bidoof.todos', initialTodos, isGithubPages);
   const [newTodo, setNewTodo] = useState('');
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editText, setEditText] = useState('');
@@ -160,7 +166,7 @@ export function TodoList({
 
       {isGithubPages && (
         <p style={{ fontSize: '0.85em', opacity: 0.75, margin: '0.5em 0' }}>
-          ⚠️ No backend connected — changes work in the UI but aren’t saved (a refresh resets them).
+          💾 No backend — changes are saved in your browser (localStorage), not on a server.
         </p>
       )}
 
