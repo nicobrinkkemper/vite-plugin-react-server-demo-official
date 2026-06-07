@@ -9,13 +9,29 @@
     margin: 0;
     padding: 0;
 }
-.ErrorBoundary p {
+.ErrorMessage p {
     font-size: 1rem;
     margin: 0;
     padding: 0;
 }
-.ErrorBoundary pre {
+.ErrorMessage pre {
     font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    overflow: scroll;
+    padding-bottom: 1rem;
+    color: white;
+}
+
+.ErrorMessage {
+    display: flex;
+    flex-direction: column;
+    max-width: 100vw;
+}
+.ErrorMessage h1 {
+    font-size: 2rem;
+    font-weight: bold;
     margin: 0;
     padding: 0;
 }

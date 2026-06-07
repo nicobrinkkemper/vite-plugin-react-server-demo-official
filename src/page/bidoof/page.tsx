@@ -33,13 +33,7 @@ export const Page = (props: Props) => {
         </Link>
         <div className={styles["TitleRow"]}>
           <h1>{props?.title ?? props.name}</h1>
-          {props.bdspSprite ? (
-            <img
-              src={props.bdspSprite}
-              alt={`${props.name} Brilliant Diamond and Shining Pearl sprite`}
-              className={styles["TitleSprite"]}
-            />
-          ) : null}
+
         </div>
         <div className={styles["Images"]}>
           <WalkingBidoof
@@ -84,7 +78,13 @@ export const Page = (props: Props) => {
             endpoint={props.bidoofEndpoint}
             data={getApiResponse(props)}
           />
-        </div>
+        </div>{props.bdspSprite ? (
+          <img
+            src={props.bdspSprite}
+            alt={`${props.name} Brilliant Diamond and Shining Pearl sprite`}
+            className={styles["TitleSprite"]}
+          />
+        ) : null}
       </div>
     </>
   );

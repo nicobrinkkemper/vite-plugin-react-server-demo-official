@@ -1,4 +1,3 @@
-import * as React from "react";
 import { ErrorBoundary } from "../../components/ErrorBoundary.client.js";
 import { Link } from "../../components/Link.client.js";
 import type { Props } from "./props.js";
@@ -18,10 +17,10 @@ export const Page = (props: Props) => {
         <Link to={props.navigation.back.href} className={styles["Link"]}>
           {props.navigation.back.text}
         </Link>
-          <ErrorBoundary>
-            <p>This page rendered without errors.</p>
-            <TestError throwError={props.throwError} />
-          </ErrorBoundary>
+        <ErrorBoundary>
+          <p>This page rendered without errors.</p>
+          <TestError throwError={props.throwError} />
+        </ErrorBoundary>
       </div>
     </>
   );
