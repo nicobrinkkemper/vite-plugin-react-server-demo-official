@@ -1,6 +1,29 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { usePersistentState } from '../hooks/usePersistentState.js';
+
+/**
+ * Wrap a state update in the View Transitions API so todo adds/removes/edits
+ * animate — the new card fades in, a removed card fades out, and the rest glide
+ * to their new positions — instead of snapping (which also masks the scrollbar
+ * reflow). flushSync applies the update synchronously so the browser can
+ * snapshot the resulting DOM. Degrades gracefully: where startViewTransition is
+ * unsupported, the update just runs with no animation.
+ */
+function withViewTransition(update: () => void) {
+  const doc =
+    typeof document !== 'undefined'
+      ? (document as Document & {
+          startViewTransition?: (cb: () => void) => unknown;
+        })
+      : undefined;
+  if (doc?.startViewTransition) {
+    doc.startViewTransition(() => flushSync(update));
+  } else {
+    update();
+  }
+}
 
 type Todo = {
   id: number;
@@ -43,6 +66,7 @@ export function TodoList({
   const [editText, setEditText] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const remainingCount = todos.filter(todo => !todo.completed).length;
 
@@ -77,8 +101,13 @@ export function TodoList({
           completed: false,
           created_at: new Date().toISOString()
         };
-        setTodos([...todos, newTodoItem]);
-        setNewTodo('');
+        withViewTransition(() => {
+          setTodos([...todos, newTodoItem]);
+          setNewTodo('');
+        });
+        // Refocus on the next frame, once `loading` is back to false and the
+        // input is re-enabled, so you can keep adding without re-clicking.
+        requestAnimationFrame(() => inputRef.current?.focus());
       }
     } catch (err) {
       setError('Failed to add todo');
@@ -94,9 +123,11 @@ export function TodoList({
     try {
       const result = await runToggle(id);
       if (result.success) {
-        setTodos(todos.map(todo =>
-          todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        ));
+        withViewTransition(() =>
+          setTodos(todos.map(todo =>
+            todo.id === id ? { ...todo, completed: !todo.completed } : todo
+          ))
+        );
       }
     } catch (err) {
       setError('Failed to toggle todo');
@@ -112,7 +143,7 @@ export function TodoList({
     try {
       const result = await runDelete(id);
       if (result.success) {
-        setTodos(todos.filter(todo => todo.id !== id));
+        withViewTransition(() => setTodos(todos.filter(todo => todo.id !== id)));
       }
     } catch (err) {
       setError('Failed to delete todo');
@@ -130,11 +161,13 @@ export function TodoList({
     try {
       const result = await runEdit(id, editText);
       if (result.success) {
-        setTodos(todos.map(todo =>
-          todo.id === id ? { ...todo, title: editText } : todo
-        ));
-        setEditingId(null);
-        setEditText('');
+        withViewTransition(() => {
+          setTodos(todos.map(todo =>
+            todo.id === id ? { ...todo, title: editText } : todo
+          ));
+          setEditingId(null);
+          setEditText('');
+        });
       }
     } catch (err) {
       setError('Failed to edit todo');
@@ -150,7 +183,7 @@ export function TodoList({
     try {
       const result = await runClear();
       if (result.success) {
-        setTodos(todos.filter(todo => !todo.completed));
+        withViewTransition(() => setTodos(todos.filter(todo => !todo.completed)));
       }
     } catch (err) {
       setError('Failed to clear completed todos');
@@ -174,6 +207,7 @@ export function TodoList({
 
       <form onSubmit={handleAddTodo}>
         <input
+          ref={inputRef}
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
@@ -181,7 +215,7 @@ export function TodoList({
           disabled={loading}
         />
         <button type="submit" disabled={loading}>
-          {loading ? '...' : 'Add'}
+          Add
         </button>
       </form>
 
@@ -200,7 +234,11 @@ export function TodoList({
 
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
+          <li
+            key={todo.id}
+            className={todo.completed ? 'completed' : ''}
+            style={{ viewTransitionName: `todo-${todo.id}` }}
+          >
             <input
               type="checkbox"
               checked={todo.completed}
