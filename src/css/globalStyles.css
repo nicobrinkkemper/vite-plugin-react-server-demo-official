@@ -1,7 +1,17 @@
 body{
     margin: 0;
     padding: 0;
-    max-height: 100vh; 
+    max-height: 100vh;
     max-width: 100vw;
     font-family: 'Courier New', Courier, monospace;
+}
+
+/* The Todo list animates adds/removes/edits via the View Transitions API
+   (see TodoList.client.tsx). Honor reduced-motion: collapse the animation. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.001ms !important;
+  }
 }
