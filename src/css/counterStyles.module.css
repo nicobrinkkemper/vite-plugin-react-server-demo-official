@@ -1,0 +1,11 @@
+/*
+ * Client-graph CSS module: imported directly by the "use client" component
+ * Counter.client.tsx. This lives in the CLIENT module graph (not the RSC
+ * server graph), which is the path exercised by vprs's dev:rsc client-CSS
+ * HMR regression test (test/e2e/dev-rsc-client-css-hmr.spec.ts in the vprs
+ * repo). The explicit rgb() color is asserted byte-for-byte by that test.
+ */
+.Counter {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
