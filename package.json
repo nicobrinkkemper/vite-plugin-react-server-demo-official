@@ -54,6 +54,6 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "vite-plugin-react-server": "^2.0.7"
+    "vite-plugin-react-server": "^2.0.8"
   }
 }
