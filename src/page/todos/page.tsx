@@ -3,6 +3,7 @@ import { TodoList } from "../../components/TodoList.client.js";
 import type { Props } from "./props.js";
 import styles from "../../css/todoStyles.module.css";
 import { Link } from "../../components/Link.client.js";
+import { ServerFnProbe } from "../../components/ServerFnProbe.client.js";
 
 
 export async function Page({
@@ -35,6 +36,7 @@ export async function Page({
         styles={styles}
         isGithubPages={isGithubPages}
       />
+      {!isGithubPages && <ServerFnProbe />}
     </div>
   );
 }

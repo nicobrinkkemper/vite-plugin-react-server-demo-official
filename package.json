@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "demo": "rm todos.db && NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "rm -f todos.db && NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server/index-*.js",
+    "test": "npm run test:e2e",
+    "test:e2e": "NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && playwright test",
     "dev:rsc": "npm run env:dev-server -- vite",
     "dev:ssr": "npm run env:start -- vite",
     "preview": "npm run build:static:preview && npm run build:client:preview && npm run build:server:preview && npm run preview:start",
@@ -39,6 +40,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.17",
     "@types/react": "^19.0.9",
@@ -54,6 +56,6 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "vite-plugin-react-server": "^2.2.0"
+    "vite-plugin-react-server": "^2.3.1"
   }
 }
