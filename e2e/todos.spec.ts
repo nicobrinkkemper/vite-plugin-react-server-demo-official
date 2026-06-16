@@ -39,4 +39,22 @@ test.describe("todos server actions (prod build)", () => {
     await page.reload();
     await expect(page.locator("li", { hasText: title })).toHaveCount(0);
   });
+
+  test("a client component that directly imports a server function can call it", async ({
+    page,
+  }) => {
+    // ServerFnProbe is a "use client" component that imports getTodos (a
+    // "use server" action) directly and calls it on click. vprs rewrites the
+    // import to a createServerReference proxy, so the click round-trips to the
+    // server. Proves the client-import half of Server Functions parity in a
+    // real browser (server body never shipped; the call hits the server).
+    await page.goto("/todos/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(1000);
+
+    const probe = page.getByTestId("server-fn-probe");
+    await expect(probe).toHaveText("Probe server fn");
+    await probe.click();
+    await expect(probe).toHaveText(/server says: \d+ todos/);
+  });
 });
