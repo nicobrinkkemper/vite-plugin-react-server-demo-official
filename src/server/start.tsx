@@ -8,6 +8,7 @@ import fs from "node:fs";
 import { props as todosProps } from "../page/todos/props.js";
 import { Css } from "vite-plugin-react-server/components";
 import type { CssContent } from "vite-plugin-react-server/types";
+import { renderTodosHtml } from "./renderTodosWithInlineFlight.server.js";
 
 declare global {
   interface ImportMetaEnv {
@@ -323,6 +324,19 @@ Object.entries(pageConfig.dynamic).forEach(
         req.headers["sec-fetch-mode"] === "cors"
       ) {
         await renderRSC(res, component, await getProps(), cssFiles);
+      } else if (path === "/todos") {
+        // Document request: render the live page to HTML with the matching
+        // flight inlined so the browser hydrates in place — current todos in
+        // the initial HTML, no empty-shell flash, no index.rsc round-trip.
+        // (The static index.html carries stale build-time todos and no flight.)
+        try {
+          res.setHeader("Content-Type", "text/html; charset=utf-8");
+          res.setHeader("Cache-Control", "no-cache");
+          (await renderTodosHtml()).pipe(res);
+        } catch (error) {
+          console.error("Dynamic /todos HTML render failed, serving static shell:", error);
+          if (!res.headersSent) serveHTMLFile(res, path.slice(1) + "/index.html");
+        }
       } else {
         serveHTMLFile(res, path.slice(1) + "/index.html");
       }

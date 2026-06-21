@@ -1,67 +1,84 @@
-import React, { use, useCallback, useState, useTransition } from "react";
-import { createRoot } from "react-dom/client";
-import { useEventListener } from "./hooks/useEventListener.js";
+import React, { useCallback, useEffect, useState, useTransition } from "react";
+import type { ReactNode } from "react";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import "./css/globalStyles.css";
 import { createReactFetcher } from "vite-plugin-react-server/utils";
 import { useRscHmr } from "virtual:react-server/hmr";
 import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
+
 /**
- * Client-side React Server Components implementation
+ * Client-side React Server Components entry.
  *
- * This module handles:
- * 1. Initial hydration of server-rendered content
- * 2. Client-side navigation using RSC
- * 3. State management for RSC data
- * 4. Stream updates when files change
+ * Initial render: the payload (build-time inlined for static routes, or the
+ * live per-request flight inlined by createHtmlStreamWithInlineFlight for the
+ * dynamic /todos route — see server/renderTodosWithInlineFlight) is fully
+ * decoded to a ReactNode BEFORE mount, then rendered directly — a synchronous
+ * first render with no Suspense boundary, so hydrateRoot matches the server
+ * markup and the page hydrates in place with zero refetch and no flash.
+ * (use()-ing the pending thenable, or wrapping the root in a client-only
+ * <Suspense> the server never rendered, mismatches the prerender → React #418.)
+ *
+ * Navigation / HMR: fetch the target route's flight, await the decode, then
+ * swap it in within a transition — keeping the current page visible, still with
+ * no Suspense boundary.
  */
-
-/**
- * Main application shell component
- * Handles navigation and RSC data updates
- */
-const Shell: React.FC<{
-  data: React.Usable<React.ReactNode>;
-}> = ({ data }) => {
+const App: React.FC<{ initialNode: ReactNode }> = ({ initialNode }) => {
+  const [content, setContent] = useState<ReactNode>(initialNode);
   const [, startTransition] = useTransition();
-  const [storeData, setStoreData] =
-    useState<React.Usable<React.ReactNode>>(data);
 
-  // Refetch RSC stream - used for both navigation and HMR
-  const refetch = useCallback((url: string = window.location.pathname, scrollToTop = true) => {
+  const go = useCallback((url: string, scrollToTop = true) => {
     if (scrollToTop && "scrollTo" in window) window.scrollTo(0, 0);
-    startTransition(() => {
-      setStoreData(
-        createReactFetcher({
-          url,
-          moduleBaseURL: import.meta.env.BASE_URL,
-          publicOrigin: import.meta.env.PUBLIC_ORIGIN,
-        })
-      );
-    });
+    Promise.resolve(
+      createReactFetcher({
+        url,
+        moduleBaseURL: import.meta.env.BASE_URL,
+        publicOrigin: import.meta.env.PUBLIC_ORIGIN,
+      })
+    )
+      .then((node) => startTransition(() => setContent(node as ReactNode)))
+      .catch(() => {
+        /* superseded by a later navigation — that render wins */
+      });
   }, []);
 
-  // Handle browser navigation
-  useEventListener("popstate", (e) =>
-    refetch(
-      e instanceof PopStateEvent && e.state?.to
-        ? e.state.to
-        : window.location.pathname
-    )
-  );
+  // Browser + <Link> navigation (Link dispatches popstate with state.to).
+  useEffect(() => {
+    const onPopState = (e: PopStateEvent) =>
+      go(e.state?.to ?? window.location.pathname);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [go]);
 
-  // HMR: refetch when server components change (no scroll, preserves position)
-  useRscHmr((url) => refetch(url, false));
+  // HMR: refetch the current route when server components change (no scroll).
+  useRscHmr((url) => go(url, false));
 
-  const content = use(storeData);
-
-  return <ErrorBoundary>{content as React.ReactNode}</ErrorBoundary>;
+  return <ErrorBoundary>{content}</ErrorBoundary>;
 };
-// Initialize the app
+
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 
-createRoot(rootElement).render(<Shell data={createReactFetcher({
-  url: window.location.pathname,
-  moduleBaseURL: import.meta.env.BASE_URL,
-  publicOrigin: import.meta.env.PUBLIC_ORIGIN,
-})} />);
+// Fully resolve the initial payload (dynamic flight-client import + decode) to a
+// node, then mount: hydrateRoot when the server sent prerendered/SSR'd markup,
+// createRoot for an empty (JS-rendered) shell.
+Promise.resolve(
+  createReactFetcher({
+    url: window.location.pathname,
+    moduleBaseURL: import.meta.env.BASE_URL,
+    publicOrigin: import.meta.env.PUBLIC_ORIGIN,
+  })
+).then(
+  (initialNode) => {
+    if (rootElement.hasChildNodes()) {
+      hydrateRoot(rootElement, <App initialNode={initialNode as ReactNode} />);
+    } else {
+      createRoot(rootElement).render(
+        <App initialNode={initialNode as ReactNode} />
+      );
+    }
+  },
+  (error) => {
+    // Stay on the server-rendered HTML rather than mounting a broken tree.
+    console.error("[bidoof] initial RSC payload failed to load", error);
+  }
+);

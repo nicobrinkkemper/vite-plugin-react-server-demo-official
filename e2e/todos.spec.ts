@@ -57,4 +57,44 @@ test.describe("todos server actions (prod build)", () => {
     await probe.click();
     await expect(probe).toHaveText(/server says: \d+ todos/);
   });
+
+  test("flash-free dynamic SSR: live todos in the initial HTML, hydrate with zero refetch", async ({
+    page,
+  }) => {
+    // /todos is a dynamic route: the server renders the CURRENT db todos to HTML
+    // per request and inlines the matching flight (createHtmlStreamWithInlineFlight),
+    // so the browser hydrates in place — no empty-shell flash, no index.rsc round
+    // trip. This guards against regressing to the fetch-on-load path (which the
+    // other tests would still pass, since they only check eventual visibility).
+    const title = `ssr-${Date.now()}`;
+
+    await page.goto("/todos/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(500);
+    await page.getByPlaceholder("Add a new todo...").fill(title);
+    await page.getByRole("button", { name: "Add" }).click();
+    await expect(page.locator("li", { hasText: title })).toBeVisible();
+
+    // Collect console/page errors (a hydration mismatch — React #418 — logs here)
+    // and any index.rsc fetches across the reload.
+    const errors: string[] = [];
+    page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+    page.on("pageerror", (e) => errors.push(String(e)));
+    const rscRequests: string[] = [];
+    page.on("request", (r) => r.url().includes(".rsc") && rscRequests.push(r.url()));
+
+    // The reload's document response must already contain the added todo and the
+    // inline flight — proof it was server-rendered from live data, not fetched.
+    const response = await page.reload({ waitUntil: "commit" });
+    const initialHtml = await response!.text();
+    expect(initialHtml, "added todo must be in the initial server HTML").toContain(title);
+    expect(initialHtml, "inline flight payload must be present").toContain('id="vprs-flight"');
+
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("li", { hasText: title })).toBeVisible();
+
+    // Hydrate-in-place: no index.rsc fetch on load, no hydration error.
+    expect(rscRequests, "no index.rsc refetch on initial load").toEqual([]);
+    expect(errors, "no hydration / console errors").toEqual([]);
+  });
 });
