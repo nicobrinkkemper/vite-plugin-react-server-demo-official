@@ -1,413 +1,77 @@
-import express from "express";
-import { renderToPipeableStream } from "react-server-dom-esm/server.node";
-import React from "react";
-import { Page as TodosPage } from "../page/todos/page.js";
+import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import fs from "node:fs";
-import { props as todosProps } from "../page/todos/props.js";
-import { Css } from "vite-plugin-react-server/components";
-import type { CssContent } from "vite-plugin-react-server/types";
-import { renderTodosHtml } from "./renderTodosWithInlineFlight.server.js";
+import { Readable, PassThrough } from "node:stream";
+import { createRequestHandler, toNodeListener } from "vite-plugin-react-server/helpers";
+import {
+  renderTodosHtml,
+  renderTodosFlight,
+} from "./renderTodosWithInlineFlight.server.js";
 
-declare global {
-  interface ImportMetaEnv {
-    GITHUB_PAGES: string;
-    BASE_URL: string;
-  }
-  interface ImportMeta {
-    env: ImportMetaEnv;
-  }
-}
-
-interface ManifestEntry {
-  file: string;
-  name?: string;
-  src?: string;
-  isEntry?: boolean;
-  imports?: string[];
-  css?: string[];
-}
-
-const app = express();
-const base = import.meta.env.BASE_URL || "/";
+/**
+ * Production server for the demo, on the vprs 2.9.0 serving API.
+ *
+ * vite-plugin-react-server now ships an opinion on serving: createRequestHandler
+ * is a Web-standard (Request) => Response server for a build. It serves the
+ * prerendered files from dist/static, dispatches "use server" actions through the
+ * SEALED production gate (handleServerAction — the verified prod trust boundary,
+ * an allowlist that rejects any action id the build did not emit), and calls our
+ * render() hook for the one dynamic route. toNodeListener adapts it to node:http
+ * (or Express middleware, or any Fetch runtime — Hono, Bun, Deno).
+ *
+ * Only /todos is dynamic: a document load gets the live page as HTML with its
+ * flight inlined (hydrate in place, no flash, no refetch); a client navigation
+ * (the index.rsc request) gets the live page flight. Every other route falls
+ * through to its prerendered file.
+ *
+ * Run:
+ *   rm -f todos.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
+ *   NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server/index-*.js
+ */
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = path.resolve(__dirname, "../../.."); // dist/server/server → repo root
+const staticDir = path.resolve(__dirname, "../../static"); // prerendered build output
+const base = process.env.BASE_URL || "/";
 const port = 3000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const staticDir = path.resolve(__dirname, "../../static");
-const serverRoot = path.resolve(__dirname, "../");
 
-// Load manifests
-const manifest = JSON.parse(
-  fs.readFileSync(path.join(staticDir, ".vite/manifest.json"), "utf-8")
-) as Record<string, ManifestEntry>;
-const serverManifest = JSON.parse(
-  fs.readFileSync(path.join(serverRoot, ".vite/manifest.json"), "utf-8")
-) as Record<string, ManifestEntry>;
+/** Pipe a Node RSC/HTML stream into a Web Response body. */
+const streamResponse = (
+  stream: { pipe: (dest: NodeJS.WritableStream) => unknown },
+  contentType: string
+): Response => {
+  const pass = new PassThrough();
+  stream.pipe(pass);
+  return new Response(Readable.toWeb(pass) as ReadableStream, {
+    headers: { "Content-Type": contentType, "Cache-Control": "no-cache" },
+  });
+};
 
-// Configuration for page handling
-const pageConfig = {
-  // Dynamic pages that need server-side rendering
-  dynamic: {
-    "/todos": {
-      component: TodosPage,
-      getProps: todosProps,
-      cssFiles: new Map([
-        [
-          "todoStyles",
-          {
-            id: "todoStyles",
-            // the most accurate way to get the css file from vite is to always add it as an entry, which the plugin does,
-            // and then look up the final css files for that entry.
-            // which in our case is just one file;
-            href: base + manifest["src/css/todoStyles.module.css"]?.css![0],
-            as: "link",
-            rel: "stylesheet",
-            precedence: "high",
-          } satisfies CssContent,
-        ],
-      ]),
-    },
+const handler = createRequestHandler({
+  staticDir,
+  // Sealed production action gate; serverManifest auto-loaded from dist/server.
+  action: { projectRoot, base },
+  // The only dynamic route. createReactFetcher requests "<route>/index.rsc" with
+  // Accept: text/x-component for a navigation; a document load has neither.
+  render: async (pathname, request) => {
+    const route = pathname.replace(/\/index\.rsc$|\.rsc$|\/$/, "");
+    if (route !== "/todos") return null;
+    const wantsFlight =
+      pathname.endsWith(".rsc") ||
+      (request.headers.get("accept") ?? "").includes("text/x-component");
+    try {
+      return wantsFlight
+        ? streamResponse(await renderTodosFlight(), "text/x-component; charset=utf-8")
+        : streamResponse(await renderTodosHtml(), "text/html; charset=utf-8");
+    } catch (error) {
+      // Degrade to the prerendered shell (stale todos) rather than 500 — return
+      // null so createRequestHandler serves the build's static file for the route.
+      console.error("[/todos] dynamic render failed, serving prerendered shell:", error);
+      return null;
+    }
   },
-  // Static pages that are pre-rendered
-  static: ["/", "/bidoof", "/error-example", "/404"],
-} as const;
-// Build a map of all valid static files
-const validFiles = new Set<string>();
-Object.values(manifest).forEach((entry) => {
-  validFiles.add(entry.file);
-  // allow css files to be requested.
-  entry.css?.forEach((css) => validFiles.add(css));
 });
 
-// Build a map of all valid server files, and a src→file lookup for action resolution
-const validServerFiles = new Set<string>();
-const serverSrcToFile = new Map<string, string>();
-Object.entries(serverManifest).forEach(([key, entry]) => {
-  validServerFiles.add(entry.file);
-  validServerFiles.add(key); // also allow lookup by src key
-  if (entry.src) {
-    serverSrcToFile.set(entry.src, entry.file);
-  }
-  serverSrcToFile.set(key, entry.file);
-  // allow css files to be requested.
-  entry.css?.forEach((css) => validServerFiles.add(css));
-});
-
-// routes we are going to be handling for this app.
-const routes = ["/", "/bidoof", "/error-example", "/todos", "/404"];
-// add index.rsc and index.html for each route to make the lookup easier.
-// these are generated after the build so they are not in the manifest.
-for (const route of routes) {
-  const rscPath = path.join(route, "index.rsc").slice(1);
-  const htmlPath = path.join(route, "index.html").slice(1);
-  validServerFiles.add(rscPath);
-  validServerFiles.add(htmlPath);
-}
-
-// Debug logging middleware
-app.use((req, res, next) => {
-  console.log("Request details:", {
-    url: req.url,
-    method: req.method,
-    accept: req.headers.accept,
-    "sec-fetch-dest": req.headers["sec-fetch-dest"],
-    "sec-fetch-mode": req.headers["sec-fetch-mode"],
-    "sec-fetch-site": req.headers["sec-fetch-site"],
-    "user-agent": req.headers["user-agent"],
-  });
-  next();
-});
-
-// Serve static files with manifest validation
-app.use(async (req, res, next) => {
-  const url = req.url.slice(1); // Remove leading slash
-
-  // Handle server actions
-  if (req.method === "POST") {
-    console.log("Handling server action:", url);
-    // Parse the action ID from x-rsc-action header (RSC protocol)
-    const chunks: Buffer[] = [];
-    req.on("data", (chunk: Buffer) => {
-      chunks.push(chunk);
-    });
-    req.on("end", async () => {
-      try {
-        const body = Buffer.concat(chunks).toString();
-        // Action ID comes from x-rsc-action header, body is encodeReply-encoded args
-        let id = req.headers["x-rsc-action"] as string;
-        let args: unknown[];
-        if (id) {
-          // RSC protocol: decode args with decodeReply
-          const { decodeReply } = await import("react-server-dom-esm/server");
-          args = await decodeReply(body, base) as unknown[];
-        } else {
-          // Legacy JSON format fallback
-          const parsed = JSON.parse(body);
-          id = parsed.id;
-          args = parsed.args ?? [];
-        }
-        const actionName = id.split("#")[1];
-        const actionKey = id.split("#")[0];
-
-        // Resolve action key: could be src path (e.g. src/server/actions/todoActions.server.ts)
-        // or built path — strip base prefix and look up in manifest
-        const strippedKey = actionKey.startsWith(base) ? actionKey.slice(base.length) : actionKey;
-        const resolvedFile = serverSrcToFile.get(strippedKey) ?? strippedKey;
-        
-        if (!validServerFiles.has(strippedKey) && !validServerFiles.has(resolvedFile)) {
-          throw new Error(`Action not found in manifest: ${actionKey}`);
-        }
-
-        console.log(
-          "Loading action:",
-          resolvedFile,
-          actionName
-        );
-        const actionModule = await import(
-          path.join(serverRoot, resolvedFile)
-        );
-        const result = await actionModule[actionName](...args);
-
-        // Use renderToPipeableStream for the action result
-        res.setHeader("Content-Type", "text/x-component; charset=utf-8");
-        res.setHeader("Cache-Control", "no-cache");
-
-        const { pipe } = renderToPipeableStream(result, base, {
-          onError(error) {
-            console.error("Server action RSC Error:", error);
-            res.statusCode = 500;
-            res.end("Internal Server Error");
-          },
-        });
-
-        pipe(res);
-      } catch (error) {
-        console.error("Server action error:", error);
-        res.status(500).json({ error: "Server action failed" });
-      }
-    });
-    return;
-  }
-
-  // If it's a valid static file, serve it
-  if (validFiles.has(url)) {
-    console.log("Serving static file:", url);
-    // Set Content-Type based on file extension and fetch destination
-    if (url.endsWith(".js") || req.headers["sec-fetch-dest"] === "script") {
-      res.setHeader("Content-Type", "application/javascript; charset=utf-8");
-    } else if (url.endsWith(".css")) {
-      res.setHeader("Content-Type", "text/css; charset=utf-8");
-    } else if (url.endsWith(".ico")) {
-      res.setHeader("Content-Type", "image/x-icon; charset=utf-8");
-    }
-    res.sendFile(path.join(staticDir, url));
-    return;
-  }
-
-  // If Accept header is text/x-component, handle RSC
-  if (req.headers.accept?.includes("text/x-component")) {
-    // Remove index.rsc and .rsc extensions for path matching
-    const pathWithoutExt = url
-      .replace(/\/index\.rsc$/, "") // Remove /index.rsc at the end
-      .replace(/\.rsc$/, ""); // Remove .rsc at the end
-
-    // Check if this is a dynamic page
-    const dynamicPage = pageConfig.dynamic[`/${pathWithoutExt}`];
-    if (dynamicPage) {
-      console.log("Rendering dynamic RSC for:", pathWithoutExt);
-      await renderRSC(
-        res,
-        dynamicPage.component,
-        await dynamicPage.getProps(),
-        dynamicPage.cssFiles
-      );
-      return;
-    }
-
-    // For all other routes, serve static RSC file
-    console.log("Serving static RSC file for:", url);
-    const rscPath = url.endsWith(".rsc") ? url : url + ".rsc";
-
-    // Validate RSC file exists in validServerFiles
-    if (!validServerFiles.has(rscPath)) {
-      console.error("Static RSC file not found:", rscPath);
-      res.status(404).send("RSC file not found");
-      return;
-    }
-
-    serveRSCFile(res, rscPath);
-    return;
-  }
-
-  // Check if this is a dynamic page
-  const dynamicPage = pageConfig.dynamic[`/${url}`];
-  if (dynamicPage) {
-    console.log("Treating as dynamic route:", url);
-    next();
-    return;
-  }
-
-  // If it's a fetch request (empty dest) and not a static file, treat it as RSC
-  if (
-    req.headers["sec-fetch-dest"] === "empty" &&
-    req.headers["sec-fetch-mode"] === "cors"
-  ) {
-    console.log("Treating as RSC (fetch request):", url);
-    next();
-    return;
-  }
-
-  // If it's not a static file and has no extension, treat it as RSC
-  if (!url.includes(".")) {
-    console.log("Treating as RSC (no extension):", url);
-    next();
-    return;
-  }
-
-  // For everything else, try to serve index.html
-  console.log("Serving index.html for:", url);
-  res.sendFile("index.html", { root: staticDir });
-});
-
-// Helper function to handle RSC rendering
-const renderRSC = async (
-  res: express.Response,
-  Component: React.ComponentType<any>,
-  props: any,
-  cssFiles: Map<string, CssContent>
-) => {
-  res.setHeader("Content-Type", "text/x-component; charset=utf-8");
-  res.setHeader("Cache-Control", "no-cache");
-
-  const { pipe } = renderToPipeableStream(
-    <>
-      <Component {...props} />
-      <Css cssFiles={cssFiles} />
-    </>,
-    base,
-    {
-      onError(error) {
-        console.error("RSC Error:", error);
-        res.statusCode = 500;
-        res.end("Internal Server Error");
-      },
-    }
-  );
-
-  pipe(res);
-};
-
-// Helper function to serve pre-rendered RSC files
-const serveRSCFile = (res: express.Response, filePath: string) => {
-  res.setHeader("Content-Type", "text/x-component; charset=utf-8");
-  res.setHeader("Cache-Control", "no-cache");
-
-  const fullPath = path.join(staticDir, filePath);
-  res.sendFile(fullPath);
-};
-
-const serveHTMLFile = (res: express.Response, filePath: string) => {
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-
-  const fullPath = path.join(staticDir, filePath);
-  res.sendFile(fullPath);
-};
-
-// Dynamic route handlers
-Object.entries(pageConfig.dynamic).forEach(
-  ([path, { component, getProps, cssFiles }]) => {
-    app.get(path, async (req, res) => {
-      if (
-        req.headers["sec-fetch-dest"] === "empty" &&
-        req.headers["sec-fetch-mode"] === "cors"
-      ) {
-        await renderRSC(res, component, await getProps(), cssFiles);
-      } else if (path === "/todos") {
-        // Document request: render the live page to HTML with the matching
-        // flight inlined so the browser hydrates in place — current todos in
-        // the initial HTML, no empty-shell flash, no index.rsc round-trip.
-        // (The static index.html carries stale build-time todos and no flight.)
-        try {
-          res.setHeader("Content-Type", "text/html; charset=utf-8");
-          res.setHeader("Cache-Control", "no-cache");
-          (await renderTodosHtml()).pipe(res);
-        } catch (error) {
-          console.error("Dynamic /todos HTML render failed, serving static shell:", error);
-          if (!res.headersSent) serveHTMLFile(res, path.slice(1) + "/index.html");
-        }
-      } else {
-        serveHTMLFile(res, path.slice(1) + "/index.html");
-      }
-    });
-  }
-);
-
-// Static route handlers
-pageConfig.static.forEach((path) => {
-  app.get(path, async (req, res) => {
-    if (
-      req.headers["sec-fetch-dest"] === "empty" &&
-      req.headers["sec-fetch-mode"] === "cors"
-    ) {
-      serveRSCFile(res, path.slice(1) + "/index.rsc");
-    } else {
-      serveHTMLFile(res, path.slice(1) + "/index.html");
-    }
-  });
-});
-
-// 404 route - must be last
-app.get(/(.*)/, async (req, res) => {
-  if (
-    req.headers["sec-fetch-dest"] === "empty" &&
-    req.headers["sec-fetch-mode"] === "cors"
-  ) {
-    serveRSCFile(res, "404/index.rsc");
-  } else {
-    serveHTMLFile(res, "404/index.html");
-  }
-});
-
-// Start the server
-app.listen(port, () => {
+http.createServer(toNodeListener(handler)).listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
   console.log(`Static files served from: ${staticDir}`);
 });
-
-/**
- * Purpose of this demo is to to show how to use the bundled modules from vite-plugin-react-server
- * to serve a specific use case: the dynamic todo page functionality of the demo app.
- *
- * We can run this script using the following commands:
- * ```bash
- * # clean up database and build the project
- * rm todos.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
- * # run the server
- * NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server/start.js
- * ```
- * Because the vite-plugin-react-server has no opinion on how to serve your application,
- * you need to write all this code yourself. It can be express, which seems to be popular these days
- * but of course there are many other options.
- *
- * The plugin only cares about transforming the modules for each boundary, and this module is one of those
- * that can also be used as the entry point for a server.
- *
- * For html pages it streams files directly from the static directory, which is like us saying that these
- * pages are static and never change.
- *
- * The todo page is made to show-off the server-action functionality - which of course won't work on
- * Github pages - but it will work just fine if you know how to setup a server and setup streams based on header/url information
- * depending on your use cases.
- *
- * Notice how our "production" server is completely dressed down
- * doing only the bare minimum to serve the files we know are static. But even for this
- * page we do not even take the effort to regenerate the index.html - it just has no todo's when
- * it renders, and they load in after the page has been rendered.
- *
- * Of course we would have several ways to handle dynamic index.html too, again, depending on your use case.
- * One solution is to make two servers, one for html and one for rsc. The other would be to somehow run
- * another thread that would generate the index.html for us, like
- * this plugin does during the static build process using the html-worker.
- */
