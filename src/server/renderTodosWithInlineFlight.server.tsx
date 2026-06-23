@@ -30,21 +30,33 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const buildDir = path.resolve(__dirname, "../.."); // dist/server/server → dist (holds client/ + static/)
 const base = process.env.BASE_URL || "/";
 
-// Stylesheet links resolved from the static build manifest so the SSR'd document
-// is styled before the client bundle loads. collectManifestCss walks a start
-// file's import graph for its emitted CSS — the same helper the build uses to
-// derive per-page vs app-shell CSS (react-static/processCssFilesForPages):
+// Stylesheets resolved from the static build manifest so the SSR'd document is
+// styled before the client bundle loads. collectManifestCss walks a start file's
+// import graph for its emitted CSS — the same helper the build uses to derive
+// per-page vs app-shell CSS (react-static/processCssFilesForPages):
 //   - cssFiles: the /todos page stylesheet, rendered inside #root.
 //   - globalCss: the app-shell stylesheets reachable from the html entry, in <head>.
+const staticDir = path.join(buildDir, "static");
 const manifest = JSON.parse(
-  fs.readFileSync(path.join(buildDir, "static/.vite/manifest.json"), "utf-8")
+  fs.readFileSync(path.join(staticDir, ".vite/manifest.json"), "utf-8")
 ) as Manifest;
+// Inline a stylesheet whose content is at/under css.inlineThreshold (10_000 in
+// vite.react.config.ts) as a <style>, and link larger ones — mirroring what
+// createCssProps does in the build. Inlining the small demo CSS means the SSR
+// document carries the styles directly, with no external <link>/preload (the
+// preloads React emitted for the linked form were being dropped with an invalid
+// `as`).
+const INLINE_THRESHOLD = 10_000;
 const toCssMap = (inputs: Record<string, string>): Map<string, CssContent> =>
   new Map(
-    Object.values(inputs).map((file) => [
-      file,
-      { id: file, href: base + file, as: "link", rel: "stylesheet", precedence: "high" },
-    ])
+    Object.values(inputs).map((file) => {
+      const code = fs.readFileSync(path.join(staticDir, file), "utf-8");
+      const content: CssContent =
+        code.length <= INLINE_THRESHOLD
+          ? { id: file, as: "style", type: "text/css", children: code }
+          : { id: file, as: "link", rel: "stylesheet", href: base + file, precedence: "high" };
+      return [file, content];
+    })
   );
 const cssFiles = toCssMap(collectManifestCss(manifest, "src/css/todoStyles.module.css"));
 const globalCss = toCssMap(collectManifestCss(manifest, "index.html"));
