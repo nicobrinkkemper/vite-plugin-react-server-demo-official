@@ -4,8 +4,10 @@ import { fileURLToPath } from "node:url";
 import React from "react";
 import { renderToPipeableStream } from "react-server-dom-esm/server.node";
 import { createInlineFlightRenderer } from "vite-plugin-react-server/stream";
+import { collectManifestCss } from "vite-plugin-react-server/helpers";
 import { Css } from "vite-plugin-react-server/components";
 import type { CssContent } from "vite-plugin-react-server/types";
+import type { Manifest } from "vite";
 import { Html } from "../Html.js";
 import { Page as TodosPage } from "../page/todos/page.js";
 import { props as todosProps } from "../page/todos/props.js";
@@ -28,20 +30,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const buildDir = path.resolve(__dirname, "../.."); // dist/server/server → dist (holds client/ + static/)
 const base = process.env.BASE_URL || "/";
 
-// The page + global stylesheet links, matched from the static build manifest so
-// the SSR'd document is styled before the client bundle loads (the same links the
-// build bakes into /todos/index.html).
+// Stylesheet links resolved from the static build manifest so the SSR'd document
+// is styled before the client bundle loads. collectManifestCss walks a start
+// file's import graph for its emitted CSS — the same helper the build uses to
+// derive per-page vs app-shell CSS (react-static/processCssFilesForPages):
+//   - cssFiles: the /todos page stylesheet, rendered inside #root.
+//   - globalCss: the app-shell stylesheets reachable from the html entry, in <head>.
 const manifest = JSON.parse(
   fs.readFileSync(path.join(buildDir, "static/.vite/manifest.json"), "utf-8")
-) as Record<string, { file: string; css?: string[] }>;
-const link = (id: string, href: string | undefined): CssContent | undefined =>
-  href ? { id, href: base + href, as: "link", rel: "stylesheet", precedence: "high" } : undefined;
-const collect = (...entries: (readonly [string, CssContent | undefined])[]) =>
-  new Map<string, CssContent>(
-    entries.filter((e): e is [string, CssContent] => e[1] !== undefined)
+) as Manifest;
+const toCssMap = (inputs: Record<string, string>): Map<string, CssContent> =>
+  new Map(
+    Object.values(inputs).map((file) => [
+      file,
+      { id: file, href: base + file, as: "link", rel: "stylesheet", precedence: "high" },
+    ])
   );
-const cssFiles = collect(["todoStyles", link("todoStyles", manifest["src/css/todoStyles.module.css"]?.css?.[0])]);
-const globalCss = collect(["globalStyles", link("globalStyles", manifest["src/css/globalStyles.css"]?.file)]);
+const cssFiles = toCssMap(collectManifestCss(manifest, "src/css/todoStyles.module.css"));
+const globalCss = toCssMap(collectManifestCss(manifest, "index.html"));
 
 // One long-lived inline-flight renderer (own html-worker), reused across requests.
 const renderer = createInlineFlightRenderer({ Html, buildDir, base });
