@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "demo": "rm -f todos.db && NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production NODE_OPTIONS='--conditions react-server' node dist/server/server/index-*.js",
+    "demo": "rm -f todos.db && NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production node dist/server/server/index-*.js",
     "test": "npm run test:e2e",
     "test:e2e": "NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && playwright test",
     "dev:rsc": "npm run env:dev-server -- vite",
@@ -55,6 +55,6 @@
     "webpack-sources": "^3.3.0"
   },
   "dependencies": {
-    "vite-plugin-react-server": "^2.9.1"
+    "vite-plugin-react-server": "^2.10.0"
   }
 }

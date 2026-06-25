@@ -9,9 +9,10 @@ import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
 /**
  * Client-side React Server Components entry.
  *
- * Initial render: the route's flight is fetched (the prerendered static .rsc for
- * static routes; the live per-request flight for the dynamic /todos route — see
- * server/renderTodosFlight), decoded to a ReactNode BEFORE mount, then rendered
+ * Initial render: the route's flight is taken from the inline payload baked into
+ * the document when present (the static build inlines it; the dynamic /todos
+ * document inlines its live per-request flight — see server/start.tsx), else
+ * fetched as `.rsc`. Either way it's decoded to a ReactNode BEFORE mount, rendered
  * directly — a synchronous first render with no Suspense boundary so hydrateRoot
  * matches the server markup. (use()-ing the pending thenable, or wrapping the
  * root in a client-only <Suspense> the server never rendered, mismatches the
