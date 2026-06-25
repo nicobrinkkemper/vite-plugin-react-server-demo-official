@@ -37,5 +37,9 @@ export default {
   },
   build: {
     pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
+    // The single-isolate edge bundle (dist/server-edge/render.js, server React
+    // inlined) is ON by default — it's what lets /todos render flash-free per
+    // request in ONE isolate, no html-worker and no runtime `--conditions
+    // react-server` (see src/server/start.tsx). Pass `edge: false` to opt out.
   }
 } satisfies StreamPluginOptions;

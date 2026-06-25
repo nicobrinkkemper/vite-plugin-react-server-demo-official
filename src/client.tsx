@@ -9,14 +9,14 @@ import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
 /**
  * Client-side React Server Components entry.
  *
- * Initial render: the payload (build-time inlined for static routes, or the
- * live per-request flight inlined by createHtmlStreamWithInlineFlight for the
- * dynamic /todos route — see server/renderTodosWithInlineFlight) is fully
- * decoded to a ReactNode BEFORE mount, then rendered directly — a synchronous
- * first render with no Suspense boundary, so hydrateRoot matches the server
- * markup and the page hydrates in place with zero refetch and no flash.
- * (use()-ing the pending thenable, or wrapping the root in a client-only
- * <Suspense> the server never rendered, mismatches the prerender → React #418.)
+ * Initial render: the route's flight is taken from the inline payload baked into
+ * the document when present (the static build inlines it; the dynamic /todos
+ * document inlines its live per-request flight — see server/start.tsx), else
+ * fetched as `.rsc`. Either way it's decoded to a ReactNode BEFORE mount, rendered
+ * directly — a synchronous first render with no Suspense boundary so hydrateRoot
+ * matches the server markup. (use()-ing the pending thenable, or wrapping the
+ * root in a client-only <Suspense> the server never rendered, mismatches the
+ * prerender → React #418.)
  *
  * Navigation / HMR: fetch the target route's flight, await the decode, then
  * swap it in within a transition — keeping the current page visible, still with

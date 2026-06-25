@@ -26,7 +26,7 @@ export default defineConfig({
     // resolve a hashed index). Plain Node, so it survives in the background;
     // the build already ran before Playwright.
     command:
-      "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production NODE_OPTIONS='--conditions=react-server' node dist/server/server/index-*.js",
+      "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production node dist/server/server/index-*.js",
     url: "http://localhost:3000/todos/",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
