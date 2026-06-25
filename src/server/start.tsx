@@ -3,26 +3,25 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Readable, PassThrough } from "node:stream";
 import { createRequestHandler, toNodeListener } from "vite-plugin-react-server/helpers";
-import {
-  renderTodosHtml,
-  renderTodosFlight,
-} from "./renderTodosWithInlineFlight.server.js";
+import { renderTodosFlight } from "./renderTodosFlight.server.js";
 
 /**
- * Production server for the demo, on the vprs 2.9.0 serving API.
+ * Production server for the demo — worker-free, edge-portable serving.
  *
- * vite-plugin-react-server now ships an opinion on serving: createRequestHandler
- * is a Web-standard (Request) => Response server for a build. It serves the
- * prerendered files from dist/static, dispatches "use server" actions through the
- * SEALED production gate (handleServerAction — the verified prod trust boundary,
- * an allowlist that rejects any action id the build did not emit), and calls our
- * render() hook for the one dynamic route. toNodeListener adapts it to node:http
- * (or Express middleware, or any Fetch runtime — Hono, Bun, Deno).
+ * createRequestHandler is vprs's Web-standard (Request) => Response server for a
+ * build. It serves the prerendered files from dist/static, dispatches "use
+ * server" actions through the SEALED production gate (handleServerAction — the
+ * verified prod trust boundary, an allowlist that rejects any action id the build
+ * did not emit), and calls our render() hook for the one dynamic route.
+ * toNodeListener adapts it to node:http (or Express middleware, or any Fetch
+ * runtime — Hono, Bun, Deno).
  *
- * Only /todos is dynamic: a document load gets the live page as HTML with its
- * flight inlined (hydrate in place, no flash, no refetch); a client navigation
- * (the index.rsc request) gets the live page flight. Every other route falls
- * through to its prerendered file.
+ * Only /todos is dynamic, and ONLY its flight is. A document load falls through
+ * to the prerendered static shell (what a CDN serves); the client then fetches
+ * this route's live flight and hydrates the current todos into #root. There is no
+ * html-worker and no cross-condition HTML render — nothing here that an edge
+ * runtime can't do. This is the shape that ports unchanged to Vercel Edge /
+ * Cloudflare / Deno (swap the in-process flight renderer for vprs's Web one).
  *
  * Run:
  *   rm -f todos.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
@@ -58,14 +57,16 @@ const handler = createRequestHandler({
     const wantsFlight =
       pathname.endsWith(".rsc") ||
       (request.headers.get("accept") ?? "").includes("text/x-component");
+    // Worker-free: only the live flight is dynamic. The document request returns
+    // null and createRequestHandler serves the prerendered static shell, which the
+    // client hydrates by fetching this same live flight — no html-worker.
+    if (!wantsFlight) return null;
     try {
-      return wantsFlight
-        ? streamResponse(await renderTodosFlight(), "text/x-component; charset=utf-8")
-        : streamResponse(await renderTodosHtml(), "text/html; charset=utf-8");
+      return streamResponse(await renderTodosFlight(), "text/x-component; charset=utf-8");
     } catch (error) {
-      // Degrade to the prerendered shell (stale todos) rather than 500 — return
-      // null so createRequestHandler serves the build's static file for the route.
-      console.error("[/todos] dynamic render failed, serving prerendered shell:", error);
+      // Degrade to the prerendered shell (build-time todos) rather than 500 —
+      // return null so createRequestHandler serves the build's static file.
+      console.error("[/todos] dynamic flight failed, serving prerendered shell:", error);
       return null;
     }
   },
