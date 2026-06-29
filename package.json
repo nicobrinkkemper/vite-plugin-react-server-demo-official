@@ -47,7 +47,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
     "acorn-loose": "^8.5.2",
-    "happy-dom": "^17.6.3",
+    "happy-dom": "^20.10.6",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tsx": "^4.22.4",
