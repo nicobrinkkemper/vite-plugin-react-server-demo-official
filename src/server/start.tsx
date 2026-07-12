@@ -7,7 +7,7 @@ import {
   toNodeListener,
 } from "vite-plugin-react-server/request-handler";
 import { collectManifestCss } from "vite-plugin-react-server/helpers";
-import { createEdgeHandler } from "vite-plugin-react-server/stream";
+import { createEdgeHandler } from "vite-plugin-react-server/stream/client";
 import type { CssContent } from "vite-plugin-react-server/types";
 import type { Manifest } from "vite";
 
