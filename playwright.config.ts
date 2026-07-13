@@ -21,12 +21,17 @@ export default defineConfig({
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
-    // The Express prod server. Its entry (src/server/index.ts) is emitted
-    // hashed, so we glob it rather than `node dist/server/server` (which can't
-    // resolve a hashed index). Plain Node, so it survives in the background;
-    // the build already ran before Playwright.
+    // The Express prod server (src/server/index.ts), started with NO
+    // `--conditions react-server` — deliberately. The single-isolate edge build
+    // exists so production runs on plain Node; needing the flag here would mean
+    // that promise is broken.
+    //
+    // The glob tolerates both the plain and the content-hashed entry name: which
+    // one the server build emits has changed across plugin versions, and pinning
+    // `index-*.js` silently stopped matching once it was emitted unhashed.
+    // Plain Node, so it survives in the background; the build ran before this.
     command:
-      "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production node dist/server/server/index-*.js",
+      "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production node dist/server/server/index*.js",
     url: "http://localhost:3000/todos/",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
