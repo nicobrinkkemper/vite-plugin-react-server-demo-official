@@ -1,14 +1,9 @@
 import React from "react";
 import type { HtmlProps } from "vite-plugin-react-server/types";
-import { Css } from "./Css";
+import { Css, Root as DefaultRoot } from "vite-plugin-react-server/components";
 
-// NB: the document wrapper imports nothing from vite-plugin-react-server/components.
-// Loading that barrel here degrades the whole document to a fragment (no <html>
-// root) in the no-flag `vite build` (build:static:gh), so `Css` is a local copy
-// and `Root` comes from props (the plugin supplies it) rather than a /components
-// default. See src/Css.tsx.
 export const Html: React.FC<HtmlProps> = ({
-  Root,
+  Root = DefaultRoot,
   cssFiles,
   globalCss,
   pageProps = {},
