@@ -21,7 +21,7 @@
     "build:static": "vite build",
     "build:client": "vite build --ssr",
     "build:server": "NODE_OPTIONS='--conditions react-server' vite build",
-    "build:app:gh": "npm run env:gh -- vite build --app",
+    "build:gh": "npm run env:gh -- vite build --app",
     "build:preview": "npm run env:preview -- npm run build --app",
     "preview:start": "npm run env:preview -- vite preview",
     "debug-build": "npm run env:dev -- vite build --app --mode=development",
