@@ -8,6 +8,7 @@
     "demo": "rm -f todos.db && NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production node dist/server/server/index-*.js",
     "test": "npm run test:e2e",
     "test:e2e": "NODE_ENV=production PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && playwright test",
+    "dev": "npm run dev:rsc",
     "dev:rsc": "npm run env:dev-server -- vite",
     "dev:ssr": "npm run env:start -- vite",
     "preview": "npm run build:preview && npm run preview:start",
