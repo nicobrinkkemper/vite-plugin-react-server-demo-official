@@ -3,7 +3,7 @@ declare global {
     env: {
       VITE_DEV: boolean;
       NODE_ENV: string;
-      VITE_BASE_URL: string;
+      PUBLIC_ORIGIN: string;
     };
   }
 }
