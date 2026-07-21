@@ -1,5 +1,6 @@
 export const props = (url: string) => {
-  const origin = import.meta.env.VITE_PUBLIC_ORIGIN ?? "";
+  // Baked by vprs from the plugin's `publicOrigin` option ("" when unset).
+  const origin = import.meta.env.PUBLIC_ORIGIN ?? "";
   const base = import.meta.env.BASE_URL ?? "/";
   let pathname = origin.includes("//")
     ? new URL(base, origin).pathname

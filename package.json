@@ -12,11 +12,11 @@
     "dev:rsc": "npm run env:dev-server -- vite",
     "dev:ssr": "npm run env:start -- vite",
     "preview": "npm run build:preview && npm run preview:start",
-    "env:gh": "GITHUB_PAGES=true PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' VITE_PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/' VITE_BASE_URL='/vite-plugin-react-server-demo-official/'",
-    "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' VITE_PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/' VITE_BASE_URL='/vite-plugin-react-server-demo-official/'",
-    "env:dev": "NODE_ENV=development BASE_URL='/' VITE_BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173' VITE_PUBLIC_ORIGIN='http://localhost:5173' VITE_PUBLIC_ORIGIN='http://localhost:5173'",
+    "env:gh": "GITHUB_PAGES=true PUBLIC_ORIGIN='https://nicobrinkkemper.github.io' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:preview": "PUBLIC_ORIGIN='http://localhost:4173' BASE_URL='/vite-plugin-react-server-demo-official/'",
+    "env:dev": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "env:dev-server": "NODE_OPTIONS='--conditions react-server' npm run env:dev",
-    "env:start": "NODE_ENV=development BASE_URL='/' VITE_BASE_URL='/' VITE_PUBLIC_ORIGIN='http://localhost:5173' VITE_PUBLIC_ORIGIN='http://localhost:5173'",
+    "env:start": "NODE_ENV=development BASE_URL='/' PUBLIC_ORIGIN='http://localhost:5173'",
     "build": "NODE_OPTIONS='--conditions react-server' vite build --app",
     "build:static": "vite build",
     "build:client": "vite build --ssr",
@@ -44,7 +44,7 @@
     "react-dom": "^19.2.7",
     "tsx": "^4.22.4",
     "vite": "^6.4.3",
-    "vite-plugin-react-server": "^3.2.1",
+    "vite-plugin-react-server": "^3.2.3",
     "webpack-sources": "^3.5.0"
   }
 }

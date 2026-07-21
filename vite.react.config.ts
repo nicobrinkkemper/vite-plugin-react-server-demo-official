@@ -30,7 +30,9 @@ export default {
   Html: "src/Html.tsx",
   verbose: false,
   moduleBasePath: "/",
-  moduleBaseURL: process.env.BASE_URL || process.env.VITE_BASE_URL || "/",
+  // No moduleBaseURL: vprs ≥3.2.3 takes Vite's `base` (vite.config.ts reads
+  // BASE_URL), so the deploy base is configured once.
+  publicOrigin: process.env.PUBLIC_ORIGIN || "",
   serverEntry: "src/server/index.ts",
   css: {
     inlineThreshold: 10000,
