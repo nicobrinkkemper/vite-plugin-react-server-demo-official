@@ -1,32 +1,13 @@
 import type { StreamPluginOptions } from "vite-plugin-react-server/types";
 
-const createRouter = (file: "props.ts" | "page.tsx") => (url: string) => {
-  switch (url) { 
-    case "/bidoof":
-      return `src/page/bidoof/${file}`;
-    case "/404":
-      return `src/page/404/${file}`;
-    case "/error-example":
-      return `src/page/error-example/${file}`;
-    case "/":
-      return `src/page/${file}`;
-    case "/todos":
-      return `src/page/todos/${file}`;
-    default: {
-      if (process.env.NODE_ENV === "development") {
-        return `src/page/404/${file}`;
-      }
-      throw new Error(
-        `Unknown route: ${typeof url === "string" ? url : JSON.stringify(url)}`
-      );
-    }
-  }
-};
 console.log('process.env.VITE_GITHUB_PAGES', process.env.VITE_GITHUB_PAGES);
 export default {
   moduleBase: "src",
-  Page: createRouter("page.tsx"),
-  props: createRouter("props.ts"),
+  // File-based routing in one field: scans src/page/** for page.tsx (+ sibling
+  // props.ts) and derives Page / props / routePatterns / the prerender
+  // worklist. All five routes are static, so build.pages is discovered from
+  // the tree — no more hand-rolled url switch to keep in sync.
+  routes: { dir: "page" },
   Html: "src/Html.tsx",
   verbose: false,
   moduleBasePath: "/",
@@ -38,7 +19,6 @@ export default {
     inlineThreshold: 10000,
   },
   build: {
-    pages: ["/", "/bidoof", "/404", "/todos", "/error-example"],
     // The single-isolate edge bundle (dist/server-edge/render.js, server React
     // inlined) is ON by default — it's what lets /todos render flash-free per
     // request in ONE isolate, no html-worker and no runtime `--conditions
