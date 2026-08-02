@@ -37,14 +37,14 @@
     "@types/node": "^22.20.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^6.0.5",
     "acorn-loose": "^8.5.2",
     "happy-dom": "^20.10.6",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tsx": "^4.22.4",
-    "vite": "^6.4.3",
-    "vite-plugin-react-server": "^3.5.1",
+    "vite": "^8.2.0",
+    "vite-plugin-react-server": "^3.5.2",
     "webpack-sources": "^3.5.0"
   }
 }
