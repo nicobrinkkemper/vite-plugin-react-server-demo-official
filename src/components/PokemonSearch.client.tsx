@@ -32,7 +32,7 @@ export const PokemonSearch = ({
         name="q"
         list="pokemon-names"
         className={styles["SearchInput"]}
-        placeholder="Any Pokémon — try one beyond gen 1"
+        placeholder="Search any Pokémon…"
         aria-label="Look up a Pokémon by name"
         autoComplete="off"
       />

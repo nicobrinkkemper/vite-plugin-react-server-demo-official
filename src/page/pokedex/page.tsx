@@ -14,7 +14,7 @@ export const Page = ({ title, pokedex, navigation, searchAction }: Props) => (
           {navigation.back.text}
         </Link>
         <h1>Pokédex</h1>
-        <p>{pokedex.length} Pokémon, prerendered at build time.</p>
+        <p>The {pokedex.length} originals below — the search finds every Pokémon, not just these.</p>
         <PokemonSearch names={pokedex.map((p) => p.name)} action={searchAction} />
       </header>
       <ul className={styles["Grid"]}>

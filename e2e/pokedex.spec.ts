@@ -20,7 +20,7 @@ test.describe("static pages (prerendered)", () => {
     await expect(page.getByRole("heading", { name: "Pokédex" })).toBeVisible();
     await page.getByRole("link", { name: "Browse the Pokédex" }).click();
     await expect(page).toHaveURL(/\/pokedex\/$/);
-    await expect(page.getByText("151 Pokémon")).toBeVisible();
+    await expect(page.getByText(/151 originals/)).toBeVisible();
   });
 
   test("the grid lists all 151 and navigates to a detail page", async ({
