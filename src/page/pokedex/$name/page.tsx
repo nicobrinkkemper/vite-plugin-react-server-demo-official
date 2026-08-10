@@ -1,5 +1,4 @@
 import * as React from "react";
-import { NavPending } from "../../../components/NavPending.client.js";
 import { FavoriteButton } from "../../../components/FavoriteButton.client.js";
 import { Link } from "../../../components/Link.client.js";
 import { artwork, TYPE_COLORS } from "../../../lib/pokedex.js";
@@ -18,7 +17,6 @@ const MAX_BASE_STAT = 255;
 
 export const Page = ({
   title,
-  url,
   pokemon,
   live,
   toggleFavorite,
@@ -27,7 +25,6 @@ export const Page = ({
 }: Props) => (
   <>
     <title>{`${title} — Pokédex`}</title>
-    <NavPending key={url} />
     <div className={styles["Pokemon"]}>
       <header className={styles["Header"]}>
         <Link to={navigation.back.href} className={styles["Back"]}>

@@ -97,8 +97,8 @@ test.describe("favorites server action (prod build)", () => {
   });
 });
 
-test.describe("navigation pending indicator", () => {
-  test("shows the target's catching state while its flight loads", async ({
+test.describe("navigation transition state", () => {
+  test("the clicked link goes busy and the page reads as stale until the swap", async ({
     page,
   }) => {
     // Make the pending window deterministic: hold the target's flight briefly.
@@ -110,16 +110,16 @@ test.describe("navigation pending indicator", () => {
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(1000);
 
-    const chip = page.getByRole("status");
-    await page.getByRole("link", { name: "Bidoof" }).click();
-    await expect(chip).toHaveText("Catching bidoof…");
-    // The old page is still on screen behind the indicator (proof of work,
-    // not a blank flash).
+    const link = page.getByRole("link", { name: "Bidoof" });
+    await link.click();
+    // The clicked link itself announces the transition…
+    await expect(link).toHaveAttribute("aria-busy", "true");
+    // …while the old page stays mounted (dirty, not blank).
     await expect(page.getByRole("heading", { name: "Pokédex" })).toBeVisible();
-    // Then the swap lands and the indicator leaves with the old tree.
+    // The swap lands: new page, and no busy link left anywhere.
     await expect(
       page.getByRole("heading", { name: /bidoof/ }),
     ).toBeVisible({ timeout: 15000 });
-    await expect(chip).toHaveCount(0);
+    await expect(page.locator("a[data-pending]")).toHaveCount(0);
   });
 });

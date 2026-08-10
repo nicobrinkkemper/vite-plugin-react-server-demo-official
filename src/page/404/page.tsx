@@ -1,14 +1,12 @@
 import React from "react";
-import { NavPending } from "../../components/NavPending.client.js";
 import styles from "../../css/404.module.css";
 import type { Props } from "./props.js";
 import { Link } from "../../components/Link.client.js";
 
-export const Page = ({ title, url, navigation }: Props) => {
+export const Page = ({ title, navigation }: Props) => {
   return (
     <>
       <title>{title}</title>
-      <NavPending key={url} />
     <div className={styles["NotFound"]}>
         <h1>{title}</h1>
         <p>The page you are looking for does not exist. If you were hunting a Pokémon outside gen 1, this deploy may be static-only — clone the repo and run <code>npm run demo</code> for the per-request path.</p>

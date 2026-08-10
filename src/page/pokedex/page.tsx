@@ -1,14 +1,12 @@
 import * as React from "react";
-import { NavPending } from "../../components/NavPending.client.js";
 import { Link } from "../../components/Link.client.js";
 import { PokemonCard } from "../../components/PokemonCard.js";
 import styles from "../../css/pokedex.module.css";
 import type { Props } from "./props.js";
 
-export const Page = ({ title, url, pokedex, navigation }: Props) => (
+export const Page = ({ title, pokedex, navigation }: Props) => (
   <>
     <title>{title}</title>
-    <NavPending key={url} />
     <div className={styles["Pokedex"]}>
       <header className={styles["Header"]}>
         <Link to={navigation.back.href} className={styles["Back"]}>
