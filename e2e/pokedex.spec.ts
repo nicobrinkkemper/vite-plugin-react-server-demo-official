@@ -67,18 +67,51 @@ test.describe("per-request path (not prerendered)", () => {
   });
 });
 
-test.describe("pokemon lookup", () => {
-  test("searching a name beyond gen 1 reaches the per-request route", async ({
+test.describe("pokemon search", () => {
+  test("typing filters the whole roster into icon cards", async ({ page }) => {
+    await page.goto("/pokedex/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(1000);
+
+    const input = page.getByLabel("Search Pokémon by name");
+    await input.fill("chu");
+    const results = page.getByLabel("search results");
+    await expect(results.locator('a[href="/pokedex/pikachu/"]')).toBeVisible();
+    await expect(results.locator('a[href="/pokedex/raichu/"]')).toBeVisible();
+    // The originals grid steps aside while searching.
+    await expect(page.getByRole("link", { name: /bulbasaur/ })).toBeHidden();
+
+    await results.locator('a[href="/pokedex/pikachu/"]').click();
+    await expect(page).toHaveURL(/\/pokedex\/pikachu\/$/);
+  });
+
+  test("a match beyond the originals reaches the per-request route", async ({
     page,
   }) => {
     await page.goto("/pokedex/");
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(1000);
 
-    const input = page.getByLabel("Look up a Pokémon by name");
+    await page.getByLabel("Search Pokémon by name").fill("lucario");
+    const result = page
+      .getByLabel("search results")
+      .locator('a[href="/pokedex/lucario/"]');
+    await expect(result).toBeVisible();
+    await result.click();
+    await expect(
+      page.getByRole("heading", { name: /lucario/ }),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText("rendered per request")).toBeVisible();
+  });
+
+  test("enter submits the first match", async ({ page }) => {
+    await page.goto("/pokedex/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(1000);
+
+    const input = page.getByLabel("Search Pokémon by name");
     await input.fill("Mr. Mime");
-    await page.getByRole("button", { name: "Look up" }).click();
-    // "Mr. Mime" slugs to mr-mime — gen 1, so this lands on a prerendered page.
+    await input.press("Enter");
     await expect(page).toHaveURL(/\/pokedex\/mr-mime\/$/);
     await expect(page.getByRole("heading", { name: /mr-mime/ })).toBeVisible();
   });

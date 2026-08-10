@@ -5,6 +5,7 @@ export const props = (url: string) => ({
   url,
   pokedex: gen1,
   searchAction: `${baseHref()}pokedex/`,
+  namesHref: `${baseHref()}names.json`,
   navigation: {
     back: { href: baseHref(), text: "Back" },
   },

@@ -15,13 +15,7 @@ export const gen1 = pokedex as Pokemon[];
 export const findLocal = (name: string): Pokemon | undefined =>
   gen1.find((p) => p.name === name.toLowerCase());
 
-const SPRITES =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon";
-
-export const sprite = (id: number) => `${SPRITES}/${id}.png`;
-export const spriteBack = (id: number) => `${SPRITES}/back/${id}.png`;
-export const artwork = (id: number) =>
-  `${SPRITES}/other/official-artwork/${id}.png`;
+export { artwork, sprite, spriteBack } from "./sprites.js";
 
 export const TYPE_COLORS: Record<string, string> = {
   normal: "#a8a878",

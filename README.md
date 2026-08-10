@@ -9,7 +9,7 @@ The app is small on purpose; every route exists to show one capability:
 | Route | Rendering | Shows |
 | --- | --- | --- |
 | `/` | static | server pages, layout, a client component (the walking Bidoof) |
-| `/pokedex/` | static | a 151-card grid + a lookup box (datalist of gen 1, free text for anything beyond) — prerendered from a committed dataset, no network at build time |
+| `/pokedex/` | static | a 151-card grid + client-side search over the FULL roster (a vendored name index served as a static asset) — prerendered from a committed dataset, no network at build time |
 | `/pokedex/$name/` | **hybrid** | file-router dynamic params: the 151 gen-1 Pokémon are prerendered via `staticPaths`; **any other name renders per request** on the same route, fetched live from PokéAPI |
 | `/404/` | static | `notFound()` thrown from a loader |
 

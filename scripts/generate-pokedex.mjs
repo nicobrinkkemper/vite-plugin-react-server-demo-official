@@ -39,3 +39,17 @@ for (let id = 1; id <= COUNT; id++) {
 
 writeFileSync(OUT, JSON.stringify(entries, null, 1) + "\n");
 console.log(`wrote ${entries.length} entries to ${OUT}`);
+
+// Every Pokémon's name+id (sprites are addressed by id), served as a static
+// asset so client-side search covers the whole roster without shipping the
+// index in the page.
+const NAMES_OUT = fileURLToPath(new URL("../public/names.json", import.meta.url));
+const list = await get("https://pokeapi.co/api/v2/pokemon?limit=100000");
+const names = list.results
+  .map((entry) => {
+    const id = Number(entry.url.match(/\/pokemon\/(\d+)\//)?.[1]);
+    return { id, name: entry.name };
+  })
+  .filter((entry) => Number.isFinite(entry.id));
+writeFileSync(NAMES_OUT, JSON.stringify(names) + "\n");
+console.log(`wrote ${names.length} names to ${NAMES_OUT}`);

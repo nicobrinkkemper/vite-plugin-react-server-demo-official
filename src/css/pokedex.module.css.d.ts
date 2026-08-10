@@ -11,7 +11,8 @@ declare const styles: {
     Type: string;
     Search: string;
     SearchInput: string;
-    SearchButton: string;
+    Results: string;
+    NoResults: string;
 };
 
 export default styles

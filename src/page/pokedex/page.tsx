@@ -5,7 +5,7 @@ import { PokemonSearch } from "../../components/PokemonSearch.client.js";
 import styles from "../../css/pokedex.module.css";
 import type { Props } from "./props.js";
 
-export const Page = ({ title, pokedex, navigation, searchAction }: Props) => (
+export const Page = ({ title, pokedex, navigation, searchAction, namesHref }: Props) => (
   <>
     <title>{title}</title>
     <div className={styles["Pokedex"]}>
@@ -15,7 +15,7 @@ export const Page = ({ title, pokedex, navigation, searchAction }: Props) => (
         </Link>
         <h1>Pokédex</h1>
         <p>The {pokedex.length} originals below — the search finds every Pokémon, not just these.</p>
-        <PokemonSearch names={pokedex.map((p) => p.name)} action={searchAction} />
+        <PokemonSearch namesHref={namesHref} action={searchAction} />
       </header>
       <ul className={styles["Grid"]}>
         {pokedex.map((pokemon) => (
