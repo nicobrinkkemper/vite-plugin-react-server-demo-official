@@ -6,7 +6,7 @@ import {
 } from "../../../server/actions/favoriteActions.server.js";
 
 export const props = async (
-  _url: string,
+  url: string,
   ctx?: { params?: { name?: string } },
 ) => {
   const name = ctx?.params?.name ?? "";
@@ -15,6 +15,7 @@ export const props = async (
   if (!pokemon) throw notFound();
   return {
     title: pokemon.name,
+    url,
     pokemon,
     live: !local,
     toggleFavorite,

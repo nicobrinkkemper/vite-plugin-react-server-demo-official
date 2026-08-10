@@ -1,4 +1,5 @@
 import * as React from "react";
+import { NavPending } from "../components/NavPending.client.js";
 import { Link } from "../components/Link.client.js";
 import { PokemonCard } from "../components/PokemonCard.js";
 import { WalkingBidoof } from "../components/WalkingBidoof.client.js";
@@ -9,7 +10,7 @@ import type { Props } from "./props.js";
 
 const BIDOOF_ID = 399;
 
-export const Page = ({ title, navigation, featured, isGithubPages }: Props) => {
+export const Page = ({ title, url, navigation, featured, isGithubPages }: Props) => {
   return (
     <>
       <title>{title}</title>
@@ -18,6 +19,7 @@ export const Page = ({ title, navigation, featured, isGithubPages }: Props) => {
         href={`${import.meta.env.PUBLIC_ORIGIN}${import.meta.env.BASE_URL}favicon.ico`}
         type="image/x-icon"
       />
+      <NavPending key={url} />
       <div className={styles["Home"]}>
         <WalkingBidoof
           srcFront={sprite(BIDOOF_ID)}
