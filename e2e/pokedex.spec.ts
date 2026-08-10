@@ -67,6 +67,31 @@ test.describe("per-request path (not prerendered)", () => {
   });
 });
 
+test.describe("pokemon lookup", () => {
+  test("searching a name beyond gen 1 reaches the per-request route", async ({
+    page,
+  }) => {
+    await page.goto("/pokedex/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(1000);
+
+    const input = page.getByLabel("Look up a Pokémon by name");
+    await input.fill("Mr. Mime");
+    await page.getByRole("button", { name: "Look up" }).click();
+    // "Mr. Mime" slugs to mr-mime — gen 1, so this lands on a prerendered page.
+    await expect(page).toHaveURL(/\/pokedex\/mr-mime\/$/);
+    await expect(page.getByRole("heading", { name: /mr-mime/ })).toBeVisible();
+  });
+
+  test("the no-JS form GET redirects ?q= to the route", async ({ request }) => {
+    const response = await request.get("/pokedex/?q=Mr.%20Mime", {
+      maxRedirects: 0,
+    });
+    expect(response.status()).toBe(302);
+    expect(response.headers()["location"]).toBe("/pokedex/mr-mime/");
+  });
+});
+
 test.describe("favorites server action (prod build)", () => {
   test("toggling a favorite persists across reload", async ({ page }) => {
     await page.goto("/pokedex/pikachu/");

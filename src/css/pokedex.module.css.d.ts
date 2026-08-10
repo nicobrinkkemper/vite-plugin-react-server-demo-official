@@ -9,6 +9,9 @@ declare const styles: {
     CardName: string;
     CardTypes: string;
     Type: string;
+    Search: string;
+    SearchInput: string;
+    SearchButton: string;
 };
 
 export default styles

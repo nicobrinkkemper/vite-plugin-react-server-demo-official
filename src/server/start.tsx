@@ -127,6 +127,21 @@ async function main() {
     action: (request) => handleRouteAction(request, { projectRoot }),
     render: async (pathname, request) => {
       const route = pathname.replace(/\/index\.rsc$|\.rsc$|\/$/, "");
+      // No-JS fallback for the lookup form: GET /pokedex/?q=name → the route.
+      if (route === "/pokedex") {
+        const q = new URL(request.url).searchParams.get("q");
+        const slug = q
+          ?.trim()
+          .toLowerCase()
+          .replace(/['.]/g, "")
+          .replace(/\s+/g, "-");
+        if (slug)
+          return new Response(null, {
+            status: 302,
+            headers: { location: `${base}pokedex/${encodeURIComponent(slug)}/` },
+          });
+        return null;
+      }
       // Only /pokedex/$name renders dynamically, and only when the name was
       // NOT prerendered (a prerendered Pokémon falls through to its static
       // file).

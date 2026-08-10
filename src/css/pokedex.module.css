@@ -84,3 +84,36 @@
     border-radius: 2px;
     text-transform: uppercase;
 }
+
+.Search {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.SearchInput {
+    flex: 1;
+    max-width: 340px;
+    background-color: #00001a;
+    border: 1px solid #333;
+    color: white;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 0.5rem 0.7rem;
+}
+
+.SearchInput:focus {
+    outline: none;
+    border-color: white;
+}
+
+.SearchButton {
+    background-color: #f8d030;
+    border: none;
+    color: #000008;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+}
