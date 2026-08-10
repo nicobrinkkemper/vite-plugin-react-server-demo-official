@@ -1,48 +1,27 @@
-"use client"
+"use client";
+import * as React from "react";
+import { Link as RouterLink } from "vite-plugin-react-server/router/client";
 
-import React from "react";
-export const Link: React.FC<{
-  children: React.ReactNode;
-  to?: string;
-  href?: string;
-  className?: string;
-}> = ({ children, to, href, className, ...props }) => (
-  <a
+// vprs router Link (typed `to` via the Register declaration in client.tsx,
+// intent-prefetch on hover, external/modified-click passthrough, plain <a>
+// during static prerender) plus the template's one addition: scroll to top on
+// a real link click. startClient doesn't force scroll, so back/forward keep
+// their browser-restored position.
+export const Link: typeof RouterLink = ({ onClick, ...props }) => (
+  <RouterLink
     {...props}
-    className={className ?? ""}
-    href={typeof href === 'string' ? href : to}
     onClick={(e) => {
-      e.preventDefault();
-      let localHref = href || to;
-      const isBlank =
-        localHref?.startsWith("http") ||
-        (e.currentTarget &&
-          "target" in e.currentTarget &&
-          e.currentTarget.target.toLowerCase() === "_blank");
-      
-      const newTo =
-        e.currentTarget && "href" in e.currentTarget
-          ? e.currentTarget.href
-          : localHref;
-
-        if (isBlank) {
-          if(newTo) window.location.href = newTo
-        }
-      const newState = { to: newTo };
-      if(window.location.pathname !== newTo) {
-        // Scroll-to-top on a real link click. The hand-rolled client's popstate
-        // handler used to do this; startClient replaces that handler and does not
-        // force scroll, so browser back/forward keep their restored position.
-        if ("scrollTo" in window) window.scrollTo(0, 0);
-        try {
-          window.history.pushState(newState, "", e.currentTarget.href);
-          window.dispatchEvent(new PopStateEvent("popstate", { state: newState }));
-        } catch (error) {
-          console.error(`You can not go to ${newTo}`, error);
-        }
-      }
+      onClick?.(e);
+      if (
+        e.defaultPrevented ||
+        e.button !== 0 ||
+        e.metaKey ||
+        e.ctrlKey ||
+        e.shiftKey ||
+        e.altKey
+      )
+        return;
+      if ("scrollTo" in window) window.scrollTo(0, 0);
     }}
-  >
-    {children}
-  </a>
+  />
 );
