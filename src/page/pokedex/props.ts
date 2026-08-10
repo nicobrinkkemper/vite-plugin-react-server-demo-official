@@ -1,0 +1,11 @@
+import { baseHref, gen1 } from "../../lib/pokedex.js";
+
+export const props = () => ({
+  title: "Pokédex — all 151",
+  pokedex: gen1,
+  navigation: {
+    back: { href: baseHref(), text: "Back" },
+  },
+});
+
+export type Props = ReturnType<typeof props>;

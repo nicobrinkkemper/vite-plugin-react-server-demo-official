@@ -1,18 +1,14 @@
 import sqlite from "node:sqlite";
 
-// Initialize database
-const db = new sqlite.DatabaseSync("todos.db", {
+const db = new sqlite.DatabaseSync("pokedex.db", {
   open: true,
 });
 
-// Create table if it doesn't exist
 db.exec(`
-  CREATE TABLE IF NOT EXISTS todos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    completed INTEGER DEFAULT 0,
+  CREATE TABLE IF NOT EXISTS favorites (
+    name TEXT PRIMARY KEY,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
   ) STRICT
-`); 
+`);
 
 export { db };

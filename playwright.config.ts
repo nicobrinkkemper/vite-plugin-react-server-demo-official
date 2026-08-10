@@ -32,7 +32,7 @@ export default defineConfig({
     // Plain Node, so it survives in the background; the build ran before this.
     command:
       "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production node dist/server/server/index*.js",
-    url: "http://localhost:3000/todos/",
+    url: "http://localhost:3000/pokedex/",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

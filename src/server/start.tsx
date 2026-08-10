@@ -14,24 +14,26 @@ import type { Manifest } from "vite";
 /**
  * Production server for the demo — single-isolate, worker-free, NO `--conditions`.
  *
- * /todos is the one dynamic route: its todos are live (SQLite, per request), so
- * its document is rendered per request rather than served as the prerendered
- * shell. The render runs in ONE isolate via the baked edge bundle
+ * /pokedex/$name is the hybrid route: the 151 vendored gen-1 Pokémon are
+ * prerendered into the static build, and any OTHER name renders per request —
+ * same route, resolved at request time (the loader fetches PokéAPI live). The
+ * per-request document runs in ONE isolate via the baked edge bundle
  * (dist/server-edge/render.js, server React inlined) + createEdgeHandler:
  *
- *   - document load  → full flash-free HTML with the live todos AND the matching
- *     headless flight inlined (<script id="vprs-flight">), so the client hydrates
- *     in place with no index.rsc round-trip.
+ *   - document load  → full flash-free HTML with the live Pokémon AND the
+ *     matching headless flight inlined (<script id="vprs-flight">), so the
+ *     client hydrates in place with no index.rsc round-trip.
  *   - client nav (.rsc) → the live headless flight for #root.
  *
  * Because the renderer runs client React in-process (the baked bundle holds the
  * server React), the process needs NO `NODE_OPTIONS=--conditions react-server`
- * and no html-worker — the shape that ports to an edge runtime. Every other
- * route falls through to its prerendered static file. "use server" actions go
- * through the sealed production gate (createRequestHandler `action`).
+ * and no html-worker — the shape that ports to an edge runtime. Every
+ * prerendered route falls through to its static file. "use server" actions
+ * (favorites) go through the sealed production gate (createRequestHandler
+ * `action`).
  *
  * Run:
- *   rm -f todos.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
+ *   rm -f pokedex.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
  *   NODE_ENV=production node dist/server/server/index-*.js
  */
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -47,7 +49,8 @@ const port = 3000;
 // the browser's HTTP base. The browser hydrates from its own base separately.
 const ssrModuleBaseURL = pathToFileURL(path.join(buildDir, "client")).href + "/";
 
-// Page CSS for /todos, resolved from the static manifest (the same collection
+// Page CSS for the per-request Pokémon document, resolved from the static
+// manifest (the same collection
 // the build uses). Small sheets inline as <style>, larger ones as a <link>, so
 // a per-request render carries its styles. Passed into the baked document
 // renderer so the full HTML and the inline flight agree.
@@ -66,8 +69,8 @@ const toCssMap = (inputs: Record<string, string>): Map<string, CssContent> =>
       return [file, content];
     })
   );
-const todosCss = toCssMap(
-  collectManifestCss(staticManifest, "src/css/todoStyles.module.css")
+const pokemonCss = toCssMap(
+  collectManifestCss(staticManifest, "src/css/pokemon.module.css")
 );
 
 // Client bootstrap entry (for hydration) from the static manifest.
@@ -99,13 +102,22 @@ async function main() {
     handleRouteAction: HandleRouteAction;
   };
 
-  // Flash-free /todos document: full inline-flight HTML in one isolate.
-  const todosDocument = createEdgeHandler({
-    renderDocument: () => renderRouteToDocument("/todos", { cssFiles: todosCss }),
-    moduleBaseURL: ssrModuleBaseURL,
-    bootstrapModules,
-    getURL: () => "/todos",
-  });
+  // Flash-free per-request document for one URL: full inline-flight HTML in
+  // one isolate.
+  const documentFor = (route: string) =>
+    createEdgeHandler({
+      renderDocument: () => renderRouteToDocument(route, { cssFiles: pokemonCss }),
+      moduleBaseURL: ssrModuleBaseURL,
+      bootstrapModules,
+      getURL: () => route,
+    });
+
+  const notFoundPage = path.join(staticDir, "404", "index.html");
+  const notFoundResponse = () =>
+    new Response(fs.readFileSync(notFoundPage), {
+      status: 404,
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    });
 
   const handler = createRequestHandler({
     staticDir,
@@ -115,15 +127,20 @@ async function main() {
     action: (request) => handleRouteAction(request, { projectRoot }),
     render: async (pathname, request) => {
       const route = pathname.replace(/\/index\.rsc$|\.rsc$|\/$/, "");
-      if (route !== "/todos") return null;
+      // Only /pokedex/$name renders dynamically, and only when the name was
+      // NOT prerendered (a prerendered Pokémon falls through to its static
+      // file).
+      if (!/^\/pokedex\/[^/]+$/.test(route)) return null;
+      if (fs.existsSync(path.join(staticDir, route.slice(1), "index.html")))
+        return null;
       const wantsFlight =
         pathname.endsWith(".rsc") ||
         (request.headers.get("accept") ?? "").includes("text/x-component");
       try {
         if (wantsFlight) {
           // Client navigation: live headless flight (Page + route CSS) for #root.
-          const { headless } = await renderRouteToDocument("/todos", {
-            cssFiles: todosCss,
+          const { headless } = await renderRouteToDocument(route, {
+            cssFiles: pokemonCss,
           });
           return new Response(headless as unknown as BodyInit, {
             headers: {
@@ -132,12 +149,14 @@ async function main() {
             },
           });
         }
-        // Document load: full flash-free HTML with live todos + inline flight.
-        return await todosDocument(request);
+        // Document load: full flash-free HTML with the live Pokémon + inline flight.
+        // The edge handler answers a loader's notFound() itself, as a bare 404 —
+        // dress that up as the prerendered 404 page.
+        const response = await documentFor(route)(request);
+        return response.status === 404 ? notFoundResponse() : response;
       } catch (error) {
-        // Degrade to the prerendered shell (build-time todos) rather than 500.
-        console.error("[/todos] dynamic render failed, serving prerendered shell:", error);
-        return null;
+        console.error(`[${route}] dynamic render failed:`, error);
+        return notFoundResponse();
       }
     },
   });

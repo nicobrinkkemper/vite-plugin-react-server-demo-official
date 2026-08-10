@@ -1,27 +1,30 @@
 # Bidoof Template
 
-A modern React application template using [vite-plugin-react-server](https://github.com/nicobrinkkemper/vite-plugin-react-server) for React Server Components (RSC) support.
+A static-first Pokédex starter built on [vite-plugin-react-server](https://github.com/nicobrinkkemper/vite-plugin-react-server) — React Server Components with ESM, Vite, and React.
 
 [See the example hosted on Github pages](https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/)
 
-Showcasing:
+The app is small on purpose; every route exists to show one capability:
 
-- Client / Server boundary
-  - Client side Error Boundary
-  - Client side navigation
-  - Server side page & props
-  - Counter with useState
-  - Dynamic head updates
-  - Async props using the pokeapi
-  - Todo page using server actions and a SQLite database (local only — disabled on the GitHub Pages build, since it has no server)
-- Static site generation capabilities with "headless" index.rsc files and fully static index.html files
-  - Static result includes server actions results
+| Route | Rendering | Shows |
+| --- | --- | --- |
+| `/` | static | server pages, layout, a client component (the walking Bidoof) |
+| `/pokedex/` | static | a 151-card grid prerendered from a committed dataset — no network at build time |
+| `/pokedex/$name/` | **hybrid** | file-router dynamic params: the 151 gen-1 Pokémon are prerendered via `staticPaths`; **any other name renders per request** on the same route, fetched live from PokéAPI |
+| `/404/` | static | `notFound()` thrown from a loader |
+
+The mascot doubles as the demo: Bidoof is gen 4, so `/pokedex/bidoof/` is deliberately *not* in the static build — it only renders through the server's live path (`npm run demo`), flash-free, in a single Node isolate with no `--conditions` flag. On the static-only GitHub Pages deploy that URL answers 404, which is the honest difference between the two render modes.
+
+Also demonstrated:
+
+- `"use server"` actions with a SQLite database — the ★ favorite button on every Pokémon page round-trips through the sealed action gate (persistence proven by the e2e suite via reload)
+- Client-side navigation with typed routes (`Link` autocompletes the route patterns)
+- Client / server boundary: error boundary, `useState`, hydration from the inlined flight payload
+- Static site generation with "headless" `index.rsc` files next to fully static `index.html` files
+
+The gen-1 dataset is committed (`src/data/pokedex.json`) so builds are deterministic and offline; regenerate it with `node scripts/generate-pokedex.mjs`.
 
 Clone the repository to see the development process in action.
-
-- Showing server side stack trace in ErrorBoundary
-- Open Developer console for additional stack-trace information on the error-example page
-- Hot reloading of pages
 
 ## Features
 
@@ -29,12 +32,9 @@ Clone the repository to see the development process in action.
 - ⚛️ [React](https://react.dev/) - The library for web and native user interfaces
 - 🎯 TypeScript support
 - 🔄 Server-side rendering with React Server Components
-- 📡 Built-in API fetching utilities
 - 🎨 CSS Modules support
-- 🔧 Experimental React patch setup
 - 🚀 Static build with RSC support
 - 🛠️ Development and preview support
-- 👷 Worker support for RSC and HTML generation
 
 ## Prerequisites
 
@@ -72,7 +72,7 @@ npm run dev:ssr
 # Build (default base / origin)
 npm run build
 
-# Build the GitHub Pages variant (the todo page is replaced with a stub here)
+# Build the GitHub Pages variant (static-only: no per-request Pokémon, no favorites)
 npm run build:gh
 
 # Build + serve a local preview at http://localhost:4173

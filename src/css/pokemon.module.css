@@ -1,0 +1,146 @@
+.Pokemon {
+    min-height: 100vh;
+    background-color: #000008;
+    color: white;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+}
+
+.Header {
+    max-width: 860px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.Back {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.LiveBadge {
+    font-size: 12px;
+    color: #000008;
+    background-color: #f8d030;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.Card {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    border: 1px solid #333;
+    background-color: #00001a;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.Artwork {
+    max-width: 100%;
+    height: auto;
+}
+
+.Info {
+    flex: 1;
+    min-width: 260px;
+    font-size: 14px;
+}
+
+.Id {
+    color: #888;
+    margin: 0;
+}
+
+.Name {
+    margin: 0 0 0.5rem;
+    font-size: 32px;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.Favorite {
+    background: none;
+    border: none;
+    color: #f8d030;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.Types {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0 0 1rem;
+}
+
+.Type {
+    color: #000008;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+
+.Flavor {
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+}
+
+.Measurements {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 1rem;
+    margin: 0 0 1rem;
+}
+
+.Measurements dt {
+    color: #888;
+}
+
+.Measurements dd {
+    margin: 0;
+}
+
+.Stats {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0.4rem 1rem;
+    margin: 0;
+    align-items: center;
+}
+
+.Stats dt {
+    color: #888;
+    font-size: 12px;
+}
+
+.Stats dd {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.StatBar {
+    display: block;
+    height: 8px;
+    background-color: #78c850;
+    min-width: 2px;
+}
+
+.StatValue {
+    font-size: 12px;
+}

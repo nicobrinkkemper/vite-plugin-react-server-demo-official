@@ -1,7 +1,9 @@
 declare const styles: {
     Home: string;
-    Url: string;
     Panel: string;
+    Url: string;
+    Cta: string;
+    Featured: string;
 };
 
 export default styles

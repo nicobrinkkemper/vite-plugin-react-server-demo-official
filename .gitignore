@@ -1,6 +1,6 @@
 dist
 node_modules
-todos.db
+pokedex.db
 # Playwright
 test-results
 playwright-report
