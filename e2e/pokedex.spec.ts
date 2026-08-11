@@ -20,14 +20,14 @@ test.describe("static pages (prerendered)", () => {
     await expect(page.getByRole("heading", { name: "Pokédex" })).toBeVisible();
     await page.getByRole("link", { name: "Browse the Pokédex" }).click();
     await expect(page).toHaveURL(/\/pokedex\/$/);
-    await expect(page.getByText(/151 originals/)).toBeVisible();
+    await expect(page.getByText(/All 1025 Pokémon/)).toBeVisible();
   });
 
-  test("the grid lists all 151 and navigates to a detail page", async ({
+  test("the grid lists all 1025 and navigates to a detail page", async ({
     page,
   }) => {
     await page.goto("/pokedex/");
-    await expect(page.locator("li")).toHaveCount(151);
+    await expect(page.locator("li")).toHaveCount(1025);
     await page.getByRole("link", { name: /pikachu/ }).click();
     await expect(page).toHaveURL(/\/pokedex\/pikachu\/$/);
     await expect(page.getByRole("heading", { name: /pikachu/ })).toBeVisible();
@@ -42,20 +42,24 @@ test.describe("static pages (prerendered)", () => {
 });
 
 test.describe("per-request path (not prerendered)", () => {
-  // Bidoof is gen 4 — deliberately outside the vendored dataset, so this page
+  // Alternate forms sit outside the vendored species dataset, so this page
   // only exists through the server's live render (loader fetches PokéAPI).
-  test("bidoof renders per request with the live badge", async ({ page }) => {
-    const response = await page.goto("/pokedex/bidoof/");
+  test("a special form renders per request with the live badge", async ({
+    page,
+  }) => {
+    const response = await page.goto("/pokedex/pikachu-rock-star/");
     test.skip(
       response?.status() === 404,
       "PokéAPI unreachable from this environment",
     );
-    await expect(page.getByRole("heading", { name: /bidoof/ })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /pikachu-rock-star/ }),
+    ).toBeVisible();
     await expect(page.getByText("rendered per request")).toBeVisible();
     // The document is flash-free: the name is IN the server HTML, not
     // client-rendered after the fact.
     const html = await response!.text();
-    expect(html).toContain("bidoof");
+    expect(html).toContain("pikachu-rock-star");
   });
 
   test("an unknown name answers 404 with the not-found page", async ({
@@ -85,21 +89,21 @@ test.describe("pokemon search", () => {
     await expect(page).toHaveURL(/\/pokedex\/pikachu\/$/);
   });
 
-  test("a match beyond the originals reaches the per-request route", async ({
+  test("a form match beyond the dataset reaches the per-request route", async ({
     page,
   }) => {
     await page.goto("/pokedex/");
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(1000);
 
-    await page.getByLabel("Search Pokémon by name").fill("lucario");
+    await page.getByLabel("Search Pokémon by name").fill("rock-star");
     const result = page
       .getByLabel("search results")
-      .locator('a[href="/pokedex/lucario/"]');
+      .locator('a[href="/pokedex/pikachu-rock-star/"]');
     await expect(result).toBeVisible();
     await result.click();
     await expect(
-      page.getByRole("heading", { name: /lucario/ }),
+      page.getByRole("heading", { name: /pikachu-rock-star/ }),
     ).toBeVisible({ timeout: 15000 });
     await expect(page.getByText("rendered per request")).toBeVisible();
   });
@@ -168,7 +172,7 @@ test.describe("navigation transition state", () => {
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(1000);
 
-    const link = page.getByRole("link", { name: "Bidoof" });
+    const link = page.getByRole("link", { name: "visit Bidoof" });
     await link.click();
     // The clicked link itself announces the transition…
     await expect(link).toHaveAttribute("aria-busy", "true");

@@ -9,6 +9,8 @@ import styles from "../css/pokedex.module.css";
 type NameEntry = { id: number; name: string };
 
 const MAX_RESULTS = 24;
+// Species ids; alternate forms sit above 10000 and are not in the dataset.
+const MAX_SPECIES_ID = 1025;
 
 // Search over EVERY Pokémon, statically: the full name+id index is a build
 // artifact (public/names.json) fetched once on mount, matches render as the
@@ -21,8 +23,8 @@ export const PokemonSearch = ({
 }: {
   namesHref: string;
   action: string;
-  /** Static-only deploy (GitHub Pages): only the prerendered originals
-   *  exist, so search offers just those. */
+  /** Static-only deploy (GitHub Pages): only the prerendered species exist,
+   *  so search offers just those (special forms need a server). */
   staticOnly?: boolean;
 }) => {
   const router = useOptionalRouter();
@@ -43,7 +45,9 @@ export const PokemonSearch = ({
   }, [namesHref]);
 
   const q = toSlug(query);
-  const searchable = staticOnly ? index.filter((entry) => entry.id <= 151) : index;
+  const searchable = staticOnly
+    ? index.filter((entry) => entry.id <= MAX_SPECIES_ID)
+    : index;
   const results = q
     ? searchable.filter((entry) => entry.name.includes(q)).slice(0, MAX_RESULTS)
     : [];
