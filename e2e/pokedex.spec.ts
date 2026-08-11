@@ -20,18 +20,27 @@ test.describe("static pages (prerendered)", () => {
     await expect(page.getByRole("heading", { name: "Pokédex" })).toBeVisible();
     await page.getByRole("link", { name: "Browse the Pokédex" }).click();
     await expect(page).toHaveURL(/\/pokedex\/$/);
-    await expect(page.getByText(/All 1025 Pokémon/)).toBeVisible();
+    await expect(page.getByRole("link", { name: /Gen 1/ })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Gen 9/ })).toBeVisible();
   });
 
-  test("the grid lists all 1025 and navigates to a detail page", async ({
+  test("a generation page lists its dex slice and navigates to a detail page", async ({
     page,
   }) => {
-    await page.goto("/pokedex/");
-    await expect(page.locator("li")).toHaveCount(1025);
+    await page.goto("/pokedex/gen/1/");
+    await expect(page.locator("li")).toHaveCount(151);
     await page.getByRole("link", { name: /pikachu/ }).click();
     await expect(page).toHaveURL(/\/pokedex\/pikachu\/$/);
     await expect(page.getByRole("heading", { name: /pikachu/ })).toBeVisible();
     await expect(page.getByText("Sp. Atk")).toBeVisible();
+  });
+
+  test("generation pages chain prev/next across the dex", async ({ page }) => {
+    await page.goto("/pokedex/gen/4/");
+    await expect(page.locator("li")).toHaveCount(107);
+    await page.getByRole("link", { name: "Gen 5 →" }).click();
+    await expect(page).toHaveURL(/\/pokedex\/gen\/5\/$/);
+    await expect(page.locator("li")).toHaveCount(156);
   });
 
   test("a prerendered detail page carries no live badge", async ({ page }) => {
@@ -172,7 +181,7 @@ test.describe("navigation transition state", () => {
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(1000);
 
-    const link = page.getByRole("link", { name: "visit Bidoof" });
+    const link = page.locator('a[href="/pokedex/bidoof/"]');
     await link.click();
     // The clicked link itself announces the transition…
     await expect(link).toHaveAttribute("aria-busy", "true");

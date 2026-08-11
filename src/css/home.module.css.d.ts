@@ -4,6 +4,7 @@ declare const styles: {
     Url: string;
     Cta: string;
     Featured: string;
+    Footer: string;
 };
 
 export default styles
