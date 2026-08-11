@@ -1,0 +1,2787 @@
+[
+ {
+  "id": 1,
+  "name": "bulbasaur",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 7,
+  "weight": 69,
+  "stats": {
+   "hp": 45,
+   "attack": 49,
+   "defense": 49,
+   "special-attack": 65,
+   "special-defense": 65,
+   "speed": 45
+  },
+  "flavor": "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON."
+ },
+ {
+  "id": 2,
+  "name": "ivysaur",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 10,
+  "weight": 130,
+  "stats": {
+   "hp": 60,
+   "attack": 62,
+   "defense": 63,
+   "special-attack": 80,
+   "special-defense": 80,
+   "speed": 60
+  },
+  "flavor": "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs."
+ },
+ {
+  "id": 3,
+  "name": "venusaur",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 20,
+  "weight": 1000,
+  "stats": {
+   "hp": 80,
+   "attack": 82,
+   "defense": 83,
+   "special-attack": 100,
+   "special-defense": 100,
+   "speed": 80
+  },
+  "flavor": "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight."
+ },
+ {
+  "id": 4,
+  "name": "charmander",
+  "types": [
+   "fire"
+  ],
+  "height": 6,
+  "weight": 85,
+  "stats": {
+   "hp": 39,
+   "attack": 52,
+   "defense": 43,
+   "special-attack": 60,
+   "special-defense": 50,
+   "speed": 65
+  },
+  "flavor": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
+ },
+ {
+  "id": 5,
+  "name": "charmeleon",
+  "types": [
+   "fire"
+  ],
+  "height": 11,
+  "weight": 190,
+  "stats": {
+   "hp": 58,
+   "attack": 64,
+   "defense": 58,
+   "special-attack": 80,
+   "special-defense": 65,
+   "speed": 80
+  },
+  "flavor": "When it swings its burning tail, it elevates the temperature to unbearably high levels."
+ },
+ {
+  "id": 6,
+  "name": "charizard",
+  "types": [
+   "fire",
+   "flying"
+  ],
+  "height": 17,
+  "weight": 905,
+  "stats": {
+   "hp": 78,
+   "attack": 84,
+   "defense": 78,
+   "special-attack": 109,
+   "special-defense": 85,
+   "speed": 100
+  },
+  "flavor": "It is said that Charizard’s fire burns hotter if it has experienced harsh battles."
+ },
+ {
+  "id": 7,
+  "name": "squirtle",
+  "types": [
+   "water"
+  ],
+  "height": 5,
+  "weight": 90,
+  "stats": {
+   "hp": 44,
+   "attack": 48,
+   "defense": 65,
+   "special-attack": 50,
+   "special-defense": 64,
+   "speed": 43
+  },
+  "flavor": "After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth."
+ },
+ {
+  "id": 8,
+  "name": "wartortle",
+  "types": [
+   "water"
+  ],
+  "height": 10,
+  "weight": 225,
+  "stats": {
+   "hp": 59,
+   "attack": 63,
+   "defense": 80,
+   "special-attack": 65,
+   "special-defense": 80,
+   "speed": 58
+  },
+  "flavor": "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance."
+ },
+ {
+  "id": 9,
+  "name": "blastoise",
+  "types": [
+   "water"
+  ],
+  "height": 16,
+  "weight": 855,
+  "stats": {
+   "hp": 79,
+   "attack": 83,
+   "defense": 100,
+   "special-attack": 85,
+   "special-defense": 105,
+   "speed": 78
+  },
+  "flavor": "A brutal POKéMON with pressurized water jets on its shell. They are used for high speed tackles."
+ },
+ {
+  "id": 10,
+  "name": "caterpie",
+  "types": [
+   "bug"
+  ],
+  "height": 3,
+  "weight": 29,
+  "stats": {
+   "hp": 45,
+   "attack": 30,
+   "defense": 35,
+   "special-attack": 20,
+   "special-defense": 20,
+   "speed": 45
+  },
+  "flavor": "Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls."
+ },
+ {
+  "id": 11,
+  "name": "metapod",
+  "types": [
+   "bug"
+  ],
+  "height": 7,
+  "weight": 99,
+  "stats": {
+   "hp": 50,
+   "attack": 20,
+   "defense": 55,
+   "special-attack": 25,
+   "special-defense": 25,
+   "speed": 30
+  },
+  "flavor": "This POKéMON is vulnerable to attack while its shell is soft, exposing its weak and tender body."
+ },
+ {
+  "id": 12,
+  "name": "butterfree",
+  "types": [
+   "bug",
+   "flying"
+  ],
+  "height": 11,
+  "weight": 320,
+  "stats": {
+   "hp": 60,
+   "attack": 45,
+   "defense": 50,
+   "special-attack": 90,
+   "special-defense": 80,
+   "speed": 70
+  },
+  "flavor": "In battle, it flaps its wings at high speed to release highly toxic dust into the air."
+ },
+ {
+  "id": 13,
+  "name": "weedle",
+  "types": [
+   "bug",
+   "poison"
+  ],
+  "height": 3,
+  "weight": 32,
+  "stats": {
+   "hp": 40,
+   "attack": 35,
+   "defense": 30,
+   "special-attack": 20,
+   "special-defense": 20,
+   "speed": 50
+  },
+  "flavor": "Often found in forests, eating leaves. It has a sharp venomous stinger on its head."
+ },
+ {
+  "id": 14,
+  "name": "kakuna",
+  "types": [
+   "bug",
+   "poison"
+  ],
+  "height": 6,
+  "weight": 100,
+  "stats": {
+   "hp": 45,
+   "attack": 25,
+   "defense": 50,
+   "special-attack": 25,
+   "special-defense": 25,
+   "speed": 35
+  },
+  "flavor": "Almost incapable of moving, this POKéMON can only harden its shell to protect itself from predators."
+ },
+ {
+  "id": 15,
+  "name": "beedrill",
+  "types": [
+   "bug",
+   "poison"
+  ],
+  "height": 10,
+  "weight": 295,
+  "stats": {
+   "hp": 65,
+   "attack": 90,
+   "defense": 40,
+   "special-attack": 45,
+   "special-defense": 80,
+   "speed": 75
+  },
+  "flavor": "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail."
+ },
+ {
+  "id": 16,
+  "name": "pidgey",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 3,
+  "weight": 18,
+  "stats": {
+   "hp": 40,
+   "attack": 45,
+   "defense": 40,
+   "special-attack": 35,
+   "special-defense": 35,
+   "speed": 56
+  },
+  "flavor": "A common sight in forests and woods. It flaps its wings at ground level to kick up blinding sand."
+ },
+ {
+  "id": 17,
+  "name": "pidgeotto",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 11,
+  "weight": 300,
+  "stats": {
+   "hp": 63,
+   "attack": 60,
+   "defense": 55,
+   "special-attack": 50,
+   "special-defense": 50,
+   "speed": 71
+  },
+  "flavor": "Very protective of its sprawling territorial area, this POKéMON will fiercely peck at any intruder."
+ },
+ {
+  "id": 18,
+  "name": "pidgeot",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 15,
+  "weight": 395,
+  "stats": {
+   "hp": 83,
+   "attack": 80,
+   "defense": 75,
+   "special-attack": 70,
+   "special-defense": 70,
+   "speed": 101
+  },
+  "flavor": "When hunting, it skims the surface of water at high speed to pick off unwary prey such as MAGIKARP."
+ },
+ {
+  "id": 19,
+  "name": "rattata",
+  "types": [
+   "normal"
+  ],
+  "height": 3,
+  "weight": 35,
+  "stats": {
+   "hp": 30,
+   "attack": 56,
+   "defense": 35,
+   "special-attack": 25,
+   "special-defense": 35,
+   "speed": 72
+  },
+  "flavor": "Living wherever there is food available, it ceaselessly scav­ enges for edibles the entire day."
+ },
+ {
+  "id": 20,
+  "name": "raticate",
+  "types": [
+   "normal"
+  ],
+  "height": 7,
+  "weight": 185,
+  "stats": {
+   "hp": 55,
+   "attack": 81,
+   "defense": 60,
+   "special-attack": 50,
+   "special-defense": 70,
+   "speed": 97
+  },
+  "flavor": "It uses its whis­ kers to maintain its balance. It apparently slows down if they are cut off."
+ },
+ {
+  "id": 21,
+  "name": "spearow",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 3,
+  "weight": 20,
+  "stats": {
+   "hp": 40,
+   "attack": 60,
+   "defense": 30,
+   "special-attack": 31,
+   "special-defense": 31,
+   "speed": 70
+  },
+  "flavor": "Eats bugs in grassy areas. It has to flap its short wings at high speed to stay airborne."
+ },
+ {
+  "id": 22,
+  "name": "fearow",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 12,
+  "weight": 380,
+  "stats": {
+   "hp": 65,
+   "attack": 90,
+   "defense": 65,
+   "special-attack": 61,
+   "special-defense": 61,
+   "speed": 100
+  },
+  "flavor": "With its huge and magnificent wings, it can keep aloft without ever having to land for rest."
+ },
+ {
+  "id": 23,
+  "name": "ekans",
+  "types": [
+   "poison"
+  ],
+  "height": 20,
+  "weight": 69,
+  "stats": {
+   "hp": 35,
+   "attack": 60,
+   "defense": 44,
+   "special-attack": 40,
+   "special-defense": 54,
+   "speed": 55
+  },
+  "flavor": "Moves silently and stealthily. Eats the eggs of birds, such as PIDGEY and SPEAROW, whole."
+ },
+ {
+  "id": 24,
+  "name": "arbok",
+  "types": [
+   "poison"
+  ],
+  "height": 35,
+  "weight": 650,
+  "stats": {
+   "hp": 60,
+   "attack": 95,
+   "defense": 69,
+   "special-attack": 65,
+   "special-defense": 79,
+   "speed": 80
+  },
+  "flavor": "It is rumored that the ferocious warning markings on its belly differ from area to area."
+ },
+ {
+  "id": 25,
+  "name": "pikachu",
+  "types": [
+   "electric"
+  ],
+  "height": 4,
+  "weight": 60,
+  "stats": {
+   "hp": 35,
+   "attack": 55,
+   "defense": 40,
+   "special-attack": 50,
+   "special-defense": 50,
+   "speed": 90
+  },
+  "flavor": "When several of these POKéMON gather, their electricity could build and cause lightning storms."
+ },
+ {
+  "id": 26,
+  "name": "raichu",
+  "types": [
+   "electric"
+  ],
+  "height": 8,
+  "weight": 300,
+  "stats": {
+   "hp": 60,
+   "attack": 90,
+   "defense": 55,
+   "special-attack": 90,
+   "special-defense": 80,
+   "speed": 110
+  },
+  "flavor": "Its long tail serves as a ground to protect itself from its own high voltage power."
+ },
+ {
+  "id": 27,
+  "name": "sandshrew",
+  "types": [
+   "ground"
+  ],
+  "height": 6,
+  "weight": 120,
+  "stats": {
+   "hp": 50,
+   "attack": 75,
+   "defense": 85,
+   "special-attack": 20,
+   "special-defense": 30,
+   "speed": 40
+  },
+  "flavor": "Burrows deep underground in arid locations far from water. It only emerges to hunt for food."
+ },
+ {
+  "id": 28,
+  "name": "sandslash",
+  "types": [
+   "ground"
+  ],
+  "height": 10,
+  "weight": 295,
+  "stats": {
+   "hp": 75,
+   "attack": 100,
+   "defense": 110,
+   "special-attack": 45,
+   "special-defense": 55,
+   "speed": 65
+  },
+  "flavor": "Curls up into a spiny ball when threatened. It can roll while curled up to attack or escape."
+ },
+ {
+  "id": 29,
+  "name": "nidoran-f",
+  "types": [
+   "poison"
+  ],
+  "height": 4,
+  "weight": 70,
+  "stats": {
+   "hp": 55,
+   "attack": 47,
+   "defense": 52,
+   "special-attack": 40,
+   "special-defense": 40,
+   "speed": 41
+  },
+  "flavor": "Although small, its venomous barbs render this POKéMON dangerous. The female has smaller horns."
+ },
+ {
+  "id": 30,
+  "name": "nidorina",
+  "types": [
+   "poison"
+  ],
+  "height": 8,
+  "weight": 200,
+  "stats": {
+   "hp": 70,
+   "attack": 62,
+   "defense": 67,
+   "special-attack": 55,
+   "special-defense": 55,
+   "speed": 56
+  },
+  "flavor": "The female's horn develops slowly. Prefers physical attacks such as clawing and biting."
+ },
+ {
+  "id": 31,
+  "name": "nidoqueen",
+  "types": [
+   "poison",
+   "ground"
+  ],
+  "height": 13,
+  "weight": 600,
+  "stats": {
+   "hp": 90,
+   "attack": 92,
+   "defense": 87,
+   "special-attack": 75,
+   "special-defense": 85,
+   "speed": 76
+  },
+  "flavor": "Its hard scales provide strong protection. It uses its hefty bulk to execute powerful moves."
+ },
+ {
+  "id": 32,
+  "name": "nidoran-m",
+  "types": [
+   "poison"
+  ],
+  "height": 5,
+  "weight": 90,
+  "stats": {
+   "hp": 46,
+   "attack": 57,
+   "defense": 40,
+   "special-attack": 40,
+   "special-defense": 40,
+   "speed": 50
+  },
+  "flavor": "Stiffens its ears to sense danger. The larger its horns, the more powerful its secreted venom."
+ },
+ {
+  "id": 33,
+  "name": "nidorino",
+  "types": [
+   "poison"
+  ],
+  "height": 9,
+  "weight": 195,
+  "stats": {
+   "hp": 61,
+   "attack": 72,
+   "defense": 57,
+   "special-attack": 55,
+   "special-defense": 55,
+   "speed": 65
+  },
+  "flavor": "An aggressive POKéMON that is quick to attack. The horn on its head secretes a powerful venom."
+ },
+ {
+  "id": 34,
+  "name": "nidoking",
+  "types": [
+   "poison",
+   "ground"
+  ],
+  "height": 14,
+  "weight": 620,
+  "stats": {
+   "hp": 81,
+   "attack": 102,
+   "defense": 77,
+   "special-attack": 85,
+   "special-defense": 75,
+   "speed": 85
+  },
+  "flavor": "It uses its powerful tail in battle to smash, constrict, then break the prey's bones."
+ },
+ {
+  "id": 35,
+  "name": "clefairy",
+  "types": [
+   "fairy"
+  ],
+  "height": 6,
+  "weight": 75,
+  "stats": {
+   "hp": 70,
+   "attack": 45,
+   "defense": 48,
+   "special-attack": 60,
+   "special-defense": 65,
+   "speed": 35
+  },
+  "flavor": "Its magical and cute appeal has many admirers. It is rare and found only in certain areas."
+ },
+ {
+  "id": 36,
+  "name": "clefable",
+  "types": [
+   "fairy"
+  ],
+  "height": 13,
+  "weight": 400,
+  "stats": {
+   "hp": 95,
+   "attack": 70,
+   "defense": 73,
+   "special-attack": 95,
+   "special-defense": 90,
+   "speed": 60
+  },
+  "flavor": "A timid fairy POKéMON that is rarely seen. It will run and hide the moment it senses people."
+ },
+ {
+  "id": 37,
+  "name": "vulpix",
+  "types": [
+   "fire"
+  ],
+  "height": 6,
+  "weight": 99,
+  "stats": {
+   "hp": 38,
+   "attack": 41,
+   "defense": 40,
+   "special-attack": 50,
+   "special-defense": 65,
+   "speed": 65
+  },
+  "flavor": "At the time of birth, it has just one tail. The tail splits from its tip as it grows older."
+ },
+ {
+  "id": 38,
+  "name": "ninetales",
+  "types": [
+   "fire"
+  ],
+  "height": 11,
+  "weight": 199,
+  "stats": {
+   "hp": 73,
+   "attack": 76,
+   "defense": 75,
+   "special-attack": 81,
+   "special-defense": 100,
+   "speed": 100
+  },
+  "flavor": "Very smart and very vengeful. Grabbing one of its many tails could result in a 1000-year curse."
+ },
+ {
+  "id": 39,
+  "name": "jigglypuff",
+  "types": [
+   "normal",
+   "fairy"
+  ],
+  "height": 5,
+  "weight": 55,
+  "stats": {
+   "hp": 115,
+   "attack": 45,
+   "defense": 20,
+   "special-attack": 45,
+   "special-defense": 25,
+   "speed": 20
+  },
+  "flavor": "When its huge eyes light up, it sings a mysteriously soothing melody that lulls its enemies to sleep."
+ },
+ {
+  "id": 40,
+  "name": "wigglytuff",
+  "types": [
+   "normal",
+   "fairy"
+  ],
+  "height": 10,
+  "weight": 120,
+  "stats": {
+   "hp": 140,
+   "attack": 70,
+   "defense": 45,
+   "special-attack": 85,
+   "special-defense": 50,
+   "speed": 45
+  },
+  "flavor": "The body is soft and rubbery. When angered, it will suck in air and inflate itself to an enormous size."
+ },
+ {
+  "id": 41,
+  "name": "zubat",
+  "types": [
+   "poison",
+   "flying"
+  ],
+  "height": 8,
+  "weight": 75,
+  "stats": {
+   "hp": 40,
+   "attack": 45,
+   "defense": 35,
+   "special-attack": 30,
+   "special-defense": 40,
+   "speed": 55
+  },
+  "flavor": "It has no eyes. Instead, it relies on its ultrasonic cries for echolocation to flit about in darkness."
+ },
+ {
+  "id": 42,
+  "name": "golbat",
+  "types": [
+   "poison",
+   "flying"
+  ],
+  "height": 16,
+  "weight": 550,
+  "stats": {
+   "hp": 75,
+   "attack": 80,
+   "defense": 70,
+   "special-attack": 65,
+   "special-defense": 75,
+   "speed": 90
+  },
+  "flavor": "Once it strikes, it will not stop draining energy from the victim even if it gets too heavy to fly."
+ },
+ {
+  "id": 43,
+  "name": "oddish",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 5,
+  "weight": 54,
+  "stats": {
+   "hp": 45,
+   "attack": 50,
+   "defense": 55,
+   "special-attack": 75,
+   "special-defense": 65,
+   "speed": 30
+  },
+  "flavor": "During the day, it keeps its face buried in the ground. At night, it wanders around sowing its seeds."
+ },
+ {
+  "id": 44,
+  "name": "gloom",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 8,
+  "weight": 86,
+  "stats": {
+   "hp": 60,
+   "attack": 65,
+   "defense": 70,
+   "special-attack": 85,
+   "special-defense": 75,
+   "speed": 40
+  },
+  "flavor": "The fluid that oozes from its mouth isn't drool. It is a nectar that is used to attract prey."
+ },
+ {
+  "id": 45,
+  "name": "vileplume",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 12,
+  "weight": 186,
+  "stats": {
+   "hp": 75,
+   "attack": 80,
+   "defense": 85,
+   "special-attack": 110,
+   "special-defense": 90,
+   "speed": 50
+  },
+  "flavor": "The larger its petals, the more toxic pollen it contains. Its big head is heavy and hard to hold up."
+ },
+ {
+  "id": 46,
+  "name": "paras",
+  "types": [
+   "bug",
+   "grass"
+  ],
+  "height": 3,
+  "weight": 54,
+  "stats": {
+   "hp": 35,
+   "attack": 70,
+   "defense": 55,
+   "special-attack": 45,
+   "special-defense": 55,
+   "speed": 25
+  },
+  "flavor": "Burrows to suck tree roots. The mushrooms on its back grow by draw­ ing nutrients from the bug host."
+ },
+ {
+  "id": 47,
+  "name": "parasect",
+  "types": [
+   "bug",
+   "grass"
+  ],
+  "height": 10,
+  "weight": 295,
+  "stats": {
+   "hp": 60,
+   "attack": 95,
+   "defense": 80,
+   "special-attack": 60,
+   "special-defense": 80,
+   "speed": 30
+  },
+  "flavor": "It stays mostly in dark, damp places, the preference not of the bug, but of the big mush­ rooms on its back."
+ },
+ {
+  "id": 48,
+  "name": "venonat",
+  "types": [
+   "bug",
+   "poison"
+  ],
+  "height": 10,
+  "weight": 300,
+  "stats": {
+   "hp": 60,
+   "attack": 55,
+   "defense": 50,
+   "special-attack": 40,
+   "special-defense": 55,
+   "speed": 45
+  },
+  "flavor": "Its big eyes are actually clusters of tiny eyes. At night, its kind is drawn by light."
+ },
+ {
+  "id": 49,
+  "name": "venomoth",
+  "types": [
+   "bug",
+   "poison"
+  ],
+  "height": 15,
+  "weight": 125,
+  "stats": {
+   "hp": 70,
+   "attack": 65,
+   "defense": 60,
+   "special-attack": 90,
+   "special-defense": 75,
+   "speed": 90
+  },
+  "flavor": "The dust-like scales covering its wings are color coded to indicate the kinds of poison it has."
+ },
+ {
+  "id": 50,
+  "name": "diglett",
+  "types": [
+   "ground"
+  ],
+  "height": 2,
+  "weight": 8,
+  "stats": {
+   "hp": 10,
+   "attack": 55,
+   "defense": 25,
+   "special-attack": 35,
+   "special-defense": 45,
+   "speed": 95
+  },
+  "flavor": "Lives about one yard underground where it feeds on plant roots. It sometimes appears above ground."
+ },
+ {
+  "id": 51,
+  "name": "dugtrio",
+  "types": [
+   "ground"
+  ],
+  "height": 7,
+  "weight": 333,
+  "stats": {
+   "hp": 35,
+   "attack": 100,
+   "defense": 50,
+   "special-attack": 50,
+   "special-defense": 70,
+   "speed": 120
+  },
+  "flavor": "A team of DIGLETT triplets. It triggers huge earthquakes by burrowing 60 miles underground."
+ },
+ {
+  "id": 52,
+  "name": "meowth",
+  "types": [
+   "normal"
+  ],
+  "height": 4,
+  "weight": 42,
+  "stats": {
+   "hp": 40,
+   "attack": 45,
+   "defense": 35,
+   "special-attack": 40,
+   "special-defense": 40,
+   "speed": 90
+  },
+  "flavor": "Adores circular objects. Wanders the streets on a nightly basis to look for dropped loose change."
+ },
+ {
+  "id": 53,
+  "name": "persian",
+  "types": [
+   "normal"
+  ],
+  "height": 10,
+  "weight": 320,
+  "stats": {
+   "hp": 65,
+   "attack": 70,
+   "defense": 60,
+   "special-attack": 65,
+   "special-defense": 65,
+   "speed": 115
+  },
+  "flavor": "Although its fur has many admirers, it is tough to raise as a pet because of its fickle meanness."
+ },
+ {
+  "id": 54,
+  "name": "psyduck",
+  "types": [
+   "water"
+  ],
+  "height": 8,
+  "weight": 196,
+  "stats": {
+   "hp": 50,
+   "attack": 52,
+   "defense": 48,
+   "special-attack": 65,
+   "special-defense": 50,
+   "speed": 55
+  },
+  "flavor": "While lulling its enemies with its vacant look, this wily POKéMON will use psychokinetic powers."
+ },
+ {
+  "id": 55,
+  "name": "golduck",
+  "types": [
+   "water"
+  ],
+  "height": 17,
+  "weight": 766,
+  "stats": {
+   "hp": 80,
+   "attack": 82,
+   "defense": 78,
+   "special-attack": 95,
+   "special-defense": 80,
+   "speed": 85
+  },
+  "flavor": "Often seen swim­ ming elegantly by lake shores. It is often mistaken for the Japanese monster, Kappa."
+ },
+ {
+  "id": 56,
+  "name": "mankey",
+  "types": [
+   "fighting"
+  ],
+  "height": 5,
+  "weight": 280,
+  "stats": {
+   "hp": 40,
+   "attack": 80,
+   "defense": 35,
+   "special-attack": 35,
+   "special-defense": 45,
+   "speed": 70
+  },
+  "flavor": "Extremely quick to anger. It could be docile one moment then thrashing away the next instant."
+ },
+ {
+  "id": 57,
+  "name": "primeape",
+  "types": [
+   "fighting"
+  ],
+  "height": 10,
+  "weight": 320,
+  "stats": {
+   "hp": 65,
+   "attack": 105,
+   "defense": 60,
+   "special-attack": 60,
+   "special-defense": 70,
+   "speed": 95
+  },
+  "flavor": "Always furious and tenacious to boot. It will not abandon chasing its quarry until it is caught."
+ },
+ {
+  "id": 58,
+  "name": "growlithe",
+  "types": [
+   "fire"
+  ],
+  "height": 7,
+  "weight": 190,
+  "stats": {
+   "hp": 55,
+   "attack": 70,
+   "defense": 45,
+   "special-attack": 70,
+   "special-defense": 50,
+   "speed": 60
+  },
+  "flavor": "Very protective of its territory. It will bark and bite to repel intruders from its space."
+ },
+ {
+  "id": 59,
+  "name": "arcanine",
+  "types": [
+   "fire"
+  ],
+  "height": 19,
+  "weight": 1550,
+  "stats": {
+   "hp": 90,
+   "attack": 110,
+   "defense": 80,
+   "special-attack": 100,
+   "special-defense": 80,
+   "speed": 95
+  },
+  "flavor": "A POKéMON that has been admired since the past for its beauty. It runs agilely as if on wings."
+ },
+ {
+  "id": 60,
+  "name": "poliwag",
+  "types": [
+   "water"
+  ],
+  "height": 6,
+  "weight": 124,
+  "stats": {
+   "hp": 40,
+   "attack": 50,
+   "defense": 40,
+   "special-attack": 40,
+   "special-defense": 40,
+   "speed": 90
+  },
+  "flavor": "Its newly grown legs prevent it from running. It appears to prefer swimming than trying to stand."
+ },
+ {
+  "id": 61,
+  "name": "poliwhirl",
+  "types": [
+   "water"
+  ],
+  "height": 10,
+  "weight": 200,
+  "stats": {
+   "hp": 65,
+   "attack": 65,
+   "defense": 65,
+   "special-attack": 50,
+   "special-defense": 50,
+   "speed": 90
+  },
+  "flavor": "Capable of living in or out of water. When out of water, it sweats to keep its body slimy."
+ },
+ {
+  "id": 62,
+  "name": "poliwrath",
+  "types": [
+   "water",
+   "fighting"
+  ],
+  "height": 13,
+  "weight": 540,
+  "stats": {
+   "hp": 90,
+   "attack": 95,
+   "defense": 95,
+   "special-attack": 70,
+   "special-defense": 90,
+   "speed": 70
+  },
+  "flavor": "An adept swimmer at both the front crawl and breast stroke. Easily overtakes the best human swimmers."
+ },
+ {
+  "id": 63,
+  "name": "abra",
+  "types": [
+   "psychic"
+  ],
+  "height": 9,
+  "weight": 195,
+  "stats": {
+   "hp": 25,
+   "attack": 20,
+   "defense": 15,
+   "special-attack": 105,
+   "special-defense": 55,
+   "speed": 90
+  },
+  "flavor": "Using its ability to read minds, it will identify impending danger and TELEPORT to safety."
+ },
+ {
+  "id": 64,
+  "name": "kadabra",
+  "types": [
+   "psychic"
+  ],
+  "height": 13,
+  "weight": 565,
+  "stats": {
+   "hp": 40,
+   "attack": 35,
+   "defense": 30,
+   "special-attack": 120,
+   "special-defense": 70,
+   "speed": 105
+  },
+  "flavor": "It emits special alpha waves from its body that induce headaches just by being close by."
+ },
+ {
+  "id": 65,
+  "name": "alakazam",
+  "types": [
+   "psychic"
+  ],
+  "height": 15,
+  "weight": 480,
+  "stats": {
+   "hp": 55,
+   "attack": 50,
+   "defense": 45,
+   "special-attack": 135,
+   "special-defense": 95,
+   "speed": 120
+  },
+  "flavor": "Its brain can out­ perform a super­ computer. Its intelligence quotient is said to be 5,000."
+ },
+ {
+  "id": 66,
+  "name": "machop",
+  "types": [
+   "fighting"
+  ],
+  "height": 8,
+  "weight": 195,
+  "stats": {
+   "hp": 70,
+   "attack": 80,
+   "defense": 50,
+   "special-attack": 35,
+   "special-defense": 35,
+   "speed": 35
+  },
+  "flavor": "Loves to build its muscles. It trains in all styles of martial arts to become even stronger."
+ },
+ {
+  "id": 67,
+  "name": "machoke",
+  "types": [
+   "fighting"
+  ],
+  "height": 15,
+  "weight": 705,
+  "stats": {
+   "hp": 80,
+   "attack": 100,
+   "defense": 70,
+   "special-attack": 50,
+   "special-defense": 60,
+   "speed": 45
+  },
+  "flavor": "It happily carries heavy cargo to toughen up. It willingly does hard work for people."
+ },
+ {
+  "id": 68,
+  "name": "machamp",
+  "types": [
+   "fighting"
+  ],
+  "height": 16,
+  "weight": 1300,
+  "stats": {
+   "hp": 90,
+   "attack": 130,
+   "defense": 80,
+   "special-attack": 65,
+   "special-defense": 85,
+   "speed": 55
+  },
+  "flavor": "Using its heavy muscles, it throws powerful punches that can send the victim clear over the horizon."
+ },
+ {
+  "id": 69,
+  "name": "bellsprout",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 7,
+  "weight": 40,
+  "stats": {
+   "hp": 50,
+   "attack": 75,
+   "defense": 35,
+   "special-attack": 70,
+   "special-defense": 30,
+   "speed": 40
+  },
+  "flavor": "A carnivorous POKéMON that traps and eats bugs. It uses its root feet to soak up needed moisture."
+ },
+ {
+  "id": 70,
+  "name": "weepinbell",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 10,
+  "weight": 64,
+  "stats": {
+   "hp": 65,
+   "attack": 90,
+   "defense": 50,
+   "special-attack": 85,
+   "special-defense": 45,
+   "speed": 55
+  },
+  "flavor": "A Pokémon that appears to be a plant. It captures unwary prey by dousing them with a toxic powder."
+ },
+ {
+  "id": 71,
+  "name": "victreebel",
+  "types": [
+   "grass",
+   "poison"
+  ],
+  "height": 17,
+  "weight": 155,
+  "stats": {
+   "hp": 80,
+   "attack": 105,
+   "defense": 65,
+   "special-attack": 100,
+   "special-defense": 70,
+   "speed": 70
+  },
+  "flavor": "Said to live in huge colonies deep in jungles, although no one has ever returned from there."
+ },
+ {
+  "id": 72,
+  "name": "tentacool",
+  "types": [
+   "water",
+   "poison"
+  ],
+  "height": 9,
+  "weight": 455,
+  "stats": {
+   "hp": 40,
+   "attack": 40,
+   "defense": 35,
+   "special-attack": 50,
+   "special-defense": 100,
+   "speed": 70
+  },
+  "flavor": "Drifts in shallow seas. Anglers who hook them by accident are often punished by its stinging acid."
+ },
+ {
+  "id": 73,
+  "name": "tentacruel",
+  "types": [
+   "water",
+   "poison"
+  ],
+  "height": 16,
+  "weight": 550,
+  "stats": {
+   "hp": 80,
+   "attack": 70,
+   "defense": 65,
+   "special-attack": 80,
+   "special-defense": 120,
+   "speed": 100
+  },
+  "flavor": "The tentacles are normally kept short. On hunts, they are extended to ensnare and immobilize prey."
+ },
+ {
+  "id": 74,
+  "name": "geodude",
+  "types": [
+   "rock",
+   "ground"
+  ],
+  "height": 4,
+  "weight": 200,
+  "stats": {
+   "hp": 40,
+   "attack": 80,
+   "defense": 100,
+   "special-attack": 30,
+   "special-defense": 30,
+   "speed": 20
+  },
+  "flavor": "Found in fields and mountains. Mistaking them for boulders, people often step or trip on them."
+ },
+ {
+  "id": 75,
+  "name": "graveler",
+  "types": [
+   "rock",
+   "ground"
+  ],
+  "height": 10,
+  "weight": 1050,
+  "stats": {
+   "hp": 55,
+   "attack": 95,
+   "defense": 115,
+   "special-attack": 45,
+   "special-defense": 45,
+   "speed": 35
+  },
+  "flavor": "Rolls down slopes to move. It rolls over any obstacle without slowing or changing its direction."
+ },
+ {
+  "id": 76,
+  "name": "golem",
+  "types": [
+   "rock",
+   "ground"
+  ],
+  "height": 14,
+  "weight": 3000,
+  "stats": {
+   "hp": 80,
+   "attack": 120,
+   "defense": 130,
+   "special-attack": 55,
+   "special-defense": 65,
+   "speed": 45
+  },
+  "flavor": "Its boulder-like body is extremely hard. It can easily withstand dynamite blasts without damage."
+ },
+ {
+  "id": 77,
+  "name": "ponyta",
+  "types": [
+   "fire"
+  ],
+  "height": 10,
+  "weight": 300,
+  "stats": {
+   "hp": 50,
+   "attack": 85,
+   "defense": 55,
+   "special-attack": 65,
+   "special-defense": 65,
+   "speed": 90
+  },
+  "flavor": "Its hooves are 10 times harder than diamonds. It can trample anything completely flat in little time."
+ },
+ {
+  "id": 78,
+  "name": "rapidash",
+  "types": [
+   "fire"
+  ],
+  "height": 17,
+  "weight": 950,
+  "stats": {
+   "hp": 65,
+   "attack": 100,
+   "defense": 70,
+   "special-attack": 80,
+   "special-defense": 80,
+   "speed": 105
+  },
+  "flavor": "Very competitive, this POKéMON will chase anything that moves fast in the hopes of racing it."
+ },
+ {
+  "id": 79,
+  "name": "slowpoke",
+  "types": [
+   "water",
+   "psychic"
+  ],
+  "height": 12,
+  "weight": 360,
+  "stats": {
+   "hp": 90,
+   "attack": 65,
+   "defense": 65,
+   "special-attack": 40,
+   "special-defense": 40,
+   "speed": 15
+  },
+  "flavor": "It is always so absent-minded that it won't react, even if its flavorful tail is bitten."
+ },
+ {
+  "id": 80,
+  "name": "slowbro",
+  "types": [
+   "water",
+   "psychic"
+  ],
+  "height": 16,
+  "weight": 785,
+  "stats": {
+   "hp": 95,
+   "attack": 75,
+   "defense": 110,
+   "special-attack": 100,
+   "special-defense": 80,
+   "speed": 30
+  },
+  "flavor": "The SHELLDER that is latched onto SLOWPOKE's tail is said to feed on the host's left over scraps."
+ },
+ {
+  "id": 81,
+  "name": "magnemite",
+  "types": [
+   "electric",
+   "steel"
+  ],
+  "height": 3,
+  "weight": 60,
+  "stats": {
+   "hp": 25,
+   "attack": 35,
+   "defense": 70,
+   "special-attack": 95,
+   "special-defense": 55,
+   "speed": 45
+  },
+  "flavor": "Uses anti-gravity to stay suspended. Appears without warning and uses THUNDER WAVE and similar moves."
+ },
+ {
+  "id": 82,
+  "name": "magneton",
+  "types": [
+   "electric",
+   "steel"
+  ],
+  "height": 10,
+  "weight": 600,
+  "stats": {
+   "hp": 50,
+   "attack": 60,
+   "defense": 95,
+   "special-attack": 120,
+   "special-defense": 70,
+   "speed": 70
+  },
+  "flavor": "Formed by several MAGNEMITEs linked together. They frequently appear when sunspots flare up."
+ },
+ {
+  "id": 83,
+  "name": "farfetchd",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 8,
+  "weight": 150,
+  "stats": {
+   "hp": 52,
+   "attack": 90,
+   "defense": 55,
+   "special-attack": 58,
+   "special-defense": 62,
+   "speed": 60
+  },
+  "flavor": "The sprig of green onions it holds is its weapon. It is used much like a metal sword."
+ },
+ {
+  "id": 84,
+  "name": "doduo",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 14,
+  "weight": 392,
+  "stats": {
+   "hp": 35,
+   "attack": 85,
+   "defense": 45,
+   "special-attack": 35,
+   "special-defense": 35,
+   "speed": 75
+  },
+  "flavor": "A bird that makes up for its poor flying with its fast foot speed. Leaves giant footprints."
+ },
+ {
+  "id": 85,
+  "name": "dodrio",
+  "types": [
+   "normal",
+   "flying"
+  ],
+  "height": 18,
+  "weight": 852,
+  "stats": {
+   "hp": 60,
+   "attack": 110,
+   "defense": 70,
+   "special-attack": 60,
+   "special-defense": 60,
+   "speed": 110
+  },
+  "flavor": "Uses its three brains to execute complex plans. While two heads sleep, one head stays awake."
+ },
+ {
+  "id": 86,
+  "name": "seel",
+  "types": [
+   "water"
+  ],
+  "height": 11,
+  "weight": 900,
+  "stats": {
+   "hp": 65,
+   "attack": 45,
+   "defense": 55,
+   "special-attack": 45,
+   "special-defense": 70,
+   "speed": 45
+  },
+  "flavor": "The protruding horn on its head is very hard. It is used for bashing through thick ice."
+ },
+ {
+  "id": 87,
+  "name": "dewgong",
+  "types": [
+   "water",
+   "ice"
+  ],
+  "height": 17,
+  "weight": 1200,
+  "stats": {
+   "hp": 90,
+   "attack": 70,
+   "defense": 80,
+   "special-attack": 70,
+   "special-defense": 95,
+   "speed": 70
+  },
+  "flavor": "Stores thermal energy in its body. Swims at a steady 8 knots even in intensely cold waters."
+ },
+ {
+  "id": 88,
+  "name": "grimer",
+  "types": [
+   "poison"
+  ],
+  "height": 9,
+  "weight": 300,
+  "stats": {
+   "hp": 80,
+   "attack": 80,
+   "defense": 50,
+   "special-attack": 40,
+   "special-defense": 50,
+   "speed": 25
+  },
+  "flavor": "Appears in filthy areas. Thrives by sucking up polluted sludge that is pumped out of factories."
+ },
+ {
+  "id": 89,
+  "name": "muk",
+  "types": [
+   "poison"
+  ],
+  "height": 12,
+  "weight": 300,
+  "stats": {
+   "hp": 105,
+   "attack": 105,
+   "defense": 75,
+   "special-attack": 65,
+   "special-defense": 100,
+   "speed": 50
+  },
+  "flavor": "Thickly covered with a filthy, vile sludge. It is so toxic, even its footprints contain poison."
+ },
+ {
+  "id": 90,
+  "name": "shellder",
+  "types": [
+   "water"
+  ],
+  "height": 3,
+  "weight": 40,
+  "stats": {
+   "hp": 30,
+   "attack": 65,
+   "defense": 100,
+   "special-attack": 45,
+   "special-defense": 25,
+   "speed": 40
+  },
+  "flavor": "Its hard shell repels any kind of attack. It is vulnerable only when its shell is open."
+ },
+ {
+  "id": 91,
+  "name": "cloyster",
+  "types": [
+   "water",
+   "ice"
+  ],
+  "height": 15,
+  "weight": 1325,
+  "stats": {
+   "hp": 50,
+   "attack": 95,
+   "defense": 180,
+   "special-attack": 85,
+   "special-defense": 45,
+   "speed": 70
+  },
+  "flavor": "When attacked, it launches its horns in quick volleys. Its innards have never been seen."
+ },
+ {
+  "id": 92,
+  "name": "gastly",
+  "types": [
+   "ghost",
+   "poison"
+  ],
+  "height": 13,
+  "weight": 1,
+  "stats": {
+   "hp": 30,
+   "attack": 35,
+   "defense": 30,
+   "special-attack": 100,
+   "special-defense": 35,
+   "speed": 80
+  },
+  "flavor": "Almost invisible, this gaseous POKéMON cloaks the target and puts it to sleep without notice."
+ },
+ {
+  "id": 93,
+  "name": "haunter",
+  "types": [
+   "ghost",
+   "poison"
+  ],
+  "height": 16,
+  "weight": 1,
+  "stats": {
+   "hp": 45,
+   "attack": 50,
+   "defense": 45,
+   "special-attack": 115,
+   "special-defense": 55,
+   "speed": 95
+  },
+  "flavor": "Because of its ability to slip through block walls, it is said to be from an­ other dimension."
+ },
+ {
+  "id": 94,
+  "name": "gengar",
+  "types": [
+   "ghost",
+   "poison"
+  ],
+  "height": 15,
+  "weight": 405,
+  "stats": {
+   "hp": 60,
+   "attack": 65,
+   "defense": 60,
+   "special-attack": 130,
+   "special-defense": 75,
+   "speed": 110
+  },
+  "flavor": "Under a full moon, this POKéMON likes to mimic the shadows of people and laugh at their fright."
+ },
+ {
+  "id": 95,
+  "name": "onix",
+  "types": [
+   "rock",
+   "ground"
+  ],
+  "height": 88,
+  "weight": 2100,
+  "stats": {
+   "hp": 35,
+   "attack": 45,
+   "defense": 160,
+   "special-attack": 30,
+   "special-defense": 45,
+   "speed": 70
+  },
+  "flavor": "It burrows through the ground at a speed of 50 mph while feeding on large boulders."
+ },
+ {
+  "id": 96,
+  "name": "drowzee",
+  "types": [
+   "psychic"
+  ],
+  "height": 10,
+  "weight": 324,
+  "stats": {
+   "hp": 60,
+   "attack": 48,
+   "defense": 45,
+   "special-attack": 43,
+   "special-defense": 90,
+   "speed": 42
+  },
+  "flavor": "Puts enemies to sleep then eats their dreams. Occasionally gets sick from eating bad dreams."
+ },
+ {
+  "id": 97,
+  "name": "hypno",
+  "types": [
+   "psychic"
+  ],
+  "height": 16,
+  "weight": 756,
+  "stats": {
+   "hp": 85,
+   "attack": 73,
+   "defense": 70,
+   "special-attack": 73,
+   "special-defense": 115,
+   "speed": 67
+  },
+  "flavor": "When it locks eyes with an enemy, it will use a mix of PSI moves such as HYPNOSIS and CONFUSION."
+ },
+ {
+  "id": 98,
+  "name": "krabby",
+  "types": [
+   "water"
+  ],
+  "height": 4,
+  "weight": 65,
+  "stats": {
+   "hp": 30,
+   "attack": 105,
+   "defense": 90,
+   "special-attack": 25,
+   "special-defense": 25,
+   "speed": 50
+  },
+  "flavor": "Its pincers are not only powerful weapons, they are used for balance when walking sideways."
+ },
+ {
+  "id": 99,
+  "name": "kingler",
+  "types": [
+   "water"
+  ],
+  "height": 13,
+  "weight": 600,
+  "stats": {
+   "hp": 55,
+   "attack": 130,
+   "defense": 115,
+   "special-attack": 50,
+   "special-defense": 50,
+   "speed": 75
+  },
+  "flavor": "The large pincer has 10000 hp of crushing power. However, its huge size makes it unwieldy to use."
+ },
+ {
+  "id": 100,
+  "name": "voltorb",
+  "types": [
+   "electric"
+  ],
+  "height": 5,
+  "weight": 104,
+  "stats": {
+   "hp": 40,
+   "attack": 30,
+   "defense": 50,
+   "special-attack": 55,
+   "special-defense": 55,
+   "speed": 100
+  },
+  "flavor": "Usually found in power plants. Easily mistaken for a POKé BALL, they have zapped many people."
+ },
+ {
+  "id": 101,
+  "name": "electrode",
+  "types": [
+   "electric"
+  ],
+  "height": 12,
+  "weight": 666,
+  "stats": {
+   "hp": 60,
+   "attack": 50,
+   "defense": 70,
+   "special-attack": 80,
+   "special-defense": 80,
+   "speed": 150
+  },
+  "flavor": "It stores electric energy under very high pressure. It often explodes with little or no provocation."
+ },
+ {
+  "id": 102,
+  "name": "exeggcute",
+  "types": [
+   "grass",
+   "psychic"
+  ],
+  "height": 4,
+  "weight": 25,
+  "stats": {
+   "hp": 60,
+   "attack": 40,
+   "defense": 80,
+   "special-attack": 60,
+   "special-defense": 45,
+   "speed": 40
+  },
+  "flavor": "Using telepathy only they can receive, they always form a cluster of six EXEGGCUTE."
+ },
+ {
+  "id": 103,
+  "name": "exeggutor",
+  "types": [
+   "grass",
+   "psychic"
+  ],
+  "height": 20,
+  "weight": 1200,
+  "stats": {
+   "hp": 95,
+   "attack": 95,
+   "defense": 85,
+   "special-attack": 125,
+   "special-defense": 75,
+   "speed": 55
+  },
+  "flavor": "Legend has it that on rare occasions, one of its heads will drop off and continue on as an EXEGGCUTE."
+ },
+ {
+  "id": 104,
+  "name": "cubone",
+  "types": [
+   "ground"
+  ],
+  "height": 4,
+  "weight": 65,
+  "stats": {
+   "hp": 50,
+   "attack": 50,
+   "defense": 95,
+   "special-attack": 40,
+   "special-defense": 50,
+   "speed": 35
+  },
+  "flavor": "Because it never removes its skull helmet, no one has ever seen this POKéMON's real face."
+ },
+ {
+  "id": 105,
+  "name": "marowak",
+  "types": [
+   "ground"
+  ],
+  "height": 10,
+  "weight": 450,
+  "stats": {
+   "hp": 60,
+   "attack": 80,
+   "defense": 110,
+   "special-attack": 50,
+   "special-defense": 80,
+   "speed": 45
+  },
+  "flavor": "The bone it holds is its key weapon. It throws the bone skillfully like a boomerang to KO targets."
+ },
+ {
+  "id": 106,
+  "name": "hitmonlee",
+  "types": [
+   "fighting"
+  ],
+  "height": 15,
+  "weight": 498,
+  "stats": {
+   "hp": 50,
+   "attack": 120,
+   "defense": 53,
+   "special-attack": 35,
+   "special-defense": 110,
+   "speed": 87
+  },
+  "flavor": "When in a hurry, its legs lengthen progressively. It runs smoothly with extra long, loping strides."
+ },
+ {
+  "id": 107,
+  "name": "hitmonchan",
+  "types": [
+   "fighting"
+  ],
+  "height": 14,
+  "weight": 502,
+  "stats": {
+   "hp": 50,
+   "attack": 105,
+   "defense": 79,
+   "special-attack": 35,
+   "special-defense": 110,
+   "speed": 76
+  },
+  "flavor": "The arm-twisting punches it throws pulverize even concrete. It rests after three minutes of fighting."
+ },
+ {
+  "id": 108,
+  "name": "lickitung",
+  "types": [
+   "normal"
+  ],
+  "height": 12,
+  "weight": 655,
+  "stats": {
+   "hp": 90,
+   "attack": 55,
+   "defense": 75,
+   "special-attack": 60,
+   "special-defense": 75,
+   "speed": 30
+  },
+  "flavor": "Its tongue can be extended like a chameleon's. It leaves a tingling sensation when it licks enemies."
+ },
+ {
+  "id": 109,
+  "name": "koffing",
+  "types": [
+   "poison"
+  ],
+  "height": 6,
+  "weight": 10,
+  "stats": {
+   "hp": 40,
+   "attack": 65,
+   "defense": 95,
+   "special-attack": 60,
+   "special-defense": 45,
+   "speed": 35
+  },
+  "flavor": "Because it stores several kinds of toxic gases in its body, it is prone to exploding without warning."
+ },
+ {
+  "id": 110,
+  "name": "weezing",
+  "types": [
+   "poison"
+  ],
+  "height": 12,
+  "weight": 95,
+  "stats": {
+   "hp": 65,
+   "attack": 90,
+   "defense": 120,
+   "special-attack": 85,
+   "special-defense": 70,
+   "speed": 60
+  },
+  "flavor": "Where two kinds of poison gases meet, 2 KOFFINGs can fuse into a WEEZING over many years."
+ },
+ {
+  "id": 111,
+  "name": "rhyhorn",
+  "types": [
+   "ground",
+   "rock"
+  ],
+  "height": 10,
+  "weight": 1150,
+  "stats": {
+   "hp": 80,
+   "attack": 85,
+   "defense": 95,
+   "special-attack": 30,
+   "special-defense": 30,
+   "speed": 25
+  },
+  "flavor": "Its massive bones are 1000 times harder than human bones. It can easily knock a trailer flying."
+ },
+ {
+  "id": 112,
+  "name": "rhydon",
+  "types": [
+   "ground",
+   "rock"
+  ],
+  "height": 19,
+  "weight": 1200,
+  "stats": {
+   "hp": 105,
+   "attack": 130,
+   "defense": 120,
+   "special-attack": 45,
+   "special-defense": 45,
+   "speed": 40
+  },
+  "flavor": "Protected by an armor-like hide, it is capable of living in molten lava of 3,600 degrees."
+ },
+ {
+  "id": 113,
+  "name": "chansey",
+  "types": [
+   "normal"
+  ],
+  "height": 11,
+  "weight": 346,
+  "stats": {
+   "hp": 250,
+   "attack": 5,
+   "defense": 5,
+   "special-attack": 35,
+   "special-defense": 105,
+   "speed": 50
+  },
+  "flavor": "A rare and elusive POKéMON that is said to bring happiness to those who manage to get it."
+ },
+ {
+  "id": 114,
+  "name": "tangela",
+  "types": [
+   "grass"
+  ],
+  "height": 10,
+  "weight": 350,
+  "stats": {
+   "hp": 65,
+   "attack": 55,
+   "defense": 115,
+   "special-attack": 100,
+   "special-defense": 40,
+   "speed": 60
+  },
+  "flavor": "The whole body is swathed with wide vines that are similar to sea­ weed. Its vines shake as it walks."
+ },
+ {
+  "id": 115,
+  "name": "kangaskhan",
+  "types": [
+   "normal"
+  ],
+  "height": 22,
+  "weight": 800,
+  "stats": {
+   "hp": 105,
+   "attack": 95,
+   "defense": 80,
+   "special-attack": 40,
+   "special-defense": 80,
+   "speed": 90
+  },
+  "flavor": "The infant rarely ventures out of its mother's protective pouch until it is 3 years old."
+ },
+ {
+  "id": 116,
+  "name": "horsea",
+  "types": [
+   "water"
+  ],
+  "height": 4,
+  "weight": 80,
+  "stats": {
+   "hp": 30,
+   "attack": 40,
+   "defense": 70,
+   "special-attack": 70,
+   "special-defense": 25,
+   "speed": 60
+  },
+  "flavor": "Known to shoot down flying bugs with precision blasts of ink from the surface of the water."
+ },
+ {
+  "id": 117,
+  "name": "seadra",
+  "types": [
+   "water"
+  ],
+  "height": 12,
+  "weight": 250,
+  "stats": {
+   "hp": 55,
+   "attack": 65,
+   "defense": 95,
+   "special-attack": 95,
+   "special-defense": 45,
+   "speed": 85
+  },
+  "flavor": "Capable of swim­ ming backwards by rapidly flapping its wing-like pectoral fins and stout tail."
+ },
+ {
+  "id": 118,
+  "name": "goldeen",
+  "types": [
+   "water"
+  ],
+  "height": 6,
+  "weight": 150,
+  "stats": {
+   "hp": 45,
+   "attack": 67,
+   "defense": 60,
+   "special-attack": 35,
+   "special-defense": 50,
+   "speed": 63
+  },
+  "flavor": "Its tail fin billows like an elegant ballroom dress, giving it the nickname of the Water Queen."
+ },
+ {
+  "id": 119,
+  "name": "seaking",
+  "types": [
+   "water"
+  ],
+  "height": 13,
+  "weight": 390,
+  "stats": {
+   "hp": 80,
+   "attack": 92,
+   "defense": 65,
+   "special-attack": 65,
+   "special-defense": 80,
+   "speed": 68
+  },
+  "flavor": "In autumn, its body becomes more fatty in preparing to propose to a mate. It takes on beautiful colors."
+ },
+ {
+  "id": 120,
+  "name": "staryu",
+  "types": [
+   "water"
+  ],
+  "height": 8,
+  "weight": 345,
+  "stats": {
+   "hp": 30,
+   "attack": 45,
+   "defense": 55,
+   "special-attack": 70,
+   "special-defense": 55,
+   "speed": 85
+  },
+  "flavor": "An enigmatic POKéMON that can effortlessly regenerate any appendage it loses in battle."
+ },
+ {
+  "id": 121,
+  "name": "starmie",
+  "types": [
+   "water",
+   "psychic"
+  ],
+  "height": 11,
+  "weight": 800,
+  "stats": {
+   "hp": 60,
+   "attack": 75,
+   "defense": 85,
+   "special-attack": 100,
+   "special-defense": 85,
+   "speed": 115
+  },
+  "flavor": "Its central core glows with the seven colors of the rainbow. Some people value the core as a gem."
+ },
+ {
+  "id": 122,
+  "name": "mr-mime",
+  "types": [
+   "psychic",
+   "fairy"
+  ],
+  "height": 13,
+  "weight": 545,
+  "stats": {
+   "hp": 40,
+   "attack": 45,
+   "defense": 65,
+   "special-attack": 100,
+   "special-defense": 120,
+   "speed": 90
+  },
+  "flavor": "If interrupted while it is miming, it will slap around the offender with its broad hands."
+ },
+ {
+  "id": 123,
+  "name": "scyther",
+  "types": [
+   "bug",
+   "flying"
+  ],
+  "height": 15,
+  "weight": 560,
+  "stats": {
+   "hp": 70,
+   "attack": 110,
+   "defense": 80,
+   "special-attack": 55,
+   "special-defense": 80,
+   "speed": 105
+  },
+  "flavor": "With ninja-like agility and speed, it can create the illusion that there is more than one."
+ },
+ {
+  "id": 124,
+  "name": "jynx",
+  "types": [
+   "ice",
+   "psychic"
+  ],
+  "height": 14,
+  "weight": 406,
+  "stats": {
+   "hp": 65,
+   "attack": 50,
+   "defense": 35,
+   "special-attack": 115,
+   "special-defense": 95,
+   "speed": 95
+  },
+  "flavor": "It seductively wiggles its hips as it walks. It can cause people to dance in unison with it."
+ },
+ {
+  "id": 125,
+  "name": "electabuzz",
+  "types": [
+   "electric"
+  ],
+  "height": 11,
+  "weight": 300,
+  "stats": {
+   "hp": 65,
+   "attack": 83,
+   "defense": 57,
+   "special-attack": 95,
+   "special-defense": 85,
+   "speed": 105
+  },
+  "flavor": "Normally found near power plants, they can wander away and cause major blackouts in cities."
+ },
+ {
+  "id": 126,
+  "name": "magmar",
+  "types": [
+   "fire"
+  ],
+  "height": 13,
+  "weight": 445,
+  "stats": {
+   "hp": 65,
+   "attack": 95,
+   "defense": 57,
+   "special-attack": 100,
+   "special-defense": 85,
+   "speed": 93
+  },
+  "flavor": "Its body always burns with an orange glow that enables it to hide perfectly among flames."
+ },
+ {
+  "id": 127,
+  "name": "pinsir",
+  "types": [
+   "bug"
+  ],
+  "height": 15,
+  "weight": 550,
+  "stats": {
+   "hp": 65,
+   "attack": 125,
+   "defense": 100,
+   "special-attack": 55,
+   "special-defense": 70,
+   "speed": 85
+  },
+  "flavor": "If it fails to crush the victim in its pincers, it will swing it around and toss it hard."
+ },
+ {
+  "id": 128,
+  "name": "tauros",
+  "types": [
+   "normal"
+  ],
+  "height": 14,
+  "weight": 884,
+  "stats": {
+   "hp": 75,
+   "attack": 100,
+   "defense": 95,
+   "special-attack": 40,
+   "special-defense": 70,
+   "speed": 110
+  },
+  "flavor": "When it targets an enemy, it charges furiously while whipping its body with its long tails."
+ },
+ {
+  "id": 129,
+  "name": "magikarp",
+  "types": [
+   "water"
+  ],
+  "height": 9,
+  "weight": 100,
+  "stats": {
+   "hp": 20,
+   "attack": 10,
+   "defense": 55,
+   "special-attack": 15,
+   "special-defense": 20,
+   "speed": 80
+  },
+  "flavor": "In the distant past, it was somewhat stronger than the horribly weak descendants that exist today."
+ },
+ {
+  "id": 130,
+  "name": "gyarados",
+  "types": [
+   "water",
+   "flying"
+  ],
+  "height": 65,
+  "weight": 2350,
+  "stats": {
+   "hp": 95,
+   "attack": 125,
+   "defense": 79,
+   "special-attack": 60,
+   "special-defense": 100,
+   "speed": 81
+  },
+  "flavor": "Rarely seen in the wild. Huge and vicious, it is capable of destroying entire cities in a rage."
+ },
+ {
+  "id": 131,
+  "name": "lapras",
+  "types": [
+   "water",
+   "ice"
+  ],
+  "height": 25,
+  "weight": 2200,
+  "stats": {
+   "hp": 130,
+   "attack": 85,
+   "defense": 80,
+   "special-attack": 85,
+   "special-defense": 95,
+   "speed": 60
+  },
+  "flavor": "A POKéMON that has been over­ hunted almost to extinction. It can ferry people across the water."
+ },
+ {
+  "id": 132,
+  "name": "ditto",
+  "types": [
+   "normal"
+  ],
+  "height": 3,
+  "weight": 40,
+  "stats": {
+   "hp": 48,
+   "attack": 48,
+   "defense": 48,
+   "special-attack": 48,
+   "special-defense": 48,
+   "speed": 48
+  },
+  "flavor": "When it spots an enemy, its body transfigures into an almost-perfect copy of its opponent."
+ },
+ {
+  "id": 133,
+  "name": "eevee",
+  "types": [
+   "normal"
+  ],
+  "height": 3,
+  "weight": 65,
+  "stats": {
+   "hp": 55,
+   "attack": 55,
+   "defense": 50,
+   "special-attack": 45,
+   "special-defense": 65,
+   "speed": 55
+  },
+  "flavor": "Its genetic code is irregular. It may mutate if it is exposed to radiation from element STONEs."
+ },
+ {
+  "id": 134,
+  "name": "vaporeon",
+  "types": [
+   "water"
+  ],
+  "height": 10,
+  "weight": 290,
+  "stats": {
+   "hp": 130,
+   "attack": 65,
+   "defense": 60,
+   "special-attack": 110,
+   "special-defense": 95,
+   "speed": 65
+  },
+  "flavor": "Lives close to water. Its long tail is ridged with a fin which is often mistaken for a mermaid's."
+ },
+ {
+  "id": 135,
+  "name": "jolteon",
+  "types": [
+   "electric"
+  ],
+  "height": 8,
+  "weight": 245,
+  "stats": {
+   "hp": 65,
+   "attack": 65,
+   "defense": 60,
+   "special-attack": 110,
+   "special-defense": 95,
+   "speed": 130
+  },
+  "flavor": "It accumulates negative ions in the atmosphere to blast out 10000- volt lightning bolts."
+ },
+ {
+  "id": 136,
+  "name": "flareon",
+  "types": [
+   "fire"
+  ],
+  "height": 9,
+  "weight": 250,
+  "stats": {
+   "hp": 65,
+   "attack": 130,
+   "defense": 60,
+   "special-attack": 95,
+   "special-defense": 110,
+   "speed": 65
+  },
+  "flavor": "When storing thermal energy in its body, its temperature could soar to over 1600 degrees."
+ },
+ {
+  "id": 137,
+  "name": "porygon",
+  "types": [
+   "normal"
+  ],
+  "height": 8,
+  "weight": 365,
+  "stats": {
+   "hp": 65,
+   "attack": 60,
+   "defense": 70,
+   "special-attack": 85,
+   "special-defense": 75,
+   "speed": 40
+  },
+  "flavor": "A POKéMON that consists entirely of programming code. Capable of moving freely in cyberspace."
+ },
+ {
+  "id": 138,
+  "name": "omanyte",
+  "types": [
+   "rock",
+   "water"
+  ],
+  "height": 4,
+  "weight": 75,
+  "stats": {
+   "hp": 35,
+   "attack": 40,
+   "defense": 100,
+   "special-attack": 90,
+   "special-defense": 55,
+   "speed": 35
+  },
+  "flavor": "Although long extinct, in rare cases, it can be genetically resurrected from fossils."
+ },
+ {
+  "id": 139,
+  "name": "omastar",
+  "types": [
+   "rock",
+   "water"
+  ],
+  "height": 10,
+  "weight": 350,
+  "stats": {
+   "hp": 70,
+   "attack": 60,
+   "defense": 125,
+   "special-attack": 115,
+   "special-defense": 70,
+   "speed": 55
+  },
+  "flavor": "A prehistoric POKéMON that died out when its heavy shell made it impossible to catch prey."
+ },
+ {
+  "id": 140,
+  "name": "kabuto",
+  "types": [
+   "rock",
+   "water"
+  ],
+  "height": 5,
+  "weight": 115,
+  "stats": {
+   "hp": 30,
+   "attack": 80,
+   "defense": 90,
+   "special-attack": 55,
+   "special-defense": 45,
+   "speed": 55
+  },
+  "flavor": "A POKéMON that was resurrected from a fossil found in what was once the ocean floor eons ago."
+ },
+ {
+  "id": 141,
+  "name": "kabutops",
+  "types": [
+   "rock",
+   "water"
+  ],
+  "height": 13,
+  "weight": 405,
+  "stats": {
+   "hp": 60,
+   "attack": 115,
+   "defense": 105,
+   "special-attack": 65,
+   "special-defense": 70,
+   "speed": 80
+  },
+  "flavor": "Kabutops slices its prey apart and sucks out the fluids. The discarded body parts become food for other Pokémon."
+ },
+ {
+  "id": 142,
+  "name": "aerodactyl",
+  "types": [
+   "rock",
+   "flying"
+  ],
+  "height": 18,
+  "weight": 590,
+  "stats": {
+   "hp": 80,
+   "attack": 105,
+   "defense": 65,
+   "special-attack": 60,
+   "special-defense": 75,
+   "speed": 130
+  },
+  "flavor": "A ferocious, pre­ historic POKéMON that goes for the enemy's throat with its serrated saw-like fangs."
+ },
+ {
+  "id": 143,
+  "name": "snorlax",
+  "types": [
+   "normal"
+  ],
+  "height": 21,
+  "weight": 4600,
+  "stats": {
+   "hp": 160,
+   "attack": 110,
+   "defense": 65,
+   "special-attack": 65,
+   "special-defense": 110,
+   "speed": 30
+  },
+  "flavor": "Very lazy. Just eats and sleeps. As its rotund bulk builds, it becomes steadily more slothful."
+ },
+ {
+  "id": 144,
+  "name": "articuno",
+  "types": [
+   "ice",
+   "flying"
+  ],
+  "height": 17,
+  "weight": 554,
+  "stats": {
+   "hp": 90,
+   "attack": 85,
+   "defense": 100,
+   "special-attack": 95,
+   "special-defense": 125,
+   "speed": 85
+  },
+  "flavor": "A legendary bird POKéMON that is said to appear to doomed people who are lost in icy mountains."
+ },
+ {
+  "id": 145,
+  "name": "zapdos",
+  "types": [
+   "electric",
+   "flying"
+  ],
+  "height": 16,
+  "weight": 526,
+  "stats": {
+   "hp": 90,
+   "attack": 90,
+   "defense": 85,
+   "special-attack": 125,
+   "special-defense": 90,
+   "speed": 100
+  },
+  "flavor": "A legendary bird POKéMON that is said to appear from clouds while dropping enormous lightning bolts."
+ },
+ {
+  "id": 146,
+  "name": "moltres",
+  "types": [
+   "fire",
+   "flying"
+  ],
+  "height": 20,
+  "weight": 600,
+  "stats": {
+   "hp": 90,
+   "attack": 100,
+   "defense": 90,
+   "special-attack": 125,
+   "special-defense": 85,
+   "speed": 90
+  },
+  "flavor": "Known as the legendary bird of fire. Every flap of its wings creates a dazzling flash of flames."
+ },
+ {
+  "id": 147,
+  "name": "dratini",
+  "types": [
+   "dragon"
+  ],
+  "height": 18,
+  "weight": 33,
+  "stats": {
+   "hp": 41,
+   "attack": 64,
+   "defense": 45,
+   "special-attack": 50,
+   "special-defense": 50,
+   "speed": 50
+  },
+  "flavor": "Long considered a mythical POKéMON until recently when a small colony was found living underwater."
+ },
+ {
+  "id": 148,
+  "name": "dragonair",
+  "types": [
+   "dragon"
+  ],
+  "height": 40,
+  "weight": 165,
+  "stats": {
+   "hp": 61,
+   "attack": 84,
+   "defense": 65,
+   "special-attack": 70,
+   "special-defense": 70,
+   "speed": 70
+  },
+  "flavor": "A mystical POKéMON that exudes a gentle aura. Has the ability to change climate conditions."
+ },
+ {
+  "id": 149,
+  "name": "dragonite",
+  "types": [
+   "dragon",
+   "flying"
+  ],
+  "height": 22,
+  "weight": 2100,
+  "stats": {
+   "hp": 91,
+   "attack": 134,
+   "defense": 95,
+   "special-attack": 100,
+   "special-defense": 100,
+   "speed": 80
+  },
+  "flavor": "An extremely rarely seen marine POKéMON. Its intelligence is said to match that of humans."
+ },
+ {
+  "id": 150,
+  "name": "mewtwo",
+  "types": [
+   "psychic"
+  ],
+  "height": 20,
+  "weight": 1220,
+  "stats": {
+   "hp": 106,
+   "attack": 110,
+   "defense": 90,
+   "special-attack": 154,
+   "special-defense": 90,
+   "speed": 130
+  },
+  "flavor": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments."
+ },
+ {
+  "id": 151,
+  "name": "mew",
+  "types": [
+   "psychic"
+  ],
+  "height": 4,
+  "weight": 40,
+  "stats": {
+   "hp": 100,
+   "attack": 100,
+   "defense": 100,
+   "special-attack": 100,
+   "special-defense": 100,
+   "speed": 100
+  },
+  "flavor": "So rare that it is still said to be a mirage by many experts. Only a few people have seen it worldwide."
+ }
+]

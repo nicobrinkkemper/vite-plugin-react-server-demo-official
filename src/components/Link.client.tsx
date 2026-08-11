@@ -1,48 +1,48 @@
-"use client"
+"use client";
+import * as React from "react";
+import { Link as RouterLink, useOptionalRouter } from "vite-plugin-react-server/router/client";
 
-import React from "react";
-export const Link: React.FC<{
-  children: React.ReactNode;
-  to?: string;
-  href?: string;
-  className?: string;
-}> = ({ children, to, href, className, ...props }) => (
-  <a
-    {...props}
-    className={className ?? ""}
-    href={typeof href === 'string' ? href : to}
-    onClick={(e) => {
-      e.preventDefault();
-      let localHref = href || to;
-      const isBlank =
-        localHref?.startsWith("http") ||
-        (e.currentTarget &&
-          "target" in e.currentTarget &&
-          e.currentTarget.target.toLowerCase() === "_blank");
-      
-      const newTo =
-        e.currentTarget && "href" in e.currentTarget
-          ? e.currentTarget.href
-          : localHref;
+const emptySubscribe = () => () => {};
+const getEmpty = () => "";
+const strip = (p: string) => p.replace(/\/+$/, "") || "/";
 
-        if (isBlank) {
-          if(newTo) window.location.href = newTo
-        }
-      const newState = { to: newTo };
-      if(window.location.pathname !== newTo) {
-        // Scroll-to-top on a real link click. The hand-rolled client's popstate
-        // handler used to do this; startClient replaces that handler and does not
-        // force scroll, so browser back/forward keep their restored position.
+// vprs router Link (typed `to` via the Register declaration in client.tsx,
+// intent-prefetch on hover, external/modified-click passthrough, plain <a>
+// during static prerender) plus the template's transition state: the router
+// swaps resolve-then-set, so after a click the old page stays mounted while
+// the target's flight loads — during that window the clicked link carries
+// `data-pending`/aria-busy and the page is styled as stale (globalStyles.css).
+// The indicator leaves the tree with the old page when the swap lands.
+export const Link: typeof RouterLink = ({ onClick, ...props }) => {
+  const router = useOptionalRouter();
+  const subscribe = router ? router.subscribe : emptySubscribe;
+  const getUrl = router ? () => router.getState().url : getEmpty;
+  const location = React.useSyncExternalStore(subscribe, getUrl, getUrl);
+  const [initial] = React.useState(location);
+  const [clicked, setClicked] = React.useState(false);
+
+  const pending =
+    clicked && location !== initial && strip(location) === strip(props.to);
+
+  return (
+    <RouterLink
+      {...props}
+      data-pending={pending || undefined}
+      aria-busy={pending || undefined}
+      onClick={(e) => {
+        onClick?.(e);
+        if (
+          e.defaultPrevented ||
+          e.button !== 0 ||
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          e.altKey
+        )
+          return;
+        setClicked(true);
         if ("scrollTo" in window) window.scrollTo(0, 0);
-        try {
-          window.history.pushState(newState, "", e.currentTarget.href);
-          window.dispatchEvent(new PopStateEvent("popstate", { state: newState }));
-        } catch (error) {
-          console.error(`You can not go to ${newTo}`, error);
-        }
-      }
-    }}
-  >
-    {children}
-  </a>
-);
+      }}
+    />
+  );
+};

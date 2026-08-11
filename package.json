@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "demo": "rm -f todos.db && NODE_ENV=production VITE_PUBLIC_ORIGIN='http://localhost:3000' PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production node dist/server/server/index-*.js",
+    "demo": "rm -f pokedex.db && NODE_ENV=production VITE_PUBLIC_ORIGIN='http://localhost:3000' PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && NODE_ENV=production node dist/server/server/index-*.js",
     "test": "npm run test:e2e",
     "test:e2e": "NODE_ENV=production VITE_PUBLIC_ORIGIN='http://localhost:3000' PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build && playwright test",
     "dev": "npm run dev:rsc",
@@ -44,7 +44,7 @@
     "react-dom": "^19.2.7",
     "tsx": "^4.22.4",
     "vite": "^8.2.0",
-    "vite-plugin-react-server": "^3.6.0",
+    "vite-plugin-react-server": "^3.9.1",
     "webpack-sources": "^3.5.0"
   }
 }

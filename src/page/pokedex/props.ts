@@ -1,0 +1,15 @@
+import { baseHref, gen1 } from "../../lib/pokedex.js";
+
+export const props = (url: string) => ({
+  title: "Pokédex — all 151",
+  url,
+  pokedex: gen1,
+  searchAction: `${baseHref()}pokedex/`,
+  namesHref: `${baseHref()}names.json`,
+  staticOnly: process.env.GITHUB_PAGES === "true",
+  navigation: {
+    back: { href: baseHref(), text: "Back" },
+  },
+});
+
+export type Props = ReturnType<typeof props>;

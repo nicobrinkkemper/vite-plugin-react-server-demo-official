@@ -15,3 +15,22 @@ body{
     animation-duration: 0.001ms !important;
   }
 }
+/* Navigation transition: the router keeps the old page mounted while the next
+   route's flight loads. The clicked link carries data-pending for that window
+   (set in Link.client.tsx); the outgoing page reads as stale. */
+body:has(a[data-pending]) {
+    cursor: progress;
+}
+body:has(a[data-pending]) #root {
+    opacity: 0.6;
+    transition: opacity 0.15s ease 0.1s;
+}
+a[data-pending] {
+    animation: nav-pulse 1s ease-in-out infinite;
+}
+@keyframes nav-pulse {
+    50% { opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) {
+    a[data-pending] { animation: none; }
+}

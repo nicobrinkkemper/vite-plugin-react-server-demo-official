@@ -6,21 +6,26 @@ import { ErrorBoundary } from "./components/ErrorBoundary.client.js";
 import "./css/globalStyles.css";
 
 /**
- * bidoof client entry.
+ * Client entry.
  *
  * vprs's `startClient` is the supplied client entry: it assembles the headless
  * router, initial-flight hydration (consuming the payload inlined into the
- * document on first paint — the static build's baked flight and /todos' live
- * per-request flight alike), client-side navigation, and RSC HMR. The whole
- * hand-rolled App / popstate / refetch / hydrateRoot boilerplate collapses to
- * this one call; the ErrorBoundary is injected through `wrap`.
- *
- * Navigation flows through <Link> (pushState + popstate), which the router
- * listens for; scroll-to-top on a click lives in <Link>. No `patterns` are
- * needed — bidoof reads no route params via useParams.
+ * document on first paint — the static build's baked flight and the per-request
+ * live flight alike), client-side navigation, and RSC HMR. The `patterns` let
+ * `useParams()` resolve `/pokedex/$name`; the ErrorBoundary is injected
+ * through `wrap`.
  */
 startClient({
   moduleBaseURL: import.meta.env.BASE_URL,
   publicOrigin: import.meta.env.PUBLIC_ORIGIN,
+  patterns: ["/", "/pokedex", "/pokedex/$name", "/404"],
   wrap: (node: ReactNode) => <ErrorBoundary>{node}</ErrorBoundary>,
 });
+
+// Typed navigation: `Link`'s `to` autocompletes these patterns (concrete paths
+// like /pokedex/pikachu still type-check).
+declare module "vite-plugin-react-server/router/client" {
+  interface Register {
+    routes: "/" | "/pokedex" | "/pokedex/$name" | "/404";
+  }
+}
