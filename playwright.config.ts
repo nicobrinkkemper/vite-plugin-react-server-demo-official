@@ -32,8 +32,11 @@ export default defineConfig({
     // Plain Node, so it survives in the background; the build ran before this.
     command:
       "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production node dist/server/server/index*.js",
-    url: "http://localhost:3000/todos/",
-    reuseExistingServer: !process.env.CI,
+    url: "http://localhost:3000/pokedex/",
+    // Never reuse: `test:e2e` rebuilds dist first, and this server holds the
+    // edge bundle in memory from ITS start — a leftover server silently tests
+    // the previous build.
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });

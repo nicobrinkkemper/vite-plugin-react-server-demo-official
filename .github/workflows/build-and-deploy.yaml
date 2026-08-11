@@ -29,6 +29,8 @@ jobs:
         uses: actions/configure-pages@v6
       - run: npm ci
       - run: npm run build:gh --if-present
+      - name: Custom 404 for deep links (GH Pages serves 404.html at the root)
+        run: cp dist/static/404/index.html dist/static/404.html
       - name: List contents
         run: |
           ls -la dist/static/
