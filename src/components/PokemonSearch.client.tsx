@@ -17,9 +17,13 @@ const MAX_RESULTS = 24;
 export const PokemonSearch = ({
   namesHref,
   action,
+  staticOnly,
 }: {
   namesHref: string;
   action: string;
+  /** Static-only deploy (GitHub Pages): only the prerendered originals
+   *  exist, so search offers just those. */
+  staticOnly?: boolean;
 }) => {
   const router = useOptionalRouter();
   const [query, setQuery] = React.useState("");
@@ -39,8 +43,9 @@ export const PokemonSearch = ({
   }, [namesHref]);
 
   const q = toSlug(query);
+  const searchable = staticOnly ? index.filter((entry) => entry.id <= 151) : index;
   const results = q
-    ? index.filter((entry) => entry.name.includes(q)).slice(0, MAX_RESULTS)
+    ? searchable.filter((entry) => entry.name.includes(q)).slice(0, MAX_RESULTS)
     : [];
 
   return (
@@ -52,7 +57,7 @@ export const PokemonSearch = ({
         onSubmit={(e) => {
           if (!router) return;
           e.preventDefault();
-          const target = results[0]?.name ?? q;
+          const target = results[0]?.name ?? (staticOnly ? "" : q);
           if (target) router.navigate(`${action}${target}/`);
         }}
       >

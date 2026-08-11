@@ -23,6 +23,10 @@ export const Html: React.FC<HtmlProps> = ({
   return (
     <html>
       <head>
+        {/* Declared in the document: hosts that omit a charset header would
+            otherwise mangle non-ASCII text ("Pokédex") and break hydration
+            with React #418. */}
+        <meta charSet="utf-8" />
         <Css cssFiles={globalCss} />
       </head>
       <body>

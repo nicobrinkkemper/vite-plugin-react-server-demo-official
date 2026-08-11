@@ -43,9 +43,15 @@ export const Page = ({ title, navigation, featured, isGithubPages }: Props) => {
           <p>
             Every other Pokémon renders <em>per request</em> on the same route,
             fetched live from PokéAPI. Try{" "}
-            <Link to={navigation.toBidoof.href} className={styles["Url"]}>
-              Bidoof
-            </Link>{" "}
+            {isGithubPages ? (
+              <a href={navigation.toBidoof.href} className={styles["Url"]}>
+                Bidoof
+              </a>
+            ) : (
+              <Link to={navigation.toBidoof.href} className={styles["Url"]}>
+                Bidoof
+              </Link>
+            )}{" "}
             — it&apos;s gen 4, so it isn&apos;t in the static build.
             {isGithubPages &&
               " (This deploy is static-only, so Bidoof will 404 here — clone the repo and `npm run demo` to see the live path.)"}

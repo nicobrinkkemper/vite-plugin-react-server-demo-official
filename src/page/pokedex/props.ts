@@ -6,6 +6,7 @@ export const props = (url: string) => ({
   pokedex: gen1,
   searchAction: `${baseHref()}pokedex/`,
   namesHref: `${baseHref()}names.json`,
+  staticOnly: process.env.GITHUB_PAGES === "true",
   navigation: {
     back: { href: baseHref(), text: "Back" },
   },
