@@ -14,6 +14,10 @@ const MAX_RESULTS = 24;
 // artifact (public/names.json) fetched once on mount, matches render as the
 // same icon cards as the grid below, and each card links into
 // /pokedex/$name — prerendered for the originals, per request beyond them.
+// On a static-only deploy the beyond-original results still show, but as
+// full-page links tagged "server only": the click lands on the 404 page
+// (which explains the two render modes) instead of hanging the router on a
+// flight fetch the host can't answer.
 export const PokemonSearch = ({
   namesHref,
   action,
@@ -21,8 +25,9 @@ export const PokemonSearch = ({
 }: {
   namesHref: string;
   action: string;
-  /** Static-only deploy (GitHub Pages): only the prerendered originals
-   *  exist, so search offers just those. */
+  /** Static-only deploy (GitHub Pages): only the prerendered originals are
+   *  reachable client-side; other results become full-page "server only"
+   *  links. */
   staticOnly?: boolean;
 }) => {
   const router = useOptionalRouter();
@@ -43,10 +48,10 @@ export const PokemonSearch = ({
   }, [namesHref]);
 
   const q = toSlug(query);
-  const searchable = staticOnly ? index.filter((entry) => entry.id <= 151) : index;
   const results = q
-    ? searchable.filter((entry) => entry.name.includes(q)).slice(0, MAX_RESULTS)
+    ? index.filter((entry) => entry.name.includes(q)).slice(0, MAX_RESULTS)
     : [];
+  const reachable = (entry: NameEntry) => !staticOnly || entry.id <= 151;
 
   return (
     <>
@@ -57,8 +62,14 @@ export const PokemonSearch = ({
         onSubmit={(e) => {
           if (!router) return;
           e.preventDefault();
-          const target = results[0]?.name ?? (staticOnly ? "" : q);
-          if (target) router.navigate(`${action}${target}/`);
+          const first = results[0];
+          const target = first?.name ?? (staticOnly ? "" : q);
+          if (!target) return;
+          if (first && !reachable(first)) {
+            window.location.assign(`${action}${target}/`);
+            return;
+          }
+          router.navigate(`${action}${target}/`);
         }}
       >
         <input
@@ -73,9 +84,9 @@ export const PokemonSearch = ({
       </form>
       {q && (
         <ul className={styles["Results"]} aria-label="search results">
-          {results.map((entry) => (
-            <li key={entry.id} className={styles["Card"]}>
-              <Link to={`${action}${entry.name}/`} className={styles["CardLink"]}>
+          {results.map((entry) => {
+            const card = (
+              <>
                 <img
                   src={sprite(entry.id)}
                   alt={entry.name}
@@ -87,9 +98,23 @@ export const PokemonSearch = ({
                   #{String(entry.id).padStart(3, "0")}
                 </span>
                 <span className={styles["CardName"]}>{entry.name}</span>
-              </Link>
-            </li>
-          ))}
+              </>
+            );
+            return (
+              <li key={entry.id} className={styles["Card"]}>
+                {reachable(entry) ? (
+                  <Link to={`${action}${entry.name}/`} className={styles["CardLink"]}>
+                    {card}
+                  </Link>
+                ) : (
+                  <a href={`${action}${entry.name}/`} className={styles["CardLink"]}>
+                    {card}
+                    <span className={styles["ServerOnly"]}>server only</span>
+                  </a>
+                )}
+              </li>
+            );
+          })}
           {results.length === 0 && (
             <li className={styles["NoResults"]}>No Pokémon match “{query}”</li>
           )}

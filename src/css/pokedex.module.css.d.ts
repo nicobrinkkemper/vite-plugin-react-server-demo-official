@@ -13,6 +13,7 @@ declare const styles: {
     SearchInput: string;
     Results: string;
     NoResults: string;
+    ServerOnly: string;
 };
 
 export default styles

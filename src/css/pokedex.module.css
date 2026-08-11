@@ -127,3 +127,10 @@
 .Pokedex:has(.SearchInput:not(:placeholder-shown)) .Grid {
     display: none;
 }
+
+.ServerOnly {
+    color: #888;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
