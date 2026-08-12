@@ -21,6 +21,11 @@ export default {
   // No moduleBaseURL: vprs ≥3.2.3 takes Vite's `base` (vite.config.ts reads
   // BASE_URL), so the deploy base is configured once.
   publicOrigin: process.env.PUBLIC_ORIGIN || "",
+  // One flight flavor for the whole deploy: snapshots freeze through the baked
+  // webpack pair and the same pair renders per request, so the CDN copies and
+  // the Cloudflare Worker serve interchangeably (the worker consumer bundle
+  // only exists under this transport).
+  transport: "webpack",
   serverEntry: "src/server/index.ts",
   css: {
     inlineThreshold: 10000,
