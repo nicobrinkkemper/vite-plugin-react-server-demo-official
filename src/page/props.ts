@@ -1,6 +1,6 @@
 import { baseHref, gen1 } from "../lib/pokedex.js";
 
-const FEATURED_IDS = [1, 4, 7, 25];
+const FEATURED_IDS = [1, 4, 7, 25, 399];
 
 export const props = (url: string) => {
   const pathname = baseHref();

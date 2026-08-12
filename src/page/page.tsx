@@ -37,31 +37,28 @@ export const Page = ({ title, navigation, featured, isGithubPages }: Props) => {
             >
               vite-plugin-react-server
             </a>
-            . All 151 original Pokémon are prerendered to static HTML at build
-            time from a committed dataset — no network, no server needed.
+            . Every Pokémon — all 1025 of them — is prerendered to static HTML
+            at build time from a committed dataset. No network, no server
+            needed.
           </p>
           <p>
-            Every other Pokémon renders <em>per request</em> on the same route,
-            fetched live from PokéAPI. Try{" "}
-            {isGithubPages ? (
-              <a href={navigation.toBidoof.href} className={styles["Url"]}>
-                Bidoof
-              </a>
-            ) : (
-              <Link to={navigation.toBidoof.href} className={styles["Url"]}>
-                Bidoof
-              </Link>
-            )}{" "}
-            — it&apos;s gen 4, so it isn&apos;t in the static build.
+            Special forms — Mega evolutions, regional variants — are not in the
+            dataset. On a server they render <em>per request</em> on the same
+            route, fetched live from PokéAPI.
             {isGithubPages &&
-              " (This deploy is static-only, so Bidoof will 404 here — clone the repo and `npm run demo` to see the live path.)"}
+              " (This deploy is static-only, so forms are not available here — clone the repo and `npm run demo` for the live path.)"}{" "}
+            And of course:{" "}
+            <Link to={navigation.toBidoof.href} className={styles["Url"]}>
+              visit Bidoof
+            </Link>
+            .
           </p>
           <nav>
             <Link to={navigation.toPokedex.href} className={styles["Cta"]}>
               {navigation.toPokedex.text}
             </Link>
           </nav>
-          <h2>Starters</h2>
+          <h2>Featured</h2>
           <ul className={styles["Featured"]}>
             {featured.map((pokemon) => (
               <PokemonCard key={pokemon.id} pokemon={pokemon} />

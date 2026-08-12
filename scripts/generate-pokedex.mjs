@@ -1,11 +1,11 @@
-// Regenerate the vendored gen-1 dataset: node scripts/generate-pokedex.mjs
+// Regenerate the vendored full-dex dataset: node scripts/generate-pokedex.mjs
 // Static builds read the committed JSON and never touch the network; only
-// per-request renders of non-gen-1 Pokémon fetch PokéAPI live.
+// per-request renders of special forms (ids above 10000) fetch PokéAPI live.
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const OUT = fileURLToPath(new URL("../src/data/pokedex.json", import.meta.url));
-const COUNT = 151;
+const COUNT = 1025;
 
 const get = async (url) => {
   const res = await fetch(url);

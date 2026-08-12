@@ -9,11 +9,11 @@ The app is small on purpose; every route exists to show one capability:
 | Route | Rendering | Shows |
 | --- | --- | --- |
 | `/` | static | server pages, layout, a client component (the walking Bidoof) |
-| `/pokedex/` | static | a 151-card grid + client-side search over the FULL roster (a vendored name index served as a static asset) — prerendered from a committed dataset, no network at build time |
-| `/pokedex/$name/` | **hybrid** | file-router dynamic params: the 151 gen-1 Pokémon are prerendered via `staticPaths`; **any other name renders per request** on the same route, fetched live from PokéAPI |
+| `/pokedex/` | static | all 1025 Pokémon as cards + client-side search over the full roster (a vendored name index served as a static asset) — prerendered from a committed dataset, no network at build time |
+| `/pokedex/$name/` | **hybrid** | file-router dynamic params: every species is prerendered via `staticPaths`; **special forms (Megas, regional variants) render per request** on the same route, fetched live from PokéAPI |
 | `/404/` | static | `notFound()` thrown from a loader |
 
-The mascot doubles as the demo: Bidoof is gen 4, so `/pokedex/bidoof/` is deliberately *not* in the static build — it only renders through the server's live path (`npm run demo`), flash-free, in a single Node isolate with no `--conditions` flag. On the static-only GitHub Pages deploy that URL answers 404, which is the honest difference between the two render modes.
+The full dex — 1025 pages — prerenders in about 17 seconds. What stays dynamic are the alternate forms (Mega evolutions, regional variants, costumes): they render through the server's live path (`npm run demo`), flash-free, in a single Node isolate with no `--conditions` flag. On the static-only GitHub Pages deploy those URLs answer 404, which is the honest difference between the two render modes.
 
 Also demonstrated:
 
@@ -22,7 +22,7 @@ Also demonstrated:
 - Client / server boundary: error boundary, `useState`, hydration from the inlined flight payload
 - Static site generation with "headless" `index.rsc` files next to fully static `index.html` files
 
-The gen-1 dataset is committed (`src/data/pokedex.json`) so builds are deterministic and offline; regenerate it with `node scripts/generate-pokedex.mjs`.
+The dataset is committed (`src/data/pokedex.json`) so builds are deterministic and offline; regenerate it with `node scripts/generate-pokedex.mjs`.
 
 Clone the repository to see the development process in action.
 
