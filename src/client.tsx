@@ -18,7 +18,7 @@ import "./css/globalStyles.css";
 startClient({
   moduleBaseURL: import.meta.env.BASE_URL,
   publicOrigin: import.meta.env.PUBLIC_ORIGIN,
-  patterns: ["/", "/pokedex", "/pokedex/$name", "/404"],
+  patterns: ["/", "/pokedex", "/pokedex/$name", "/pokedex/gen/$gen", "/404"],
   wrap: (node: ReactNode) => <ErrorBoundary>{node}</ErrorBoundary>,
 });
 
@@ -26,6 +26,6 @@ startClient({
 // like /pokedex/pikachu still type-check).
 declare module "vite-plugin-react-server/router/client" {
   interface Register {
-    routes: "/" | "/pokedex" | "/pokedex/$name" | "/404";
+    routes: "/" | "/pokedex" | "/pokedex/$name" | "/pokedex/gen/$gen" | "/404";
   }
 }

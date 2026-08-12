@@ -9,7 +9,8 @@ The app is small on purpose; every route exists to show one capability:
 | Route | Rendering | Shows |
 | --- | --- | --- |
 | `/` | static | server pages, layout, a client component (the walking Bidoof) |
-| `/pokedex/` | static | all 1025 Pokémon as cards + client-side search over the full roster (a vendored name index served as a static asset) — prerendered from a committed dataset, no network at build time |
+| `/pokedex/` | static | generation hub + client-side search over the full roster (a vendored name index served as a static asset) |
+| `/pokedex/gen/$gen/` | static | one page per generation, enumerated by `staticPaths` from the committed dataset — no network at build time |
 | `/pokedex/$name/` | **hybrid** | file-router dynamic params: every species is prerendered via `staticPaths`; **special forms (Megas, regional variants) render per request** on the same route, fetched live from PokéAPI |
 | `/404/` | static | `notFound()` thrown from a loader |
 

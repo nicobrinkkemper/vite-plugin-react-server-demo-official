@@ -11,6 +11,8 @@ export default {
     dir: "page",
     staticPaths: {
       "/pokedex/$name": () => pokedex.map((p: { name: string }) => ({ name: p.name })),
+      "/pokedex/gen/$gen": () =>
+        Array.from({ length: 9 }, (_, i) => ({ gen: String(i + 1) })),
     },
   },
   Html: "src/Html.tsx",

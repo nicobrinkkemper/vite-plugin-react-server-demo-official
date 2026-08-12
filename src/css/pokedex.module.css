@@ -127,3 +127,29 @@
 .Pokedex:has(.SearchInput:not(:placeholder-shown)) .Grid {
     display: none;
 }
+
+.GenList {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 960px;
+}
+
+.GenSprites {
+    display: flex;
+    gap: 0;
+}
+
+.GenSprites img {
+    image-rendering: pixelated;
+}
+
+.GenNav {
+    display: flex;
+    justify-content: space-between;
+    max-width: 960px;
+    margin: 1.5rem auto 0;
+}

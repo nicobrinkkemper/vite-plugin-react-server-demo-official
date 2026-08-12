@@ -12,6 +12,31 @@ export type Pokemon = {
 
 export const gen1 = pokedex as Pokemon[];
 
+export type Generation = {
+  gen: number;
+  from: number;
+  to: number;
+  /** The gen's starter trio, for preview sprites. */
+  starters: [number, number, number];
+};
+
+export const GENERATIONS: Generation[] = [
+  { gen: 1, from: 1, to: 151, starters: [1, 4, 7] },
+  { gen: 2, from: 152, to: 251, starters: [152, 155, 158] },
+  { gen: 3, from: 252, to: 386, starters: [252, 255, 258] },
+  { gen: 4, from: 387, to: 493, starters: [387, 390, 393] },
+  { gen: 5, from: 494, to: 649, starters: [495, 498, 501] },
+  { gen: 6, from: 650, to: 721, starters: [650, 653, 656] },
+  { gen: 7, from: 722, to: 809, starters: [722, 725, 728] },
+  { gen: 8, from: 810, to: 905, starters: [810, 813, 816] },
+  { gen: 9, from: 906, to: 1025, starters: [906, 909, 912] },
+];
+
+export const byGeneration = (gen: number): Pokemon[] => {
+  const g = GENERATIONS.find((entry) => entry.gen === gen);
+  return g ? gen1.filter((p) => p.id >= g.from && p.id <= g.to) : [];
+};
+
 export const findLocal = (name: string): Pokemon | undefined =>
   gen1.find((p) => p.name === name.toLowerCase());
 

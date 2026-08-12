@@ -1,14 +1,14 @@
-import { baseHref, gen1 } from "../../lib/pokedex.js";
+import { baseHref, GENERATIONS } from "../../lib/pokedex.js";
 
 export const props = (url: string) => ({
-  title: "Pokédex — all 151",
+  title: "Pokédex",
   url,
-  pokedex: gen1,
+  generations: GENERATIONS,
   searchAction: `${baseHref()}pokedex/`,
   namesHref: `${baseHref()}names.json`,
   staticOnly: process.env.GITHUB_PAGES === "true",
   navigation: {
-    back: { href: baseHref(), text: "Back" },
+    back: { href: baseHref(), text: "Home" },
   },
 });
 
