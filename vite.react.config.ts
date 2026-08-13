@@ -21,11 +21,14 @@ export default {
   // No moduleBaseURL: vprs ≥3.2.3 takes Vite's `base` (vite.config.ts reads
   // BASE_URL), so the deploy base is configured once.
   publicOrigin: process.env.PUBLIC_ORIGIN || "",
-  // One flight flavor for the whole deploy: snapshots freeze through the baked
-  // webpack pair and the same pair renders per request, so the CDN copies and
-  // the Cloudflare Worker serve interchangeably (the worker consumer bundle
-  // only exists under this transport).
-  transport: "webpack",
+  // One flight flavor PER DEPLOY. The Cloudflare/Node deploys use webpack:
+  // snapshots freeze through the baked pair and the same pair renders per
+  // request, so CDN copies and the Worker serve interchangeably (the worker
+  // consumer bundle only exists under that transport). The GitHub Pages
+  // deploy stays esm: webpack chunk ids are root-relative and the browser
+  // chunk loader does not apply BASE_URL, so a subpath deploy 404s every
+  // client chunk (vprs bug; flip Pages to webpack when it can honor base).
+  transport: process.env.GITHUB_PAGES === "true" ? "esm" : "webpack",
   serverEntry: "src/server/index.ts",
   css: {
     inlineThreshold: 10000,
