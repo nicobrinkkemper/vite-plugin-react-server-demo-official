@@ -6,7 +6,9 @@ export const props = (url: string) => ({
   generations: GENERATIONS,
   searchAction: `${baseHref()}pokedex/`,
   namesHref: `${baseHref()}names.json`,
-  staticOnly: process.env.GITHUB_PAGES === "true",
+  // Guarded: bare `process` does not exist on edge runtimes (workerd).
+  staticOnly:
+    typeof process !== "undefined" && process.env.GITHUB_PAGES === "true",
   navigation: {
     back: { href: baseHref(), text: "Home" },
   },

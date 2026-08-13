@@ -95,12 +95,25 @@ async function main() {
   // It also carries the baked server-action gate, so the action dispatch never
   // disk-imports the react-server transport either.
   const edgeBundlePath = path.resolve(buildDir, "server-edge", "render.js");
-  const { renderRouteToDocument, handleRouteAction } = (await import(
+  const { renderRouteToDocument, handleRouteAction, flightTransport, clientManifest } = (await import(
     pathToFileURL(edgeBundlePath).href
   )) as {
     renderRouteToDocument: RenderRouteToDocument;
     handleRouteAction: HandleRouteAction;
+    flightTransport?: "esm" | "webpack";
+    clientManifest?: Record<string, { id: string; chunks: string[]; name: string }>;
   };
+
+  // Under transport:"webpack" the flight carries module-map reference rows the
+  // runtime (esm) consumer cannot resolve — decode + HTML render must go
+  // through the BAKED consumer, which carries client React and the closed
+  // client-module registry. The pair ships together; the esm transport has no
+  // consumer bake and keeps the runtime path.
+  const consumerPath = path.resolve(buildDir, "server-edge", "consumer.js");
+  const { renderFlightToHtml: bakedRenderFlightToHtml } =
+    flightTransport === "webpack"
+      ? await import(pathToFileURL(consumerPath).href)
+      : { renderFlightToHtml: undefined };
 
   // Flash-free per-request document for one URL: full inline-flight HTML in
   // one isolate.
@@ -110,6 +123,16 @@ async function main() {
       moduleBaseURL: ssrModuleBaseURL,
       bootstrapModules,
       getURL: () => route,
+      flightTransport,
+      clientManifest,
+      renderFlightToHtml: bakedRenderFlightToHtml,
+      // The browser's client entry is transport-agnostic and picks its flight
+      // decoder from this inline hint — prerendered documents carry it from
+      // the freeze; a per-request document must stamp it itself.
+      bootstrapScriptContent:
+        flightTransport === "webpack"
+          ? 'self.__vprsFlightTransport="webpack";'
+          : undefined,
     });
 
   const notFoundPage = path.join(staticDir, "404", "index.html");

@@ -11,7 +11,9 @@ export const props = (url: string) => {
       toPokedex: { href: `${pathname}pokedex/`, text: "Browse the Pokédex" },
     },
     featured: gen1.filter((p) => FEATURED_IDS.includes(p.id)),
-    isGithubPages: process.env.GITHUB_PAGES === "true",
+    // Guarded: bare `process` does not exist on edge runtimes (workerd).
+    isGithubPages:
+      typeof process !== "undefined" && process.env.GITHUB_PAGES === "true",
   };
 };
 
