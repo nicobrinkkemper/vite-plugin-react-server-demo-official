@@ -44,7 +44,7 @@
     "react-dom": "^19.2.7",
     "tsx": "^4.22.4",
     "vite": "^8.2.0",
-    "vite-plugin-react-server": "^3.10.1",
+    "vite-plugin-react-server": "^3.10.2",
     "webpack-sources": "^3.5.0"
   }
 }
