@@ -5,7 +5,7 @@ React Server Components as a Vite plugin, not a framework. One `vite build`
 produces a fully static site, and the same artifacts serve dynamic
 per-request renders when you put a server behind them.
 
-**[Open the live demo](https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/)** (GitHub Pages, the static-only deploy)
+**[Open the live demo](https://nicobrinkkemper.github.io/vite-plugin-react-server-demo-official/)** (GitHub Pages, static-only) · **[the hybrid deploy](https://vite-plugin-react-server-demo-official.nico-f6d.workers.dev/)** (Cloudflare Workers — special forms render per request)
 
 The app is small on purpose; every route exists to show one capability:
 
@@ -43,9 +43,11 @@ answers everything else with the prerendered 404.
 - **GitHub Pages** serves `dist/static` as-is. Static-only: the prerendered
   dex works fully, and special-form URLs answer 404 — the honest difference
   between the modes, not papered over.
-- **Cloudflare Workers** serves the same static snapshot as assets and routes
-  everything else through the baked pair (`worker.mjs`), so special forms
-  render per request, flash-free, in one isolate.
+- **[Cloudflare Workers](https://vite-plugin-react-server-demo-official.nico-f6d.workers.dev/)**
+  serves the same static snapshot as assets and routes everything else
+  through the baked pair (`worker.mjs`), so special forms render per
+  request, flash-free, in one isolate — try a URL Pages can't answer:
+  [/pokedex/charizard-mega-x/](https://vite-plugin-react-server-demo-official.nico-f6d.workers.dev/pokedex/charizard-mega-x/).
 
 Both deploys ship from CI on every push to `main`.
 
