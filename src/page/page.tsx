@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "vite-plugin-react-server/router/client";
+import { Link } from "../components/Link.client.js";
 import { PokemonCard } from "../components/PokemonCard.js";
 import { WalkingBidoof } from "../components/WalkingBidoof.client.js";
 import { sprite, spriteBack } from "../lib/pokedex.js";

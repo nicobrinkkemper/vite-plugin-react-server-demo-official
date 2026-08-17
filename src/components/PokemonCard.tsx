@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "vite-plugin-react-server/router/client";
+import { Link } from "./Link.client.js";
 import { baseHref, sprite, TYPE_COLORS, type Pokemon } from "../lib/pokedex.js";
 import styles from "../css/pokedex.module.css";
 

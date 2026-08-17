@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../css/404.module.css";
 import type { Props } from "./props.js";
-import { Link } from "vite-plugin-react-server/router/client";
+import { Link } from "../../components/Link.client.js";
 
 export const Page = ({ title, navigation }: Props) => {
   return (

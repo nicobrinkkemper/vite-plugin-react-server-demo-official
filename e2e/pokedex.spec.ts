@@ -2,8 +2,8 @@ import { test, expect } from "@playwright/test";
 
 /**
  * Pokédex end-to-end against the production build: the prerendered static
- * pages, the per-request path for a Pokémon OUTSIDE the vendored gen-1
- * dataset, and the favorites server-action round-trip (real `"use server"`
+ * pages, the per-request path for a form OUTSIDE the vendored dataset (a
+ * regional variant), and the favorites server-action round-trip (real `"use server"`
  * action backed by SQLite — persistence proven by reloading, so a client-only
  * optimistic update can't pass).
  */

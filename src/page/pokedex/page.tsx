@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "vite-plugin-react-server/router/client";
+import { Link } from "../../components/Link.client.js";
 import { PokemonSearch } from "../../components/PokemonSearch.client.js";
 import { sprite } from "../../lib/sprites.js";
 import styles from "../../css/pokedex.module.css";
