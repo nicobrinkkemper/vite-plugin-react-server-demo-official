@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "../../../../components/Link.client.js";
+import { Link } from "vite-plugin-react-server/router/client";
 import { PokemonCard } from "../../../../components/PokemonCard.js";
 import styles from "../../../../css/pokedex.module.css";
 import type { Props } from "./props.js";

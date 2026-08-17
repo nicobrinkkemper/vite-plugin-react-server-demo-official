@@ -4,3 +4,4 @@ pokedex.db
 # Playwright
 test-results
 playwright-report
+.env

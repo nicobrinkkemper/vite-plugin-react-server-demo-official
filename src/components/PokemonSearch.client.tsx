@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { useOptionalRouter } from "vite-plugin-react-server/router/client";
-import { Link } from "./Link.client.js";
+import { Link } from "vite-plugin-react-server/router/client";
 import { sprite } from "../lib/sprites.js";
 import { toSlug } from "../lib/slug.js";
 import styles from "../css/pokedex.module.css";

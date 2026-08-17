@@ -17,7 +17,7 @@ body{
 }
 /* Navigation transition: the router keeps the old page mounted while the next
    route's flight loads. The clicked link carries data-pending for that window
-   (set in Link.client.tsx); the outgoing page reads as stale. */
+   (supplied by the router's Link); the outgoing page reads as stale. */
 body:has(a[data-pending]) {
     cursor: progress;
 }

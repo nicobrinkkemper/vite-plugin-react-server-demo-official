@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FavoriteButton } from "../../../components/FavoriteButton.client.js";
-import { Link } from "../../../components/Link.client.js";
+import { Link } from "vite-plugin-react-server/router/client";
 import { artwork, TYPE_COLORS } from "../../../lib/pokedex.js";
 import styles from "../../../css/pokemon.module.css";
 import type { Props } from "./props.js";

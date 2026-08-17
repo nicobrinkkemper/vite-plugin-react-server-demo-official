@@ -28,9 +28,9 @@
     "clean-install": "npm install react@^19.2.7 react-dom@^19.2.7",
     "patch-oss": "patch"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "Nico Brinkkemper",
+  "license": "MIT",
+  "description": "Pokédex demo for vite-plugin-react-server: 1,000+ prerendered pages, a hybrid per-request route, and server actions from one static-first Vite build",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
     "@types/express": "^5.0.6",
