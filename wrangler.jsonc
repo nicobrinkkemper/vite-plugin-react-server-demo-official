@@ -2,7 +2,7 @@
   // Cloudflare Workers deploy: prerendered snapshots from assets, everything
   // else per-request through worker.mjs (the baked single-isolate pair).
   // Build: npm run build · Deploy: npx wrangler deploy
-  "name": "vprs-pokedex-demo",
+  "name": "vite-plugin-react-server-demo-official",
   "main": "worker.mjs",
   "compatibility_date": "2026-07-01",
   "assets": {

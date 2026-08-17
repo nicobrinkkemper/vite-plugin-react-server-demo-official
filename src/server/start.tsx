@@ -14,8 +14,9 @@ import type { Manifest } from "vite";
 /**
  * Production server for the demo — single-isolate, worker-free, NO `--conditions`.
  *
- * /pokedex/$name is the hybrid route: the 151 vendored gen-1 Pokémon are
- * prerendered into the static build, and any OTHER name renders per request —
+ * /pokedex/$name is the hybrid route: the vendored dataset (all 1,025
+ * species) is prerendered into the static build, and any OTHER name renders
+ * per request —
  * same route, resolved at request time (the loader fetches PokéAPI live). The
  * per-request document runs in ONE isolate via the baked edge bundle
  * (dist/server-edge/render.js, server React inlined) + createEdgeHandler:

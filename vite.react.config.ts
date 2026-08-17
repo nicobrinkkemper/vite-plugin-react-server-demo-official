@@ -5,8 +5,8 @@ export default {
   moduleBase: "src",
   // File-based routing in one field: scans src/page/** for page.tsx (+ sibling
   // props.ts) and derives Page / props / routePatterns / the prerender
-  // worklist. The dynamic /pokedex/$name route prerenders the 151 vendored
-  // gen-1 Pokémon; any other name resolves per request on the server.
+  // worklist. The dynamic /pokedex/$name route prerenders every vendored
+  // species; any other name resolves per request on the server.
   routes: {
     dir: "page",
     staticPaths: {

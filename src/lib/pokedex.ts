@@ -10,7 +10,7 @@ export type Pokemon = {
   flavor?: string;
 };
 
-export const gen1 = pokedex as Pokemon[];
+export const allPokemon = pokedex as Pokemon[];
 
 export type Generation = {
   gen: number;
@@ -34,11 +34,11 @@ export const GENERATIONS: Generation[] = [
 
 export const byGeneration = (gen: number): Pokemon[] => {
   const g = GENERATIONS.find((entry) => entry.gen === gen);
-  return g ? gen1.filter((p) => p.id >= g.from && p.id <= g.to) : [];
+  return g ? allPokemon.filter((p) => p.id >= g.from && p.id <= g.to) : [];
 };
 
 export const findLocal = (name: string): Pokemon | undefined =>
-  gen1.find((p) => p.name === name.toLowerCase());
+  allPokemon.find((p) => p.name === name.toLowerCase());
 
 export { artwork, sprite, spriteBack } from "./sprites.js";
 
