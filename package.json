@@ -40,11 +40,11 @@
     "@vitejs/plugin-react": "^6.0.5",
     "acorn-loose": "^8.5.2",
     "happy-dom": "^20.10.6",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "tsx": "^4.22.4",
     "vite": "^8.2.0",
-    "vite-plugin-react-server": "^3.11.0",
+    "vite-plugin-react-server": "^3.11.1",
     "webpack-sources": "^3.5.0"
   }
 }
