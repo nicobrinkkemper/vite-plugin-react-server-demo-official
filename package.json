@@ -25,7 +25,7 @@
     "build:preview": "npm run env:preview -- npm run build --app",
     "preview:start": "npm run env:preview -- vite preview",
     "debug-build": "npm run env:dev -- vite build --app --mode=development",
-    "clean-install": "npm install react@^19.2.7 react-dom@^19.2.7",
+    "clean-install": "npm install react@^19.2.8 react-dom@^19.2.8",
     "patch-oss": "patch"
   },
   "author": "Nico Brinkkemper",
