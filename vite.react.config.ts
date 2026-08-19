@@ -1,7 +1,13 @@
 import type { StreamPluginOptions } from "vite-plugin-react-server/types";
+import { getCondition } from "vite-plugin-react-server/config";
 import pokedex from "./src/data/pokedex.json" with { type: "json" };
 
 export default {
+  // This demo deliberately runs BOTH topologies from one config (dev:rsc vs
+  // dev:ssr, build vs build:static), so the declared runner tracks the
+  // launching script's condition. A single-topology app declares a literal
+  // "main" or "isolated" instead. Required from vite-plugin-react-server 4.0.
+  runner: getCondition() === "react-server" ? ("main" as const) : ("isolated" as const),
   moduleBase: "src",
   // File-based routing in one field: scans src/page/** for page.tsx (+ sibling
   // props.ts) and derives Page / props / routePatterns / the prerender
