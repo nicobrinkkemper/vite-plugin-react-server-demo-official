@@ -13,8 +13,8 @@ export default defineConfig({
   optimizeDeps: {
     // Pre-bundle these for faster dev startup and to resolve linked package issues
     include: [
-      "react-server-dom-esm/client.browser",
-      "react-server-dom-esm/client",
+      "react-server-loader/client.browser",
+      "react-server-loader/client",
     ],
   },
 });
