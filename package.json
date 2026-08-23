@@ -42,10 +42,10 @@
     "happy-dom": "^20.10.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-server-loader": "19.2.20",
     "tsx": "^4.22.4",
     "vite": "^8.2.0",
-    "vite-plugin-react-server": "^4.0.0",
-    "react-server-loader": "19.2.20",
+    "vite-plugin-react-server": "^4.0.1",
     "webpack-sources": "^3.5.0"
   }
 }
