@@ -45,7 +45,7 @@
     "react-server-loader": "19.2.20",
     "tsx": "^4.22.4",
     "vite": "^8.2.0",
-    "vite-plugin-react-server": "^4.0.1",
+    "vite-plugin-react-server": "^4.0.2",
     "webpack-sources": "^3.5.0"
   }
 }
