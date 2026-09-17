@@ -14,14 +14,23 @@
     "binding": "ASSETS",
     "run_worker_first": true
   },
-  // The favorites store on Workers. `wrangler dev` backs it with a local
-  // SQLite file under .wrangler/ and needs no account; deploys use the
-  // account's database (created once with `wrangler d1 create`).
+  // The likes store on Workers. `wrangler dev` backs it with a local SQLite
+  // file under .wrangler/ and needs no account; deploys use the account's
+  // database (created once with `wrangler d1 create`).
   "d1_databases": [
     {
-      "binding": "FAVORITES",
+      "binding": "LIKES",
       "database_name": "pokedex-favorites",
       "database_id": "3bc8f526-636d-430a-81bb-85cd5d4b2df4"
+    }
+  ],
+  // Action POSTs per client ip: enough for a person clicking around, not for
+  // a script manufacturing likes. worker.mjs answers 429 past the limit.
+  "ratelimits": [
+    {
+      "name": "LIKES_RATE_LIMIT",
+      "namespace_id": "1001",
+      "simple": { "limit": 30, "period": 60 }
     }
   ]
 }

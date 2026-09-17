@@ -8,7 +8,8 @@ declare const styles: {
     Info: string;
     Id: string;
     Name: string;
-    Favorite: string;
+    Like: string;
+    LikeCount: string;
     Types: string;
     Type: string;
     Flavor: string;

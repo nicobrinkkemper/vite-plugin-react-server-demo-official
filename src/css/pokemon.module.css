@@ -68,7 +68,7 @@
     gap: 0.5rem;
 }
 
-.Favorite {
+.Like {
     background: none;
     border: none;
     color: #f8d030;
@@ -76,6 +76,15 @@
     cursor: pointer;
     padding: 0;
     line-height: 1;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25em;
+}
+
+.LikeCount {
+    font-size: 0.5em;
+    font-weight: 600;
+    color: inherit;
 }
 
 .Types {

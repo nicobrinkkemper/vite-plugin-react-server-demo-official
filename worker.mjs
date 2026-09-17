@@ -10,10 +10,10 @@
 // vite-plugin-react-server subpaths here would drag node builtins into the
 // bundle, and the pair needs none.
 //
-// Bindings (the FAVORITES D1 database, see wrangler.jsonc) arrive per request
+// Bindings (the LIKES D1 database, see wrangler.jsonc) arrive per request
 // on `env`. The pair forwards everything after the request as `platform`:
 // loaders see it as `ctx.platform`, and every server action gets a trailing
-// `{ platform }` argument — that is how the favorites action reaches D1 here
+// `{ platform }` argument — that is how the likes action reaches D1 here
 // while the same code runs on node:sqlite under Node.
 import * as bundle from "./dist/server-edge/render.js";
 import { renderFlightToHtml } from "./dist/server-edge/consumer.js";
@@ -26,6 +26,14 @@ export default {
     const platform = [env, ctx];
     try {
       if (request.method === "POST" && request.headers.get("x-rsc-action")) {
+        // Likes are one anonymous click each; the rate-limit binding (per
+        // client ip, see wrangler.jsonc) is what keeps a script from
+        // manufacturing them. Absent on Node and in wrangler dev.
+        if (env.LIKES_RATE_LIMIT) {
+          const key = request.headers.get("cf-connecting-ip") ?? "unknown";
+          const { success } = await env.LIKES_RATE_LIMIT.limit({ key });
+          if (!success) return new Response("Too many requests", { status: 429 });
+        }
         return await bundle.handleRouteAction(request, { platform });
       }
 

@@ -53,11 +53,13 @@ Both deploys ship from CI on every push to `main`.
 
 ## Also demonstrated
 
-- `"use server"` actions with a database — the ★ favorite button on every
+- `"use server"` actions with a database — the ♥ like button on every
   Pokémon page round-trips through the sealed action gate: SQLite on Node,
   and on Workers the D1 binding the action receives per request as its
-  trailing `{ platform }` context (persistence proven by the e2e suite via
-  reload, on both hosts)
+  trailing `{ platform }` context. Likes are per visitor (an anonymous id the
+  browser keeps), rate-limited per ip on the Worker and capped at 999 per
+  Pokémon in the store; persistence is proven by the e2e suite via reload,
+  on both hosts
 - Client-side navigation with typed routes (`Link` autocompletes the route
   patterns and carries `data-pending`/`aria-busy` while the target's flight
   loads — the stale-page dimming is a few lines of CSS on those attributes)

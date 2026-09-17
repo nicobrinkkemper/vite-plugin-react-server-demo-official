@@ -30,7 +30,7 @@ import type { Manifest } from "vite";
  * server React), the process needs NO `NODE_OPTIONS=--conditions react-server`
  * and no html-worker — the shape that ports to an edge runtime. Every
  * prerendered route falls through to its static file. "use server" actions
- * (favorites) go through the sealed production gate (createRequestHandler
+ * (likes) go through the sealed production gate (createRequestHandler
  * `action`).
  *
  * Run:
