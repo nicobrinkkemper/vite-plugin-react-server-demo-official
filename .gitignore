@@ -4,3 +4,5 @@ pokedex.db
 # Playwright
 test-results
 playwright-report
+# wrangler dev local state (D1)
+.wrangler

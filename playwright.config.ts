@@ -19,8 +19,29 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
-  webServer: {
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    // The same build under workerd (`wrangler dev`, local mode, no account):
+    // prerendered pages come from the assets binding, the favorites action
+    // round-trips through worker.mjs into the local D1 binding. Only the
+    // favorites spec runs here — it is the one that needs a binding.
+    {
+      name: "workerd",
+      grep: /favorites server action/,
+      use: { ...devices["Desktop Chrome"], baseURL: "http://localhost:8787" },
+    },
+  ],
+  webServer: [
+    {
+      // workerd with the D1 binding from wrangler.jsonc, local state under
+      // .wrangler/ (gitignored). Same rebuilt dist as the Node server.
+      command: "npx wrangler dev --port 8787 --log-level warn",
+      url: "http://localhost:8787/pokedex/pikachu/",
+      reuseExistingServer: false,
+      timeout: 120_000,
+      env: { WRANGLER_SEND_METRICS: "false" },
+    },
+    {
     // The Express prod server (src/server/index.ts), started with NO
     // `--conditions react-server` — deliberately. The single-isolate edge build
     // exists so production runs on plain Node; needing the flag here would mean
@@ -38,5 +59,6 @@ export default defineConfig({
     // the previous build.
     reuseExistingServer: false,
     timeout: 120_000,
-  },
+    },
+  ],
 });
