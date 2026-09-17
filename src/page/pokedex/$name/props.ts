@@ -1,9 +1,9 @@
 import { notFound } from "vite-plugin-react-server/router";
 import { baseHref, fetchLive, findLocal } from "../../../lib/pokedex.js";
 import {
-  getFavorites,
-  toggleFavorite,
-} from "../../../server/actions/favoriteActions.server.js";
+  getLikes,
+  toggleLike,
+} from "../../../server/actions/likeActions.server.js";
 
 export const props = async (
   url: string,
@@ -18,8 +18,8 @@ export const props = async (
     url,
     pokemon,
     live: !local,
-    toggleFavorite,
-    getFavorites,
+    toggleLike,
+    getLikes,
     navigation: {
       back: { href: `${baseHref()}pokedex/`, text: "Pokédex" },
     },

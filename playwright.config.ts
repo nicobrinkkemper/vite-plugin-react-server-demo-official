@@ -22,12 +22,12 @@ export default defineConfig({
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     // The same build under workerd (`wrangler dev`, local mode, no account):
-    // prerendered pages come from the assets binding, the favorites action
+    // prerendered pages come from the assets binding, the likes action
     // round-trips through worker.mjs into the local D1 binding. Only the
-    // favorites spec runs here — it is the one that needs a binding.
+    // likes spec runs here — it is the one that needs a binding.
     {
       name: "workerd",
-      grep: /favorites server action/,
+      grep: /likes server action/,
       use: { ...devices["Desktop Chrome"], baseURL: "http://localhost:8787" },
     },
   ],

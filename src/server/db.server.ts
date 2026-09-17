@@ -1,37 +1,48 @@
-// The favorites store behind the "use server" actions. Two backends, chosen
-// per call from the action's trailing context:
+// The likes store behind the "use server" actions. Two backends, chosen per
+// call from the action's trailing context:
 //
 // - Cloudflare Workers: bindings arrive per request on the fetch handler's
-//   `env`, which worker.mjs forwards as `platform[0]`. A `FAVORITES` D1
-//   binding there means the action runs on D1.
+//   `env`, which worker.mjs forwards as `platform[0]`. A `LIKES` D1 binding
+//   there means the action runs on D1.
 // - Node (the Express prod server, dev, the e2e suite): `platform` is empty,
 //   so the store falls back to node:sqlite on disk.
 //
 // The sqlite import stays lazy on purpose: a top-level `import "node:sqlite"`
 // would be baked into the edge bundle's module scope and crash evaluation on
 // runtimes without node builtins. Deferring it keeps the bundle boot-safe
-// everywhere; the import only runs when a Node host actually executes a
-// favorites action.
+// everywhere; the import only runs when a Node host actually executes an
+// action.
 
 /** The context vite-plugin-react-server appends to every action call. */
 export type ActionContext = { platform?: unknown[] };
 
-export type FavoritesStore = {
-  list(): Promise<string[]>;
-  has(name: string): Promise<boolean>;
-  add(name: string): Promise<void>;
-  remove(name: string): Promise<void>;
+export type LikesStore = {
+  /** How many visitors like this Pokémon. */
+  count(pokemon: string): Promise<number>;
+  liked(pokemon: string, visitor: string): Promise<boolean>;
+  like(pokemon: string, visitor: string): Promise<void>;
+  unlike(pokemon: string, visitor: string): Promise<void>;
 };
 
-const SCHEMA = `CREATE TABLE IF NOT EXISTS favorites (
-  name TEXT PRIMARY KEY,
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+// One row per (Pokémon, visitor): a visitor likes a Pokémon at most once, and
+// the count is the number of rows.
+const SCHEMA = `CREATE TABLE IF NOT EXISTS likes (
+  pokemon TEXT NOT NULL,
+  visitor TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (pokemon, visitor)
 ) STRICT`;
+
+const SQL = {
+  count: "SELECT COUNT(*) AS n FROM likes WHERE pokemon = ?",
+  liked: "SELECT 1 AS one FROM likes WHERE pokemon = ? AND visitor = ?",
+  like: "INSERT OR IGNORE INTO likes (pokemon, visitor) VALUES (?, ?)",
+  unlike: "DELETE FROM likes WHERE pokemon = ? AND visitor = ?",
+};
 
 // The slice of D1's prepared-statement API the store uses.
 type D1Statement = {
   bind(...values: unknown[]): D1Statement;
-  all<T>(): Promise<{ results: T[] }>;
   first<T>(): Promise<T | null>;
   run(): Promise<unknown>;
 };
@@ -44,35 +55,29 @@ const isD1 = (value: unknown): value is D1Like =>
 
 /** The D1 binding on workerd's env, when the request came through a Worker. */
 const d1Binding = (ctx?: ActionContext): D1Like | undefined => {
-  const env = ctx?.platform?.[0] as { FAVORITES?: unknown } | undefined;
-  return isD1(env?.FAVORITES) ? env.FAVORITES : undefined;
+  const env = ctx?.platform?.[0] as { LIKES?: unknown } | undefined;
+  return isD1(env?.LIKES) ? env.LIKES : undefined;
 };
 
-const d1Store = (db: D1Like): FavoritesStore => {
+const d1Store = (db: D1Like): LikesStore => {
   const ready = db.prepare(SCHEMA).run();
   return {
-    list: async () => {
+    count: async (pokemon) => {
       await ready;
-      const { results } = await db
-        .prepare("SELECT name FROM favorites ORDER BY created_at ASC")
-        .all<{ name: string }>();
-      return results.map((row) => row.name);
+      const row = await db.prepare(SQL.count).bind(pokemon).first<{ n: number }>();
+      return row?.n ?? 0;
     },
-    has: async (name) => {
+    liked: async (pokemon, visitor) => {
       await ready;
-      const row = await db
-        .prepare("SELECT 1 AS one FROM favorites WHERE name = ?")
-        .bind(name)
-        .first();
-      return row !== null;
+      return (await db.prepare(SQL.liked).bind(pokemon, visitor).first()) !== null;
     },
-    add: async (name) => {
+    like: async (pokemon, visitor) => {
       await ready;
-      await db.prepare("INSERT INTO favorites (name) VALUES (?)").bind(name).run();
+      await db.prepare(SQL.like).bind(pokemon, visitor).run();
     },
-    remove: async (name) => {
+    unlike: async (pokemon, visitor) => {
       await ready;
-      await db.prepare("DELETE FROM favorites WHERE name = ?").bind(name).run();
+      await db.prepare(SQL.unlike).bind(pokemon, visitor).run();
     },
   };
 };
@@ -80,7 +85,7 @@ const d1Store = (db: D1Like): FavoritesStore => {
 type SqliteDb = import("node:sqlite").DatabaseSync;
 let sqlite: Promise<SqliteDb> | undefined;
 
-const sqliteStore = (): FavoritesStore => {
+const sqliteStore = (): LikesStore => {
   sqlite ??= import("node:sqlite").then(({ DatabaseSync }) => {
     const db = new DatabaseSync("pokedex.db", { open: true });
     db.exec(SCHEMA);
@@ -88,29 +93,27 @@ const sqliteStore = (): FavoritesStore => {
   });
   const open = sqlite;
   return {
-    list: async () => {
+    count: async (pokemon) => {
       const db = await open;
-      const rows = db
-        .prepare("SELECT name FROM favorites ORDER BY created_at ASC")
-        .all() as { name: string }[];
-      return rows.map((row) => row.name);
+      const row = db.prepare(SQL.count).get(pokemon) as { n: number } | undefined;
+      return row?.n ?? 0;
     },
-    has: async (name) => {
+    liked: async (pokemon, visitor) => {
       const db = await open;
-      return db.prepare("SELECT 1 FROM favorites WHERE name = ?").get(name) !== undefined;
+      return db.prepare(SQL.liked).get(pokemon, visitor) !== undefined;
     },
-    add: async (name) => {
+    like: async (pokemon, visitor) => {
       const db = await open;
-      db.prepare("INSERT INTO favorites (name) VALUES (?)").run(name);
+      db.prepare(SQL.like).run(pokemon, visitor);
     },
-    remove: async (name) => {
+    unlike: async (pokemon, visitor) => {
       const db = await open;
-      db.prepare("DELETE FROM favorites WHERE name = ?").run(name);
+      db.prepare(SQL.unlike).run(pokemon, visitor);
     },
   };
 };
 
-export const favoritesStore = (ctx?: ActionContext): FavoritesStore => {
+export const likesStore = (ctx?: ActionContext): LikesStore => {
   const d1 = d1Binding(ctx);
   return d1 ? d1Store(d1) : sqliteStore();
 };

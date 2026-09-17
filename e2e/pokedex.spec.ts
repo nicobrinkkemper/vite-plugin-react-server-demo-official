@@ -3,16 +3,18 @@ import { test, expect } from "@playwright/test";
 /**
  * Pokédex end-to-end against the production build: the prerendered static
  * pages, the per-request path for a form OUTSIDE the vendored dataset (a
- * regional variant), and the favorites server-action round-trip (real `"use server"`
+ * regional variant), and the likes server-action round-trip (real `"use server"`
  * action backed by SQLite on Node and D1 under workerd — persistence proven by
  * reloading, so a client-only optimistic update can't pass).
  */
 
-// Wait for hydration: the favorite button only renders after the client
-// bundle attaches AND the first getFavorites action round-trip resolves, so
-// its presence proves interactivity.
+// Wait for hydration: the like button only renders after the client bundle
+// attaches AND the first getLikes action round-trip resolves, so its
+// presence proves interactivity.
+const likeButton = (page: import("@playwright/test").Page) =>
+  page.getByRole("button", { name: /^(un)?like$/i });
 const hydrated = (page: import("@playwright/test").Page) =>
-  expect(page.getByRole("button", { name: /favorites/ })).toBeVisible();
+  expect(likeButton(page)).toBeVisible();
 
 test.describe("static pages (prerendered)", () => {
   test("home links into the pokedex", async ({ page }) => {
@@ -138,33 +140,40 @@ test.describe("pokemon search", () => {
   });
 });
 
-test.describe("favorites server action (prod build)", () => {
-  test("toggling a favorite persists across reload", async ({ page }) => {
+test.describe("likes server action (prod build)", () => {
+  test("a like counts, persists across reload, and an unlike takes it back", async ({
+    page,
+  }) => {
     await page.goto("/pokedex/pikachu/");
     await hydrated(page);
 
-    const button = page.getByRole("button", { name: /favorites/ });
-    const wasFavorite = (await button.getAttribute("aria-pressed")) === "true";
+    const button = likeButton(page);
+    const wasLiked = (await button.getAttribute("aria-pressed")) === "true";
+    const before = Number(await button.getAttribute("data-count"));
+    const after = before + (wasLiked ? -1 : 1);
 
     await button.click();
-    await expect(button).toHaveAttribute(
-      "aria-pressed",
-      String(!wasFavorite),
-    );
+    await expect(button).toHaveAttribute("aria-pressed", String(!wasLiked));
+    await expect(button).toHaveAttribute("data-count", String(after));
 
-    // Reload: the state must come back from the store via getFavorites (SQLite
-    // on Node, D1 on the Worker), not from component state.
+    // Reload: both the count and THIS visitor's state must come back from
+    // the store via getLikes (SQLite on Node, D1 on the Worker) keyed by the
+    // visitor id the browser kept, not from component state.
     await page.reload();
     await hydrated(page);
-    await expect(
-      page.getByRole("button", { name: /favorites/ }),
-    ).toHaveAttribute("aria-pressed", String(!wasFavorite));
+    await expect(likeButton(page)).toHaveAttribute(
+      "aria-pressed",
+      String(!wasLiked),
+    );
+    await expect(likeButton(page)).toHaveAttribute("data-count", String(after));
 
     // Toggle back so the test is idempotent across runs.
-    await page.getByRole("button", { name: /favorites/ }).click();
-    await expect(
-      page.getByRole("button", { name: /favorites/ }),
-    ).toHaveAttribute("aria-pressed", String(wasFavorite));
+    await likeButton(page).click();
+    await expect(likeButton(page)).toHaveAttribute(
+      "aria-pressed",
+      String(wasLiked),
+    );
+    await expect(likeButton(page)).toHaveAttribute("data-count", String(before));
   });
 });
 

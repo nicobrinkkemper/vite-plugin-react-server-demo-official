@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FavoriteButton } from "../../../components/FavoriteButton.client.js";
+import { LikeButton } from "../../../components/LikeButton.client.js";
 import { Link } from "../../../components/Link.client.js";
 import { artwork, TYPE_COLORS } from "../../../lib/pokedex.js";
 import styles from "../../../css/pokemon.module.css";
@@ -19,8 +19,8 @@ export const Page = ({
   title,
   pokemon,
   live,
-  toggleFavorite,
-  getFavorites,
+  toggleLike,
+  getLikes,
   navigation,
 }: Props) => (
   <>
@@ -48,10 +48,10 @@ export const Page = ({
           <p className={styles["Id"]}>#{String(pokemon.id).padStart(3, "0")}</p>
           <h1 className={styles["Name"]}>
             {pokemon.name}
-            <FavoriteButton
+            <LikeButton
               name={pokemon.name}
-              toggleFavorite={toggleFavorite}
-              getFavorites={getFavorites}
+              toggleLike={toggleLike}
+              getLikes={getLikes}
             />
           </h1>
           <p className={styles["Types"]}>
