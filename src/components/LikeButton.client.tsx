@@ -2,6 +2,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import type { Likes } from "../server/actions/likeActions.server.js";
+import { MAX_LIKES } from "../lib/likes.js";
 import styles from "../css/pokemon.module.css";
 
 // An anonymous visitor id: made up once per browser and kept in
@@ -62,7 +63,9 @@ export const LikeButton = ({
       }}
     >
       {likes.liked ? "♥" : "♡"}
-      <span className={styles["LikeCount"]}>{likes.count}</span>
+      <span className={styles["LikeCount"]}>
+        {likes.count >= MAX_LIKES ? `${MAX_LIKES}+` : likes.count}
+      </span>
     </button>
   );
 };

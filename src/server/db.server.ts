@@ -13,6 +13,8 @@
 // everywhere; the import only runs when a Node host actually executes an
 // action.
 
+import { MAX_LIKES } from "../lib/likes.js";
+
 /** The context vite-plugin-react-server appends to every action call. */
 export type ActionContext = { platform?: unknown[] };
 
@@ -20,6 +22,7 @@ export type LikesStore = {
   /** How many visitors like this Pokémon. */
   count(pokemon: string): Promise<number>;
   liked(pokemon: string, visitor: string): Promise<boolean>;
+  /** A no-op once the Pokémon holds MAX_LIKES rows. */
   like(pokemon: string, visitor: string): Promise<void>;
   unlike(pokemon: string, visitor: string): Promise<void>;
 };
@@ -36,7 +39,11 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS likes (
 const SQL = {
   count: "SELECT COUNT(*) AS n FROM likes WHERE pokemon = ?",
   liked: "SELECT 1 AS one FROM likes WHERE pokemon = ? AND visitor = ?",
-  like: "INSERT OR IGNORE INTO likes (pokemon, visitor) VALUES (?, ?)",
+  // The cap lives in the statement so two concurrent likes at the ceiling
+  // cannot both squeeze in: the count is checked and the row written in one
+  // step. Parameters: pokemon, visitor, pokemon, cap.
+  like: `INSERT OR IGNORE INTO likes (pokemon, visitor)
+    SELECT ?, ? WHERE (SELECT COUNT(*) FROM likes WHERE pokemon = ?) < ?`,
   unlike: "DELETE FROM likes WHERE pokemon = ? AND visitor = ?",
 };
 
@@ -73,7 +80,7 @@ const d1Store = (db: D1Like): LikesStore => {
     },
     like: async (pokemon, visitor) => {
       await ready;
-      await db.prepare(SQL.like).bind(pokemon, visitor).run();
+      await db.prepare(SQL.like).bind(pokemon, visitor, pokemon, MAX_LIKES).run();
     },
     unlike: async (pokemon, visitor) => {
       await ready;
@@ -104,7 +111,7 @@ const sqliteStore = (): LikesStore => {
     },
     like: async (pokemon, visitor) => {
       const db = await open;
-      db.prepare(SQL.like).run(pokemon, visitor);
+      db.prepare(SQL.like).run(pokemon, visitor, pokemon, MAX_LIKES);
     },
     unlike: async (pokemon, visitor) => {
       const db = await open;
