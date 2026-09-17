@@ -46,6 +46,7 @@
     "tsx": "^4.22.4",
     "vite": "^8.2.0",
     "vite-plugin-react-server": "^4.1.0",
-    "webpack-sources": "^3.5.0"
+    "webpack-sources": "^3.5.0",
+    "wrangler": "^4.133.0"
   }
 }

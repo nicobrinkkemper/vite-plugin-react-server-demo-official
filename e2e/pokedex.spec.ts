@@ -4,8 +4,8 @@ import { test, expect } from "@playwright/test";
  * Pokédex end-to-end against the production build: the prerendered static
  * pages, the per-request path for a form OUTSIDE the vendored dataset (a
  * regional variant), and the favorites server-action round-trip (real `"use server"`
- * action backed by SQLite — persistence proven by reloading, so a client-only
- * optimistic update can't pass).
+ * action backed by SQLite on Node and D1 under workerd — persistence proven by
+ * reloading, so a client-only optimistic update can't pass).
  */
 
 // Wait for hydration: the favorite button only renders after the client
@@ -152,8 +152,8 @@ test.describe("favorites server action (prod build)", () => {
       String(!wasFavorite),
     );
 
-    // Reload: the state must come back from SQLite via getFavorites, not from
-    // component state.
+    // Reload: the state must come back from the store via getFavorites (SQLite
+    // on Node, D1 on the Worker), not from component state.
     await page.reload();
     await hydrated(page);
     await expect(
