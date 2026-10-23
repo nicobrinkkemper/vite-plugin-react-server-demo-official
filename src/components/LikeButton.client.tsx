@@ -35,6 +35,8 @@ export const LikeButton = ({
   // null = unknown (before the first action round-trip, or no server to ask).
   const [likes, setLikes] = useState<Likes | null>(null);
 
+  // Keyed on the name alone: every page refresh hands down a new getLikes
+  // reference, and refetching on it would ask again after every answer.
   useEffect(() => {
     let cancelled = false;
     getLikes(name, visitorId())
@@ -45,7 +47,7 @@ export const LikeButton = ({
     return () => {
       cancelled = true;
     };
-  }, [getLikes, name]);
+  }, [name]);
 
   if (likes === null) return null;
 

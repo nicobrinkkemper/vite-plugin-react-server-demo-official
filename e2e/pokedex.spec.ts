@@ -175,6 +175,28 @@ test.describe("likes server action (prod build)", () => {
     );
     await expect(likeButton(page)).toHaveAttribute("data-count", String(before));
   });
+
+  test("a visit asks for the likes once, on load and after navigating back", async ({
+    page,
+  }) => {
+    const reads: string[] = [];
+    page.on("request", (request) => {
+      if (request.headers()["x-rsc-action"]?.endsWith("#getLikes"))
+        reads.push(request.url());
+    });
+
+    await page.goto("/pokedex/pikachu/");
+    await hydrated(page);
+    await page.waitForLoadState("networkidle");
+    expect(reads).toHaveLength(1);
+
+    await page.getByRole("link", { name: /Pokédex/ }).click();
+    await expect(page.getByRole("link", { name: /Gen 1/ })).toBeVisible();
+    await page.goBack();
+    await hydrated(page);
+    await page.waitForLoadState("networkidle");
+    expect(reads).toHaveLength(2);
+  });
 });
 
 test.describe("navigation transition state", () => {
