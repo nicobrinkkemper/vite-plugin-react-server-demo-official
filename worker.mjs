@@ -28,8 +28,10 @@ export default {
       if (request.method === "POST" && request.headers.get("x-rsc-action")) {
         // Likes are one anonymous click each; the rate-limit binding (per
         // client ip, see wrangler.jsonc) is what keeps a script from
-        // manufacturing them. Absent on Node and in wrangler dev.
-        if (env.LIKES_RATE_LIMIT) {
+        // manufacturing them. Only the toggle counts: reading the count is
+        // every page view. Absent on Node and in wrangler dev.
+        const action = request.headers.get("x-rsc-action");
+        if (env.LIKES_RATE_LIMIT && action.endsWith("#toggleLike")) {
           const key = request.headers.get("cf-connecting-ip") ?? "unknown";
           const { success } = await env.LIKES_RATE_LIMIT.limit({ key });
           if (!success) return new Response("Too many requests", { status: 429 });

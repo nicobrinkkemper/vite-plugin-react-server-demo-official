@@ -24,7 +24,7 @@
       "database_id": "3bc8f526-636d-430a-81bb-85cd5d4b2df4"
     }
   ],
-  // Action POSTs per client ip: enough for a person clicking around, not for
+  // Like toggles per client ip: enough for a person clicking around, not for
   // a script manufacturing likes. worker.mjs answers 429 past the limit.
   "ratelimits": [
     {
