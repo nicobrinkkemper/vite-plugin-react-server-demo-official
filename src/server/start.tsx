@@ -35,7 +35,7 @@ import type { Manifest } from "vite";
  *
  * Run:
  *   rm -f pokedex.db && PUBLIC_ORIGIN='http://localhost:3000' BASE_URL='/' npm run build
- *   NODE_ENV=production node dist/server/server/index-*.js
+ *   NODE_ENV=production node dist/server/server/index.js
  */
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const buildDir = path.resolve(__dirname, "../.."); // dist/server/server → dist

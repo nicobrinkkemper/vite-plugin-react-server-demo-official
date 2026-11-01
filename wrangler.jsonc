@@ -24,6 +24,17 @@
       "database_id": "3bc8f526-636d-430a-81bb-85cd5d4b2df4"
     }
   ],
+  // The likes store's Node fallback (src/server/db.server.ts) lazily imports
+  // node:sqlite; the edge bundle is baked from the same server graph, so the
+  // specifier is in dist/server-edge/render.js even though a Worker never
+  // takes that branch (it has the LIKES binding above). Wrangler's bundler
+  // resolves even a dead dynamic import and warns that node:sqlite needs
+  // nodejs_compat. Swapping the module for a throw-only stub removes the
+  // specifier from the Worker bundle without turning on a Node compatibility
+  // layer the code does not use.
+  "alias": {
+    "node:sqlite": "./worker.node-sqlite.mjs"
+  },
   // Like toggles per client ip: enough for a person clicking around, not for
   // a script manufacturing likes. worker.mjs answers 429 past the limit.
   "ratelimits": [
