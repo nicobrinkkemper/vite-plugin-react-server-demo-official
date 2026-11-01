@@ -47,12 +47,11 @@ export default defineConfig({
     // exists so production runs on plain Node; needing the flag here would mean
     // that promise is broken.
     //
-    // The glob tolerates both the plain and the content-hashed entry name: which
-    // one the server build emits has changed across plugin versions, and pinning
-    // `index-*.js` silently stopped matching once it was emitted unhashed.
-    // Plain Node, so it survives in the background; the build ran before this.
+    // The server build emits the entry unhashed (dist/server/server/index.js),
+    // the same path the `demo` script runs. Plain Node, so it survives in the
+    // background; the build ran before this.
     command:
-      "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production node dist/server/server/index*.js",
+      "BASE_URL=/ PUBLIC_ORIGIN=http://localhost:3000 NODE_ENV=production node dist/server/server/index.js",
     url: "http://localhost:3000/pokedex/",
     // Never reuse: `test:e2e` rebuilds dist first, and this server holds the
     // edge bundle in memory from ITS start — a leftover server silently tests

@@ -11,7 +11,9 @@
 // would be baked into the edge bundle's module scope and crash evaluation on
 // runtimes without node builtins. Deferring it keeps the bundle boot-safe
 // everywhere; the import only runs when a Node host actually executes an
-// action.
+// action. The Worker build swaps the specifier for a throw-only stub
+// (wrangler.jsonc `alias`), so wrangler's bundler neither warns about it nor
+// asks for nodejs_compat.
 
 import { MAX_LIKES } from "../lib/likes.js";
 
