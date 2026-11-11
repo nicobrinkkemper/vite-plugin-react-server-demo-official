@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Link } from "./Link.client.js";
-import { baseHref, sprite, TYPE_COLORS, type Pokemon } from "../lib/pokedex.js";
+import { sprite, TYPE_COLORS, type Pokemon } from "../lib/pokedex.js";
 import styles from "../css/pokedex.module.css";
 
 export const PokemonCard = ({ pokemon }: { pokemon: Pokemon }) => (
   <li className={styles["Card"]}>
-    <Link to={`${baseHref()}pokedex/${pokemon.name}/`} className={styles["CardLink"]}>
+    <Link to={`/pokedex/${pokemon.name}/`} className={styles["CardLink"]}>
       <img
         src={sprite(pokemon.id)}
         alt={pokemon.name}

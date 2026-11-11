@@ -10,7 +10,7 @@ export const props = (url: string) => ({
   staticOnly:
     typeof process !== "undefined" && process.env.GITHUB_PAGES === "true",
   navigation: {
-    back: { href: baseHref(), text: "Home" },
+    back: { href: "/", text: "Home" },
   },
 });
 

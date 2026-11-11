@@ -5,7 +5,7 @@ export const props = (url: string)=>{
         url,    
         navigation: {
             back: {
-                href: `${import.meta.env.BASE_URL === "" ? "/" : import.meta.env.BASE_URL}`,
+                href: "/",
                 text: "Back"
             }
         }
