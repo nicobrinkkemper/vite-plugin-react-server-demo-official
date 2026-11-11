@@ -62,7 +62,7 @@ export const PokemonSearch = ({
           if (!router) return;
           e.preventDefault();
           const target = results[0]?.name ?? (staticOnly ? "" : q);
-          if (target) router.navigate(`${action}${target}/`);
+          if (target) router.navigate(`/pokedex/${target}/`);
         }}
       >
         <input
@@ -79,7 +79,7 @@ export const PokemonSearch = ({
         <ul className={styles["Results"]} aria-label="search results">
           {results.map((entry) => (
             <li key={entry.id} className={styles["Card"]}>
-              <Link to={`${action}${entry.name}/`} className={styles["CardLink"]}>
+              <Link to={`/pokedex/${entry.name}/`} className={styles["CardLink"]}>
                 <img
                   src={sprite(entry.id)}
                   alt={entry.name}

@@ -1,14 +1,13 @@
-import { baseHref, allPokemon } from "../lib/pokedex.js";
+import { allPokemon } from "../lib/pokedex.js";
 
 const FEATURED_IDS = [1, 4, 7, 25, 399];
 
 export const props = (url: string) => {
-  const pathname = baseHref();
   return {
     title: "Pokédex — vite-plugin-react-server",
     url,
     navigation: {
-      toPokedex: { href: `${pathname}pokedex/`, text: "Browse the Pokédex" },
+      toPokedex: { href: "/pokedex/", text: "Browse the Pokédex" },
     },
     featured: allPokemon.filter((p) => FEATURED_IDS.includes(p.id)),
     // Guarded: bare `process` does not exist on edge runtimes (workerd).

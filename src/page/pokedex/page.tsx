@@ -19,7 +19,7 @@ export const Page = ({ title, generations, navigation, searchAction, namesHref, 
       <ul className={styles["GenList"]}>
         {generations.map((g) => (
           <li key={g.gen} className={styles["Card"]}>
-            <Link to={`${searchAction}gen/${g.gen}/`} className={styles["CardLink"]}>
+            <Link to={`/pokedex/gen/${g.gen}/`} className={styles["CardLink"]}>
               <span className={styles["GenSprites"]}>
                 {g.starters.map((id) => (
                   <img key={id} src={sprite(id)} alt="" width={68} height={68} loading="lazy" />
